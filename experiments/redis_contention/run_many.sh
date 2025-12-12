@@ -17,114 +17,113 @@ set -euo pipefail
 # )
 
 PAIRS_CORES=(
-    "1,16"
-    "2,17"
-    "3,18"
-    "4,19"
-    "5,20"
-    "6,21"
-    "7,22"
-    "8,23"
-    "9,24"
-    "10,25"
-    "11,26"
-    "12,27"
-    "13,28"
-    "14,29"
-    "15,30"
-    "32,48"
-    "33,49"
-    "34,50"
-    "35,51"
-    "36,52"
-    "37,53"
-    "38,54"
-    "39,55"
-    "40,56"
-    "41,57"
-    "42,58"
-    "43,59"
-    "44,60"
-    "45,61"
-    "46,62"
-    "47,63"
+    "1,32"
+    # "2,33"
+    # "3,34"
+    # "4,35"
+    # "5,36"
+    # "6,37"
+    # "7,38"
+    # "8,39"
+    # "9,40"
+    # "10,41"
+    # "11,42"
+    # "12,43"
+    # "13,44"
+    # "14,45"
+    # "15,46"
 )
 
-declare -a client_arr=("1")
-declare -a thread_arr=("4")
-declare -a pipeline_arr=("1")
-# declare -a client_arr=("50")
+# declare -a client_arr=("1")
 # declare -a thread_arr=("4")
 # declare -a pipeline_arr=("1")
+# declare -a client_arr=("16" "32")
+declare -a client_arr=("16")
+declare -a thread_arr=("4")
+declare -a pipeline_arr=("100")
+
+declare -a key_maximum_arr=("10000000")
 
 BASE_PORT=6500
 
 MAX_LOADED_PAIRS=$(( ${#PAIRS_CORES[@]} - 1 ))
 
-for CLIENTS in "${client_arr[@]}"; do
-    for THREADS in "${thread_arr[@]}"; do
-        for PIPELINE in "${pipeline_arr[@]}"; do
-            for LOAD_PAIRS in $(seq 0 "$MAX_LOADED_PAIRS"); do
-                OUT_BASE="${PWD}/redis_contention_3/loaded_pairs_${LOAD_PAIRS}"
-                mkdir -p "$OUT_BASE"
-                READY_FLAG="$OUT_BASE/ready.txt"
-                rm -f "$READY_FLAG" 2>/dev/null || true
-                for i in "${!PAIRS_CORES[@]}"; do
-                    if (( i != 0 && i > LOAD_PAIRS )); then
-                        # This load pair is not active in this run
-                        continue
-                    fi
+for REDIS_KEY_MAXIMUM in "${key_maximum_arr[@]}"; do
+    for CLIENTS in "${client_arr[@]}"; do
+        for THREADS in "${thread_arr[@]}"; do
+            for PIPELINE in "${pipeline_arr[@]}"; do
+                for LOAD_PAIRS in $(seq 0 "$MAX_LOADED_PAIRS"); do
+                    for i in "${!PAIRS_CORES[@]}"; do
+                        if (( i != 0 && i > LOAD_PAIRS )); then
+                            # This load pair is not active in this run
+                            continue
+                        fi
 
-                    echo "---- RUN: clients=$CLIENTS threads=$THREADS pipeline=$PIPELINE ----"
+                        echo "---- RUN: clients=$CLIENTS threads=$THREADS pipeline=$PIPELINE ----"
 
-                    OUTPUT="$OUT_BASE/pair_$i"
-                    mkdir -p "$OUTPUT"
+                        CONFIGS="clients_${CLIENTS}_threads_${THREADS}_pipeline_${PIPELINE}_key_maximum_${REDIS_KEY_MAXIMUM}"
+                        RESULTS_DIR="TEST_DB/$CONFIGS"
+                        OUT_BASE="${PWD}/${RESULTS_DIR}/loaded_pairs_${LOAD_PAIRS}"
+                        OUTPUT="$OUT_BASE/pair_$i"
+                        READY_FLAG="$OUT_BASE/ready.txt"
+                        RUN_FOLDER="$OUTPUT/$CONFIGS"
 
-                    RUN_FOLDER="$OUTPUT/clients_${CLIENTS}_threads_${THREADS}_pipeline_${PIPELINE}"
-                    mkdir -p "$RUN_FOLDER"
-                    SERVER_LOG="$RUN_FOLDER/server.log"
-                    REDIS_OUTPUT="$RUN_FOLDER/redis.out"
-                    REDIS_HISTOGRAM_FILE="$RUN_FOLDER/latency.out"
+                        rm -f "$READY_FLAG" 2>/dev/null || true
+                        mkdir -p "$OUTPUT"
+                        mkdir -p "$OUT_BASE"
+                        mkdir -p "$RUN_FOLDER"
+                        SERVER_LOG="$RUN_FOLDER/server.log"
+                        REDIS_OUTPUT="$RUN_FOLDER/redis.out"
+                        REDIS_HISTOGRAM_FILE="$RUN_FOLDER/latency.out"
 
-                    cores="${PAIRS_CORES[$i]}"
-                    srv_core="${cores%%,*}"
-                    cli_core="${cores##*,}"
-                    port=$((BASE_PORT + i))
+                        cores="${PAIRS_CORES[$i]}"
+                        srv_core="${cores%%,*}"
+                        cli_core="${cores##*,}"
+                        port=$((BASE_PORT + i))
 
-                    echo "Launching pair $i on port $port (server core $srv_core, client core $cli_core)"
+                        echo "Launching pair $i on port $port (server core $srv_core, client core $cli_core)"
 
-                    # For multi-pair runs, usually you don't want to drop caches each time
+                        # For multi-pair runs, usually you don't want to drop caches each time
 
-                    if [[ "$i" == 0 ]]; then
-                    # First pair flushes caches
-                        FLUSH=1 \
-                        LOADED_PAIRS="$LOAD_PAIRS" \
-                        CLIENTS="$CLIENTS" THREADS="$THREADS" PIPELINE="$PIPELINE" \
-                        READY_FLAG="$READY_FLAG" \
-                        REDIS_PORT="$port" PORT="$port" \
-                        SERVER_LOG="$SERVER_LOG" \
-                        REDIS_OUTPUT="$REDIS_OUTPUT" \
-                        REDIS_HISTOGRAM_FILE="$REDIS_HISTOGRAM_FILE" \
-                        REDIS_PREFIX="taskset -c $srv_core" \
-                        MEMTIER_PREFIX="/usr/bin/time -v taskset -c $cli_core" \
-                        ./redis_pair.sh > "$RUN_FOLDER/redis_pair" 2>&1 &
-                    else
-                        FLUSH=1 \
-                        REDIS_PORT="$port" PORT="$port" \
-                        READY_FLAG="$READY_FLAG" \
-                        SERVER_LOG="$SERVER_LOG" \
-                        REDIS_OUTPUT="$REDIS_OUTPUT" \
-                        REDIS_HISTOGRAM_FILE="$REDIS_HISTOGRAM_FILE" \
-                        REDIS_PREFIX="taskset -c $srv_core" \
-                        MEMTIER_PREFIX="/usr/bin/time -v taskset -c $cli_core" \
-                        ./redis_pair_silence.sh > "$RUN_FOLDER/redis_pair" 2>&1 &
-                    fi
+                        if [[ "$i" == 0 ]]; then
+                        # First pair flushes caches
+                            FLUSH=1 \
+                            LOADED_PAIRS="$LOAD_PAIRS" \
+                            CLIENTS="$CLIENTS" THREADS="$THREADS" PIPELINE="$PIPELINE" \
+                            VTUNE_DIR="$RESULTS_DIR" \
+                            READY_FLAG="$READY_FLAG" \
+                            REDIS_PORT="$port" PORT="$port" \
+                            SERVER_LOG="$SERVER_LOG" \
+                            REDIS_OUTPUT="$REDIS_OUTPUT" \
+                            REDIS_HISTOGRAM_FILE="$REDIS_HISTOGRAM_FILE" \
+                            REDIS_PREFIX="taskset -c $srv_core" \
+                            MEMTIER_PREFIX="/usr/bin/time -v taskset -c $cli_core" \
+                            REDIS_KEY_MAXIMUM="$REDIS_KEY_MAXIMUM" \
+                            ./redis_pair.sh > "$RUN_FOLDER/redis_pair" 2>&1 &
+                        else
+                            FLUSH=1 \
+                            REDIS_PORT="$port" PORT="$port" \
+                            VTUNE_DIR="$RESULTS_DIR" \
+                            READY_FLAG="$READY_FLAG" \
+                            SERVER_LOG="$SERVER_LOG" \
+                            REDIS_OUTPUT="$REDIS_OUTPUT" \
+                            REDIS_HISTOGRAM_FILE="$REDIS_HISTOGRAM_FILE" \
+                            REDIS_PREFIX="taskset -c $srv_core" \
+                            MEMTIER_PREFIX="/usr/bin/time -v taskset -c $cli_core" \
+                            ./redis_pair_silence.sh > "$RUN_FOLDER/redis_pair" 2>&1 &
+                        fi
+                    done
+                    wait
+                    sleep 5  # wait a bit before starting next run
                 done
-                wait
-                sleep 5  # wait a bit before starting next run
             done
         done
     done
-done
+done 
+
+# Aggregate results & graph
+python3 aggregate.py --result_dir "./$RESULTS_DIR" --output "./$RESULTS_DIR.json"
+
+python3 graph.py --input "./$RESULTS_DIR.json" --output "$RESULTS_DIR/plot_metrics.jpg"
 
 echo "All pairs completed."

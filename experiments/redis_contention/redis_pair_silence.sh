@@ -15,9 +15,12 @@ FLUSH="${FLUSH:-1}"               # set FLUSH=1 to drop caches (needs sudo)
 # KEY/DATASIZE patterns: R=random, S=sequential, G=Gaussian, Z=zipfian
 HOST="${HOST:-127.0.0.1}"
 # Performance params
-CLIENTS="${CLIENTS:-32}"
+# CLIENTS="${CLIENTS:-16}"
+# THREADS="${THREADS:-4}"
+# PIPELINE="${PIPELINE:-100}"
+CLIENTS="${CLIENTS:-1}"
 THREADS="${THREADS:-4}"
-PIPELINE="${PIPELINE:-100}"
+PIPELINE="${PIPELINE:-1}"
 
 # Honor REDIS_PORT first, then PORT, fall back to 6500
 REDIS_PORT="${REDIS_PORT:-${PORT:-6500}}"
@@ -76,5 +79,4 @@ echo "[MEMTIER PID]: $MEMTIER_PID"
 wait "$MEMTIER_PID" 2>/dev/null || true
 kill "$SRV_PID" >/dev/null 2>&1 || true
 wait "$SRV_PID" 2>/dev/null || true
-wait "$VTUNE_PID" 2>/dev/null || true
 echo "Done. Output: $REDIS_OUTPUT"

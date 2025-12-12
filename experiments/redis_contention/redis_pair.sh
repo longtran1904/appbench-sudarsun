@@ -23,14 +23,14 @@ PIPELINE="${PIPELINE:-10}"
 # Number of Loaded Client-Server Pairs
 LOADED_PAIRS="${LOADED_PAIRS:-0}"
 
-# Honor REDIS_PORT first, then PORT, fall back to 6500
+# Redis configs
 REDIS_PORT="${REDIS_PORT:-${PORT:-6500}}"
 REDIS_TESTTIME="${REDIS_TESTTIME:-60}"       # seconds
 REDIS_DATASIZE_RANGE="${REDIS_DATASIZE_RANGE:-4-2048}" # bytes
 REDIS_DATASIZE_PATTERN="${REDIS_DATASIZE_PATTERN:-R}"  
-REDIS_KEY_MAXIMUM="${REDIS_KEY_MAXIMUM:-100000000}"
-REDIS_KEY_PATTERN="${REDIS_KEY_PATTERN:-R:R}"
-REDIS_RATIO="${REDIS_RATIO:-5:1}"           # SET:GET ratio
+REDIS_KEY_MAXIMUM="${REDIS_KEY_MAXIMUM:-1000000}"
+REDIS_KEY_PATTERN="${REDIS_KEY_PATTERN:-S:R}"
+REDIS_RATIO="${REDIS_RATIO:-0:1}"           # SET:GET ratio
 REDIS_OUTPUT="${REDIS_OUTPUT:-$OUTPUT/redis.out}"
 REDIS_HISTOGRAM_FILE="${REDIS_HISTOGRAM_FILE:-$OUTPUT/latency.out}"
 SERVER_LOG="${SERVER_LOG:-$OUTPUT/server.log}"
@@ -38,6 +38,7 @@ SERVER_LOG="${SERVER_LOG:-$OUTPUT/server.log}"
 # Optional prefixes (e.g., taskset/numactl) for pinning
 REDIS_PREFIX="${REDIS_PREFIX:-}"
 MEMTIER_PREFIX="${MEMTIER_PREFIX:-}"
+VTUNE_DIR="${VTUNE_DIR:-redis_vtune}"
 
 flush() {
   [ "$FLUSH" = "1" ] && sudo sh -c 'sync; echo 3 > /proc/sys/vm/drop_caches' || true
@@ -55,15 +56,11 @@ echo "==> redis-server: ${REDIS_PREFIX:+$REDIS_PREFIX }$REDIS_SERVER ${REDIS_CON
 
 rm -f "$READY_FLAG" 2>/dev/null || true
 
-vtune -collect memory-access -result-dir "$APPBENCH/vtune_projects/redis_contention_3/redis_clients_${CLIENTS}_threads_${THREADS}_loaded_pairs_$LOADED_PAIRS" \
-    -knob analyze-mem-objects=true \
-    -finalization-mode=full \
-    -search-dir="/usr/lib/debug/boot" \
-    -- ${REDIS_PREFIX:+$REDIS_PREFIX }"$REDIS_SERVER" ${REDIS_CONF:+$REDIS_CONF} \
-        --bind "$HOST" --port "$REDIS_PORT" --daemonize no > "$SERVER_LOG" 2>&1 &
-
-# ${REDIS_PREFIX:+$REDIS_PREFIX }"$REDIS_SERVER" ${REDIS_CONF:+$REDIS_CONF} \
-#     --bind "$HOST" --port "$REDIS_PORT" --daemonize no > "$SERVER_LOG" 2>&1 &
+${REDIS_PREFIX:+$REDIS_PREFIX }"$REDIS_SERVER" ${REDIS_CONF:+$REDIS_CONF} \
+    --bind "$HOST" --port "$REDIS_PORT" --daemonize no \
+    --dir "./databases" --dbfilename "dump_0.rdb" > "$SERVER_LOG" 2>&1 &
+SRV_PID=$!
+echo "[SERVER PID]: $SRV_PID"
 
 # wait until it answers PING (max ~20s)
 for i in {1..100}; do
@@ -88,19 +85,23 @@ if [ "$READY" -ne 1 ]; then
     exit 1
 fi
 
+vtune -collect memory-access -result-dir "$APPBENCH/vtune_projects/$VTUNE_DIR" \
+    -target-pid="$SRV_PID" \
+    -knob analyze-mem-objects=true \
+    -finalization-mode=full \
+    -search-dir="/usr/lib/debug/boot" \
+
 VTUNE_PID=$(pgrep -f "vtune -collect memory-access")
-VTUNE_CHILD_PID=$(pgrep -P "$VTUNE_PID")
-SRV_PID=$(pgrep -a -P "$VTUNE_CHILD_PID" redis-server | awk '{print $1}')
-echo "[SERVER PID]: $SRV_PID"
 
 echo "==> starting memtier_benchmark ${MEMTIER_PREFIX:+$MEMTIER_PREFIX }memtier_benchmark --port "$REDIS_PORT" --test-time="$REDIS_TESTTIME" \
+    --data-import="./databases/dump_0.rdb" \
     --clients "$CLIENTS" --threads "$THREADS" --pipeline "$PIPELINE" \
     --random-data --data-size-range="$REDIS_DATASIZE_RANGE" \
     --data-size-pattern="$REDIS_DATASIZE_PATTERN" --key-maximum="$REDIS_KEY_MAXIMUM" \
     --ratio="$REDIS_RATIO" --hide-histogram \
     --out-file="$REDIS_OUTPUT" --hdr-file-prefix="$REDIS_HISTOGRAM_FILE" 2>&1 &"
 
-${MEMTIER_PREFIX:+$MEMTIER_PREFIX }memtier_benchmark --port "$REDIS_PORT" --test-time="$REDIS_TESTTIME" \
+${MEMTIER_PREFIX:+$MEMTIER_PREFIX }memtier_benchmark --port "$REDIS_PORT" --test-time=60 \
   --clients "$CLIENTS" --threads "$THREADS" --pipeline "$PIPELINE" \
   --random-data --data-size-range="$REDIS_DATASIZE_RANGE" \
   --data-size-pattern="$REDIS_DATASIZE_PATTERN" --key-maximum="$REDIS_KEY_MAXIMUM" \

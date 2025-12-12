@@ -1,48 +1,0 @@
-==> starting redis-server on 127.0.0.1:6502
-Printing server log to: /mnt/appbench/experiments/redis_contention/redis_contention_2/loaded_pairs_2/pair_2/clients_1_threads_4_pipeline_1/server.log
-==> redis-server: taskset -c 7 /mnt/appbench/redis-3.0.0/src/redis-server /mnt/appbench/redis-3.0.0/redis.conf --bind 127.0.0.1 --port 6502 --daemonize no >/mnt/appbench/experiments/redis_contention/redis_contention_2/loaded_pairs_2/pair_2/clients_1_threads_4_pipeline_1/server.log 2>&1 &
-[SERVER PID]: 247586
-==> starting memtier_benchmark /usr/bin/time -v taskset -c 8-9 memtier_benchmark --port 6502 --test-time=15     --clients 256 --threads 4 --pipeline 100     --random-data --data-size-range=4-2048     --data-size-pattern=R --key-maximum=100000000     --ratio=1:1 --hide-histogram     --out-file=/mnt/appbench/experiments/redis_contention/redis_contention_2/loaded_pairs_2/pair_2/clients_1_threads_4_pipeline_1/redis.out --hdr-file-prefix=/mnt/appbench/experiments/redis_contention/redis_contention_2/loaded_pairs_2/pair_2/clients_1_threads_4_pipeline_1/latency.out 2>&1 &
-[MEMTIER PID]: 247621
-Writing results to stdout
-[RUN #1] Preparing benchmark client...
-[RUN #1] Launching threads now...
-[RUN #1 6%,   0 secs]  4 threads 256 conns:      992728 ops, 1047624 (avg: 1047624) ops/sec, 548.84MB/sec (avg: 548.84MB/sec), 93.52 (avg: 93.52) msec latency[RUN #1 13%,   1 secs]  4 threads 256 conns:     2088284 ops, 1095237 (avg: 1072074) ops/sec, 574.96MB/sec (avg: 562.25MB/sec), 92.27 (avg: 92.86) msec latency[RUN #1 20%,   2 secs]  4 threads 256 conns:     3112798 ops, 1024036 (avg: 1055774) ops/sec, 531.38MB/sec (avg: 551.78MB/sec), 97.16 (avg: 94.28) msec latency[RUN #1 26%,   3 secs]  4 threads 256 conns:     3613321 ops,  500359 (avg:  915070) ops/sec, 279.30MB/sec (avg: 482.75MB/sec), 198.63 (avg: 108.73) msec latency[RUN #1 33%,   4 secs]  4 threads 256 conns:     4371118 ops,  757552 (avg:  883231) ops/sec, 399.30MB/sec (avg: 465.88MB/sec), 144.89 (avg: 115.00) msec latency[RUN #1 40%,   5 secs]  4 threads 256 conns:     5740467 ops, 1369010 (avg:  964905) ops/sec, 718.37MB/sec (avg: 508.33MB/sec), 74.99 (avg: 105.46) msec latency[RUN #1 46%,   6 secs]  4 threads 256 conns:     7071336 ops, 1330535 (avg: 1017531) ops/sec, 716.53MB/sec (avg: 538.30MB/sec), 76.54 (avg: 100.01) msec latency[RUN #1 53%,   7 secs]  4 threads 256 conns:     8389780 ops, 1314946 (avg: 1055031) ops/sec, 701.30MB/sec (avg: 558.85MB/sec), 78.08 (avg: 96.57) msec latency[RUN #1 60%,   8 secs]  4 threads 256 conns:     9728991 ops, 1338832 (avg: 1086741) ops/sec, 699.51MB/sec (avg: 574.57MB/sec), 76.34 (avg: 93.78) msec latency[RUN #1 66%,   9 secs]  4 threads 256 conns:    10961833 ops, 1232528 (avg: 1101392) ops/sec, 659.88MB/sec (avg: 583.14MB/sec), 82.78 (avg: 92.55) msec latency[RUN #1 73%,  10 secs]  4 threads 256 conns:    12148214 ops, 1186079 (avg: 1109126) ops/sec, 646.03MB/sec (avg: 588.88MB/sec), 86.11 (avg: 91.92) msec latency[RUN #1 80%,  11 secs]  4 threads 256 conns:    13332058 ops, 1183536 (avg: 1115353) ops/sec, 639.74MB/sec (avg: 593.14MB/sec), 86.48 (avg: 91.43) msec latency[RUN #1 86%,  12 secs]  4 threads 256 conns:    14496327 ops, 1163968 (avg: 1119107) ops/sec, 634.56MB/sec (avg: 596.34MB/sec), 87.60 (avg: 91.13) msec latency[RUN #1 93%,  13 secs]  4 threads 256 conns:    15666851 ops, 1170213 (avg: 1122770) ops/sec, 622.03MB/sec (avg: 598.18MB/sec), 87.77 (avg: 90.88) msec latency[RUN #1 100%,  14 secs]  4 threads 256 conns:    16825973 ops, 1158826 (avg: 1125182) ops/sec, 617.80MB/sec (avg: 599.49MB/sec), 87.97 (avg: 90.68) msec latency[RUN #1 100%,  15 secs]  0 threads 256 conns:    17948046 ops, 1158826 (avg: 1193082) ops/sec, 617.80MB/sec (avg: 635.42MB/sec), 87.97 (avg: 85.91) msec latency
-
-4         Threads
-256       Connections per thread
-15        Seconds
-
-
-ALL STATS
-============================================================================================================================
-Type         Ops/sec     Hits/sec   Misses/sec    Avg. Latency     p50 Latency     p99 Latency   p99.9 Latency       KB/sec 
-----------------------------------------------------------------------------------------------------------------------------
-Sets       602699.21          ---          ---        85.90794        89.08700       241.66300       299.00700    633330.63 
-Gets       602697.80        14.13    602683.67        85.90813        89.08700       241.66300       299.00700     24075.29 
-Waits           0.00          ---          ---             ---             ---             ---             ---          --- 
-Totals    1205397.01        14.13    602683.67        85.90804        89.08700       241.66300       299.00700    657405.92 
-	Command being timed: "taskset -c 8-9 memtier_benchmark --port 6502 --test-time=15 --clients 256 --threads 4 --pipeline 100 --random-data --data-size-range=4-2048 --data-size-pattern=R --key-maximum=100000000 --ratio=1:1 --hide-histogram"
-	User time (seconds): 16.41
-	System time (seconds): 5.66
-	Percent of CPU this job got: 136%
-	Elapsed (wall clock) time (h:mm:ss or m:ss): 0:16.22
-	Average shared text size (kbytes): 0
-	Average unshared data size (kbytes): 0
-	Average stack size (kbytes): 0
-	Average total size (kbytes): 0
-	Maximum resident set size (kbytes): 266656
-	Average resident set size (kbytes): 0
-	Major (requiring I/O) page faults: 23
-	Minor (reclaiming a frame) page faults: 221941
-	Voluntary context switches: 5797
-	Involuntary context switches: 1265
-	Swaps: 0
-	File system inputs: 1304
-	File system outputs: 8
-	Socket messages sent: 0
-	Socket messages received: 0
-	Signals delivered: 0
-	Page size (bytes): 4096
-	Exit status: 0
-Done. Output: /mnt/appbench/experiments/redis_contention/redis_contention_2/loaded_pairs_2/pair_2/clients_1_threads_4_pipeline_1/redis.out
