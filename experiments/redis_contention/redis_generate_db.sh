@@ -16,9 +16,9 @@ FLUSH="${FLUSH:-1}"               # set FLUSH=1 to drop caches (needs sudo)
 # KEY/DATASIZE patterns: R=random, S=sequential, G=Gaussian, Z=zipfian
 HOST="${HOST:-127.0.0.1}"
 # Performance params
-CLIENTS="${CLIENTS:-1024}"
-THREADS="${THREADS:-4}"
-PIPELINE="${PIPELINE:-10}"
+CLIENTS="${CLIENTS:-1}"
+THREADS="${THREADS:-1}"
+PIPELINE="${PIPELINE:-100}"
 
 # Number of Loaded Client-Server Pairs
 LOADED_PAIRS="${LOADED_PAIRS:-0}"
@@ -28,7 +28,7 @@ REDIS_PORT="${REDIS_PORT:-${PORT:-6500}}"
 REDIS_TESTTIME="${REDIS_TESTTIME:-60}"       # seconds
 REDIS_DATASIZE_RANGE="${REDIS_DATASIZE_RANGE:-4-2048}" # bytes
 REDIS_DATASIZE_PATTERN="${REDIS_DATASIZE_PATTERN:-R}"  
-REDIS_KEY_MAXIMUM="${REDIS_KEY_MAXIMUM:-1000000}"
+REDIS_KEY_MAXIMUM="${REDIS_KEY_MAXIMUM:-10000000}"
 REDIS_KEY_PATTERN="${REDIS_KEY_PATTERN:-S:R}"
 REDIS_RATIO="${REDIS_RATIO:-1:0}"           # SET:GET ratio
 REDIS_OUTPUT="${REDIS_OUTPUT:-$OUTPUT/redis.out}"
@@ -51,8 +51,6 @@ flush # Flush page cache
 echo "Printing server log to: $SERVER_LOG"
 echo "==> redis-server: ${REDIS_PREFIX:+$REDIS_PREFIX }$REDIS_SERVER ${REDIS_CONF:+$REDIS_CONF} --bind $HOST --port $REDIS_PORT --daemonize no >$SERVER_LOG 2>&1 &"
 
-rm -f "$READY_FLAG" 2>/dev/null || true
-
 ${REDIS_PREFIX:+$REDIS_PREFIX }"$REDIS_SERVER" ${REDIS_CONF:+$REDIS_CONF} \
     --bind "$HOST" --port "$REDIS_PORT" --daemonize no > "$SERVER_LOG" 2>&1 &
 
@@ -64,7 +62,6 @@ for i in {1..100}; do
     if "$REDIS_CLI" -h "$HOST" -p "$REDIS_PORT" PING >/dev/null 2>&1; then
         READY=1
         echo "[INFO] Redis is ready on $HOST:$REDIS_PORT (after $((i * 200)) ms)"
-        echo "READY" > "${READY_FLAG}"
         break
     fi
     sleep 0.2
@@ -82,23 +79,38 @@ if [ "$READY" -ne 1 ]; then
     exit 1
 fi
 
-echo "==> starting memtier_benchmark ${MEMTIER_PREFIX:+$MEMTIER_PREFIX }memtier_benchmark --port "$REDIS_PORT" --test-time="$REDIS_TESTTIME" \
+echo "==> starting memtier_benchmark ${MEMTIER_PREFIX:+$MEMTIER_PREFIX }memtier_benchmark --port "$REDIS_PORT" \
     --clients "$CLIENTS" --threads "$THREADS" --pipeline "$PIPELINE" \
-    --random-data --data-size-range="$REDIS_DATASIZE_RANGE" \
-    --data-size-pattern="$REDIS_DATASIZE_PATTERN" --key-maximum="$REDIS_KEY_MAXIMUM" \
+    --data-size-range="$REDIS_DATASIZE_RANGE" --data-size-pattern="$REDIS_DATASIZE_PATTERN" \
+    --key-maximum="$REDIS_KEY_MAXIMUM" --key-pattern="$REDIS_KEY_PATTERN" \
     --ratio="$REDIS_RATIO" --hide-histogram \
     --out-file="$REDIS_OUTPUT" --hdr-file-prefix="$REDIS_HISTOGRAM_FILE" 2>&1 &"
 
-${MEMTIER_PREFIX:+$MEMTIER_PREFIX }memtier_benchmark --port "$REDIS_PORT" --requests='allkeys' \
+${MEMTIER_PREFIX:+$MEMTIER_PREFIX }memtier_benchmark --port "$REDIS_PORT" --requests="allkeys" \
   --clients "$CLIENTS" --threads "$THREADS" --pipeline "$PIPELINE" \
-  --random-data --data-size-range="$REDIS_DATASIZE_RANGE" \
-  --data-size-pattern="$REDIS_DATASIZE_PATTERN" --key-maximum="$REDIS_KEY_MAXIMUM" \
+  --random-data --data-size-range="$REDIS_DATASIZE_RANGE" --data-size-pattern="$REDIS_DATASIZE_PATTERN" \
+  --key-maximum="$REDIS_KEY_MAXIMUM" --key-pattern="$REDIS_KEY_PATTERN" \
   --ratio="$REDIS_RATIO" --hide-histogram \
   --out-file="$REDIS_OUTPUT" --hdr-file-prefix="$REDIS_HISTOGRAM_FILE" 2>&1 &
 MEMTIER_PID=$!
 echo "[MEMTIER PID]: $MEMTIER_PID"
 
 wait "$MEMTIER_PID" 2>/dev/null || true
+
+echo "[INFO] Triggering BGSAVE to write RDB..."
+$REDIS_CLI -h "$HOST" -p "$REDIS_PORT" BGSAVE
+
+# Wait for the background save to finish
+while true; do
+    in_progress=$($REDIS_CLI -h "$HOST" -p "$REDIS_PORT" INFO persistence \
+        | awk -F: '/^rdb_bgsave_in_progress:/ {gsub("\r","",$2); print $2}')
+    if [ "$in_progress" = "0" ]; then
+        echo "[INFO] BGSAVE complete."
+        break
+    fi
+    sleep 1
+done
+
 kill "$SRV_PID" >/dev/null 2>&1 || true
 wait "$SRV_PID" 2>/dev/null || true
 echo "Done. Output: $REDIS_OUTPUT"
