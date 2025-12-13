@@ -16,9 +16,9 @@ FLUSH="${FLUSH:-1}"               # set FLUSH=1 to drop caches (needs sudo)
 # KEY/DATASIZE patterns: R=random, S=sequential, G=Gaussian, Z=zipfian
 HOST="${HOST:-127.0.0.1}"
 # Performance params
-CLIENTS="${CLIENTS:-1024}"
+CLIENTS="${CLIENTS:-8}"
 THREADS="${THREADS:-4}"
-PIPELINE="${PIPELINE:-10}"
+PIPELINE="${PIPELINE:-1}"
 
 # Number of Loaded Client-Server Pairs
 LOADED_PAIRS="${LOADED_PAIRS:-0}"
@@ -50,7 +50,7 @@ flush # Flush page cache
 
 # start server in foreground, background the process; capture PID
 echo "Printing server log to: $SERVER_LOG"
-echo "==> redis-server: ${REDIS_PREFIX:+$REDIS_PREFIX }$REDIS_SERVER ${REDIS_CONF:+$REDIS_CONF} --bind $HOST --port $REDIS_PORT --daemonize no >$SERVER_LOG 2>&1 &"
+echo "==> redis-server: ${REDIS_PREFIX:+$REDIS_PREFIX }$REDIS_SERVER ${REDIS_CONF:+$REDIS_CONF} --bind $HOST --port $REDIS_PORT --daemonize no --dir "./databases" --dbfilename "dump_0.rdb" >$SERVER_LOG 2>&1 &"
 
 # mkdir -p "$APPBENCH/vtune_projects/redis_O3"
 
@@ -58,9 +58,20 @@ rm -f "$READY_FLAG" 2>/dev/null || true
 
 ${REDIS_PREFIX:+$REDIS_PREFIX }"$REDIS_SERVER" ${REDIS_CONF:+$REDIS_CONF} \
     --bind "$HOST" --port "$REDIS_PORT" --daemonize no \
-    --dir "./databases" --dbfilename "dump_0.rdb" > "$SERVER_LOG" 2>&1 &
+    --dir "./databases" --dbfilename "dump_${PAIR_INDEX}.rdb" > "$SERVER_LOG" 2>&1 &
 SRV_PID=$!
 echo "[SERVER PID]: $SRV_PID"
+
+echo "Waiting for Redis to finish loading RDB (watching log: $SERVER_LOG)..."
+while true; do
+    # Check if the log already contains the magic string
+    if grep -q "DB loaded from disk" "$SERVER_LOG"; then
+        echo "Detected 'DB loaded from disk' in log. RDB load complete."
+        break
+    fi
+
+    sleep 1
+done
 
 # wait until it answers PING (max ~20s)
 for i in {1..100}; do
@@ -85,11 +96,17 @@ if [ "$READY" -ne 1 ]; then
     exit 1
 fi
 
+# echo "vtune -collect memory-access -result-dir "$APPBENCH/vtune_projects/$VTUNE_DIR" \
+#     -target-pid="$SRV_PID" \
+#     -knob analyze-mem-objects=true \
+#     -finalization-mode=full \
+#     -search-dir="/usr/lib/debug/boot""
+
 vtune -collect memory-access -result-dir "$APPBENCH/vtune_projects/$VTUNE_DIR" \
     -target-pid="$SRV_PID" \
     -knob analyze-mem-objects=true \
     -finalization-mode=full \
-    -search-dir="/usr/lib/debug/boot" \
+    -search-dir="/usr/lib/debug/boot" &
 
 VTUNE_PID=$(pgrep -f "vtune -collect memory-access")
 
@@ -113,7 +130,7 @@ echo "[MEMTIER PID]: $MEMTIER_PID"
 wait "$MEMTIER_PID" 2>/dev/null || true
 kill "$SRV_PID" >/dev/null 2>&1 || true
 wait "$SRV_PID" 2>/dev/null || true
-wait "$VTUNE_PID" 2>/dev/null || true
+# wait "$VTUNE_PID" 2>/dev/null || true
 echo "Done. Output: $REDIS_OUTPUT"
 
 set -x

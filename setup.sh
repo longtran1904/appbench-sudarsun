@@ -69,8 +69,9 @@ DOWNLOAD_VTUNE(){
 
     # Set perf event permissions
     echo 0 | sudo tee /proc/sys/kernel/perf_event_paranoid
-    # Set kernel pointer permissions
+    # Set kernel permissions
     echo 0 | sudo tee /proc/sys/kernel/kptr_restrict
+    echo 0 | sudo tee /proc/sys/kernel/yama/ptrace_scope
 
     # Install kernel debug info
     codename=$(lsb_release -c | awk  '{print $2}')

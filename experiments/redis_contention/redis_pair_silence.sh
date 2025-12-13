@@ -18,9 +18,9 @@ HOST="${HOST:-127.0.0.1}"
 # CLIENTS="${CLIENTS:-16}"
 # THREADS="${THREADS:-4}"
 # PIPELINE="${PIPELINE:-100}"
-CLIENTS="${CLIENTS:-1}"
+CLIENTS="${CLIENTS:-8}"
 THREADS="${THREADS:-4}"
-PIPELINE="${PIPELINE:-1}"
+PIPELINE="${PIPELINE:-10}"
 
 # Honor REDIS_PORT first, then PORT, fall back to 6500
 REDIS_PORT="${REDIS_PORT:-${PORT:-6500}}"
@@ -48,12 +48,24 @@ flush # Flush page cache
 
 # start server in foreground, background the process; capture PID
 echo "Printing server log to: $SERVER_LOG"
-echo "==> redis-server: ${REDIS_PREFIX:+$REDIS_PREFIX }$REDIS_SERVER ${REDIS_CONF:+$REDIS_CONF} --bind $HOST --port $REDIS_PORT --daemonize no >$SERVER_LOG 2>&1 &"
+echo "==> redis-server: ${REDIS_PREFIX:+$REDIS_PREFIX }$REDIS_SERVER ${REDIS_CONF:+$REDIS_CONF} --bind $HOST --port $REDIS_PORT --daemonize no --dir \"./databases\" --dbfilename \"dump_${PAIR_INDEX}.rdb\" >$SERVER_LOG 2>&1 &"
 ${REDIS_PREFIX:+$REDIS_PREFIX }"$REDIS_SERVER" ${REDIS_CONF:+$REDIS_CONF} \
-  --bind "$HOST" --port "$REDIS_PORT" --daemonize no > "$SERVER_LOG" 2>&1 &
+  --bind "$HOST" --port "$REDIS_PORT" --daemonize no > "$SERVER_LOG" \
+  --dir "./databases" --dbfilename "dump_${PAIR_INDEX}.rdb" 2>&1 &
 
 SRV_PID=$!
 echo "[SERVER PID]: $SRV_PID"
+
+echo "Waiting for Redis to finish loading RDB (watching log: $SERVER_LOG)..."
+while true; do
+    # Check if the log already contains the magic string
+    if grep -q "DB loaded from disk" "$SERVER_LOG"; then
+        echo "Detected 'DB loaded from disk' in log. RDB load complete."
+        break
+    fi
+
+    sleep 1
+done
 
 # wait for READY_FLAG file to have content
 echo "waiting for READY_FLAG: ${READY_FLAG:-}"

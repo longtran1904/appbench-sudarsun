@@ -18,7 +18,7 @@ set -euo pipefail
 
 PAIRS_CORES=(
     "1,32"
-    # "2,33"
+    "2,33"
     # "3,34"
     # "4,35"
     # "5,36"
@@ -38,9 +38,9 @@ PAIRS_CORES=(
 # declare -a thread_arr=("4")
 # declare -a pipeline_arr=("1")
 # declare -a client_arr=("16" "32")
-declare -a client_arr=("16")
+declare -a client_arr=("8")
 declare -a thread_arr=("4")
-declare -a pipeline_arr=("100")
+declare -a pipeline_arr=("1")
 
 declare -a key_maximum_arr=("10000000")
 
@@ -62,15 +62,14 @@ for REDIS_KEY_MAXIMUM in "${key_maximum_arr[@]}"; do
                         echo "---- RUN: clients=$CLIENTS threads=$THREADS pipeline=$PIPELINE ----"
 
                         CONFIGS="clients_${CLIENTS}_threads_${THREADS}_pipeline_${PIPELINE}_key_maximum_${REDIS_KEY_MAXIMUM}"
-                        RESULTS_DIR="TEST_DB/$CONFIGS"
-                        OUT_BASE="${PWD}/${RESULTS_DIR}/loaded_pairs_${LOAD_PAIRS}"
-                        OUTPUT="$OUT_BASE/pair_$i"
-                        READY_FLAG="$OUT_BASE/ready.txt"
-                        RUN_FOLDER="$OUTPUT/$CONFIGS"
+                        # RESULTS_DIR="contention/$CONFIGS"
+                        RESULTS_BASE="baseline_contention_2"
+                        RESULTS_DIR="${RESULTS_BASE}/loaded_pairs_${LOAD_PAIRS}"
+                        READY_FLAG="${PWD}/${RESULTS_DIR}/ready.txt"
+                        RUN_FOLDER="${PWD}/${RESULTS_DIR}/pair_$i"
 
                         rm -f "$READY_FLAG" 2>/dev/null || true
-                        mkdir -p "$OUTPUT"
-                        mkdir -p "$OUT_BASE"
+                        mkdir -p "${PWD}/${RESULTS_DIR}"
                         mkdir -p "$RUN_FOLDER"
                         SERVER_LOG="$RUN_FOLDER/server.log"
                         REDIS_OUTPUT="$RUN_FOLDER/redis.out"
@@ -89,6 +88,7 @@ for REDIS_KEY_MAXIMUM in "${key_maximum_arr[@]}"; do
                         # First pair flushes caches
                             FLUSH=1 \
                             LOADED_PAIRS="$LOAD_PAIRS" \
+                            PAIR_INDEX="$i" \
                             CLIENTS="$CLIENTS" THREADS="$THREADS" PIPELINE="$PIPELINE" \
                             VTUNE_DIR="$RESULTS_DIR" \
                             READY_FLAG="$READY_FLAG" \
@@ -102,6 +102,7 @@ for REDIS_KEY_MAXIMUM in "${key_maximum_arr[@]}"; do
                             ./redis_pair.sh > "$RUN_FOLDER/redis_pair" 2>&1 &
                         else
                             FLUSH=1 \
+                            PAIR_INDEX="$i" \
                             REDIS_PORT="$port" PORT="$port" \
                             VTUNE_DIR="$RESULTS_DIR" \
                             READY_FLAG="$READY_FLAG" \
@@ -122,8 +123,8 @@ for REDIS_KEY_MAXIMUM in "${key_maximum_arr[@]}"; do
 done 
 
 # Aggregate results & graph
-python3 aggregate.py --result_dir "./$RESULTS_DIR" --output "./$RESULTS_DIR.json"
+python3 aggregate.py --result_dir "./$RESULTS_BASE" --output "./$RESULTS_BASE.json"
 
-python3 graph.py --input "./$RESULTS_DIR.json" --output "$RESULTS_DIR/plot_metrics.jpg"
+python3 graph.py --input "./$RESULTS_BASE.json" --output "$RESULTS_BASE/plot_metrics.jpg"
 
 echo "All pairs completed."

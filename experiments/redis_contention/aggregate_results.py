@@ -50,11 +50,11 @@ def parse_folder_name(folder_name):
         folder_name: Name of the directory
         
     Returns:
-        tuple: (clients, threads, pipeline) as integers, or None if parsing fails
+        tuple: (clients, threads, pipeline, key_maximum) as integers, or None if parsing fails
     """
-    match = re.match(r'clients_(\d+)_threads_(\d+)_pipeline_(\d+)', folder_name)
+    match = re.match(r'clients_(\d+)_threads_(\d+)_pipeline_(\d+)_key_maximum_(\d+)', folder_name)
     if match:
-        return (int(match.group(1)), int(match.group(2)), int(match.group(3)))
+        return (int(match.group(1)), int(match.group(2)), int(match.group(3)), int(match.group(4)))
     return None
 
 def aggregate_results(base_path):
@@ -83,10 +83,10 @@ def aggregate_results(base_path):
             print(f"Skipping folder {folder_name}: could not parse configuration")
             continue
         
-        clients, threads, pipeline = parsed
+        clients, threads, pipeline, key_maximum = parsed
         
         # Look for redis.out file
-        redis_out_path = os.path.join(folder_path, 'redis.out')
+        redis_out_path = os.path.join(folder_path, 'loaded_pairs_0', 'pair_0', 'redis.out')
         if not os.path.exists(redis_out_path):
             print(f"Warning: redis.out not found in {folder_path}")
             continue

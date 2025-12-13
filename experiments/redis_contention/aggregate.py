@@ -87,7 +87,7 @@ def aggregate_results(base_path):
         loaded_pairs = parsed
         
         # Look for redis.out file
-        redis_out_path = os.path.join(folder_path, 'pair_0', 'clients_1_threads_4_pipeline_1', 'redis.out')
+        redis_out_path = os.path.join(folder_path, 'pair_0', 'redis.out')
         if not os.path.exists(redis_out_path):
             print(f"Warning: redis.out not found in {folder_path}")
             continue
