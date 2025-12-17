@@ -77,13 +77,15 @@ DOWNLOAD_VTUNE(){
     codename=$(lsb_release -c | awk  '{print $2}')
     sudo tee /etc/apt/sources.list.d/ddebs.list << EOF
 deb http://ddebs.ubuntu.com/ ${codename}      main restricted universe multiverse
-deb http://ddebs.ubuntu.com/ ${codename}-security main restricted universe multiverse
 deb http://ddebs.ubuntu.com/ ${codename}-updates  main restricted universe multiverse
 deb http://ddebs.ubuntu.com/ ${codename}-proposed main restricted universe multiverse
 EOF
 
+    sudo sed -i.bak '/ddebs\.ubuntu\.com\/\s\+jammy-security/d' /etc/apt/sources.list.d/ddebs.list
+    
     sudo apt-get update
-    sudo apt-get install linux-image-$(uname -r)-dbgsym linux-headers-$(uname -r)-dbgsym
+    sudo apt-get install -y ubuntu-dbgsym-keyring
+    sudo apt-get install -y linux-image-$(uname -r)-dbgsym linux-headers-$(uname -r)-dbgsym
 }
 
 INSTALL_SYSTEM_LIBS

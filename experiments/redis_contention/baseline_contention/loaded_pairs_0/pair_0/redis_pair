@@ -1,312 +1,0 @@
-+ CODEBASE=/mnt/appbench-sudarsun
-+ REDIS_DIR=/mnt/appbench-sudarsun/redis-3.0.0/src
-+ REDIS_SERVER=/mnt/appbench-sudarsun/redis-3.0.0/src/redis-server
-+ REDIS_BENCH=/mnt/appbench-sudarsun/redis-3.0.0/src/redis-benchmark
-+ REDIS_CLI=/mnt/appbench-sudarsun/redis-3.0.0/src/redis-cli
-+ REDIS_CONF=/mnt/appbench-sudarsun/redis-3.0.0/redis.conf
-+ OUTPUT=/mnt/appbench-sudarsun/output/redis
-+ FLUSH=1
-+ HOST=127.0.0.1
-+ CLIENTS=8
-+ THREADS=4
-+ PIPELINE=1
-+ LOADED_PAIRS=0
-+ REDIS_PORT=6500
-+ REDIS_TESTTIME=60
-+ REDIS_DATASIZE_RANGE=4-2048
-+ REDIS_DATASIZE_PATTERN=R
-+ REDIS_KEY_MAXIMUM=10000000
-+ REDIS_KEY_PATTERN=S:R
-+ REDIS_RATIO=0:1
-+ REDIS_OUTPUT=/mnt/appbench-sudarsun/experiments/redis_contention/baseline_contention/loaded_pairs_0/pair_0/redis.out
-+ REDIS_HISTOGRAM_FILE=/mnt/appbench-sudarsun/experiments/redis_contention/baseline_contention/loaded_pairs_0/pair_0/latency.out
-+ SERVER_LOG=/mnt/appbench-sudarsun/experiments/redis_contention/baseline_contention/loaded_pairs_0/pair_0/server.log
-+ REDIS_PREFIX='taskset -c 1'
-+ MEMTIER_PREFIX='/usr/bin/time -v taskset -c 32'
-+ VTUNE_DIR=baseline_contention/loaded_pairs_0
-+ echo '==> starting redis-server on 127.0.0.1:6500'
-==> starting redis-server on 127.0.0.1:6500
-+ flush
-+ '[' 1 = 1 ']'
-+ sudo sh -c 'sync; echo 3 > /proc/sys/vm/drop_caches'
-+ echo 'Printing server log to: /mnt/appbench-sudarsun/experiments/redis_contention/baseline_contention/loaded_pairs_0/pair_0/server.log'
-Printing server log to: /mnt/appbench-sudarsun/experiments/redis_contention/baseline_contention/loaded_pairs_0/pair_0/server.log
-+ echo '==> redis-server: taskset -c 1 /mnt/appbench-sudarsun/redis-3.0.0/src/redis-server /mnt/appbench-sudarsun/redis-3.0.0/redis.conf --bind 127.0.0.1 --port 6500 --daemonize no --dir ./databases --dbfilename dump_0.rdb >/mnt/appbench-sudarsun/experiments/redis_contention/baseline_contention/loaded_pairs_0/pair_0/server.log 2>&1 &'
-==> redis-server: taskset -c 1 /mnt/appbench-sudarsun/redis-3.0.0/src/redis-server /mnt/appbench-sudarsun/redis-3.0.0/redis.conf --bind 127.0.0.1 --port 6500 --daemonize no --dir ./databases --dbfilename dump_0.rdb >/mnt/appbench-sudarsun/experiments/redis_contention/baseline_contention/loaded_pairs_0/pair_0/server.log 2>&1 &
-+ rm -f /mnt/appbench-sudarsun/experiments/redis_contention/baseline_contention/loaded_pairs_0/ready.txt
-+ SRV_PID=748293
-+ echo '[SERVER PID]: 748293'
-[SERVER PID]: 748293
-+ echo 'Waiting for Redis to finish loading RDB (watching log: /mnt/appbench-sudarsun/experiments/redis_contention/baseline_contention/loaded_pairs_0/pair_0/server.log)...'
-Waiting for Redis to finish loading RDB (watching log: /mnt/appbench-sudarsun/experiments/redis_contention/baseline_contention/loaded_pairs_0/pair_0/server.log)...
-+ true
-+ grep -q 'DB loaded from disk' /mnt/appbench-sudarsun/experiments/redis_contention/baseline_contention/loaded_pairs_0/pair_0/server.log
-+ taskset -c 1 /mnt/appbench-sudarsun/redis-3.0.0/src/redis-server /mnt/appbench-sudarsun/redis-3.0.0/redis.conf --bind 127.0.0.1 --port 6500 --daemonize no --dir ./databases --dbfilename dump_0.rdb
-+ sleep 1
-+ true
-+ grep -q 'DB loaded from disk' /mnt/appbench-sudarsun/experiments/redis_contention/baseline_contention/loaded_pairs_0/pair_0/server.log
-+ sleep 1
-+ true
-+ grep -q 'DB loaded from disk' /mnt/appbench-sudarsun/experiments/redis_contention/baseline_contention/loaded_pairs_0/pair_0/server.log
-+ sleep 1
-+ true
-+ grep -q 'DB loaded from disk' /mnt/appbench-sudarsun/experiments/redis_contention/baseline_contention/loaded_pairs_0/pair_0/server.log
-+ sleep 1
-+ true
-+ grep -q 'DB loaded from disk' /mnt/appbench-sudarsun/experiments/redis_contention/baseline_contention/loaded_pairs_0/pair_0/server.log
-+ sleep 1
-+ true
-+ grep -q 'DB loaded from disk' /mnt/appbench-sudarsun/experiments/redis_contention/baseline_contention/loaded_pairs_0/pair_0/server.log
-+ sleep 1
-+ true
-+ grep -q 'DB loaded from disk' /mnt/appbench-sudarsun/experiments/redis_contention/baseline_contention/loaded_pairs_0/pair_0/server.log
-+ sleep 1
-+ true
-+ grep -q 'DB loaded from disk' /mnt/appbench-sudarsun/experiments/redis_contention/baseline_contention/loaded_pairs_0/pair_0/server.log
-+ sleep 1
-+ true
-+ grep -q 'DB loaded from disk' /mnt/appbench-sudarsun/experiments/redis_contention/baseline_contention/loaded_pairs_0/pair_0/server.log
-+ sleep 1
-+ true
-+ grep -q 'DB loaded from disk' /mnt/appbench-sudarsun/experiments/redis_contention/baseline_contention/loaded_pairs_0/pair_0/server.log
-+ sleep 1
-+ true
-+ grep -q 'DB loaded from disk' /mnt/appbench-sudarsun/experiments/redis_contention/baseline_contention/loaded_pairs_0/pair_0/server.log
-+ sleep 1
-+ true
-+ grep -q 'DB loaded from disk' /mnt/appbench-sudarsun/experiments/redis_contention/baseline_contention/loaded_pairs_0/pair_0/server.log
-+ sleep 1
-+ true
-+ grep -q 'DB loaded from disk' /mnt/appbench-sudarsun/experiments/redis_contention/baseline_contention/loaded_pairs_0/pair_0/server.log
-+ sleep 1
-+ true
-+ grep -q 'DB loaded from disk' /mnt/appbench-sudarsun/experiments/redis_contention/baseline_contention/loaded_pairs_0/pair_0/server.log
-+ sleep 1
-+ true
-+ grep -q 'DB loaded from disk' /mnt/appbench-sudarsun/experiments/redis_contention/baseline_contention/loaded_pairs_0/pair_0/server.log
-+ sleep 1
-+ true
-+ grep -q 'DB loaded from disk' /mnt/appbench-sudarsun/experiments/redis_contention/baseline_contention/loaded_pairs_0/pair_0/server.log
-+ sleep 1
-+ true
-+ grep -q 'DB loaded from disk' /mnt/appbench-sudarsun/experiments/redis_contention/baseline_contention/loaded_pairs_0/pair_0/server.log
-+ sleep 1
-+ true
-+ grep -q 'DB loaded from disk' /mnt/appbench-sudarsun/experiments/redis_contention/baseline_contention/loaded_pairs_0/pair_0/server.log
-+ sleep 1
-+ true
-+ grep -q 'DB loaded from disk' /mnt/appbench-sudarsun/experiments/redis_contention/baseline_contention/loaded_pairs_0/pair_0/server.log
-+ sleep 1
-+ true
-+ grep -q 'DB loaded from disk' /mnt/appbench-sudarsun/experiments/redis_contention/baseline_contention/loaded_pairs_0/pair_0/server.log
-+ sleep 1
-+ true
-+ grep -q 'DB loaded from disk' /mnt/appbench-sudarsun/experiments/redis_contention/baseline_contention/loaded_pairs_0/pair_0/server.log
-+ sleep 1
-+ true
-+ grep -q 'DB loaded from disk' /mnt/appbench-sudarsun/experiments/redis_contention/baseline_contention/loaded_pairs_0/pair_0/server.log
-+ sleep 1
-+ true
-+ grep -q 'DB loaded from disk' /mnt/appbench-sudarsun/experiments/redis_contention/baseline_contention/loaded_pairs_0/pair_0/server.log
-+ sleep 1
-+ true
-+ grep -q 'DB loaded from disk' /mnt/appbench-sudarsun/experiments/redis_contention/baseline_contention/loaded_pairs_0/pair_0/server.log
-+ sleep 1
-+ true
-+ grep -q 'DB loaded from disk' /mnt/appbench-sudarsun/experiments/redis_contention/baseline_contention/loaded_pairs_0/pair_0/server.log
-+ sleep 1
-+ true
-+ grep -q 'DB loaded from disk' /mnt/appbench-sudarsun/experiments/redis_contention/baseline_contention/loaded_pairs_0/pair_0/server.log
-+ sleep 1
-+ true
-+ grep -q 'DB loaded from disk' /mnt/appbench-sudarsun/experiments/redis_contention/baseline_contention/loaded_pairs_0/pair_0/server.log
-+ sleep 1
-+ true
-+ grep -q 'DB loaded from disk' /mnt/appbench-sudarsun/experiments/redis_contention/baseline_contention/loaded_pairs_0/pair_0/server.log
-+ sleep 1
-+ true
-+ grep -q 'DB loaded from disk' /mnt/appbench-sudarsun/experiments/redis_contention/baseline_contention/loaded_pairs_0/pair_0/server.log
-+ sleep 1
-+ true
-+ grep -q 'DB loaded from disk' /mnt/appbench-sudarsun/experiments/redis_contention/baseline_contention/loaded_pairs_0/pair_0/server.log
-+ sleep 1
-+ true
-+ grep -q 'DB loaded from disk' /mnt/appbench-sudarsun/experiments/redis_contention/baseline_contention/loaded_pairs_0/pair_0/server.log
-+ sleep 1
-+ true
-+ grep -q 'DB loaded from disk' /mnt/appbench-sudarsun/experiments/redis_contention/baseline_contention/loaded_pairs_0/pair_0/server.log
-+ sleep 1
-+ true
-+ grep -q 'DB loaded from disk' /mnt/appbench-sudarsun/experiments/redis_contention/baseline_contention/loaded_pairs_0/pair_0/server.log
-+ sleep 1
-+ true
-+ grep -q 'DB loaded from disk' /mnt/appbench-sudarsun/experiments/redis_contention/baseline_contention/loaded_pairs_0/pair_0/server.log
-+ sleep 1
-+ true
-+ grep -q 'DB loaded from disk' /mnt/appbench-sudarsun/experiments/redis_contention/baseline_contention/loaded_pairs_0/pair_0/server.log
-+ sleep 1
-+ true
-+ grep -q 'DB loaded from disk' /mnt/appbench-sudarsun/experiments/redis_contention/baseline_contention/loaded_pairs_0/pair_0/server.log
-+ sleep 1
-+ true
-+ grep -q 'DB loaded from disk' /mnt/appbench-sudarsun/experiments/redis_contention/baseline_contention/loaded_pairs_0/pair_0/server.log
-+ sleep 1
-+ true
-+ grep -q 'DB loaded from disk' /mnt/appbench-sudarsun/experiments/redis_contention/baseline_contention/loaded_pairs_0/pair_0/server.log
-+ sleep 1
-+ true
-+ grep -q 'DB loaded from disk' /mnt/appbench-sudarsun/experiments/redis_contention/baseline_contention/loaded_pairs_0/pair_0/server.log
-+ sleep 1
-+ true
-+ grep -q 'DB loaded from disk' /mnt/appbench-sudarsun/experiments/redis_contention/baseline_contention/loaded_pairs_0/pair_0/server.log
-+ sleep 1
-+ true
-+ grep -q 'DB loaded from disk' /mnt/appbench-sudarsun/experiments/redis_contention/baseline_contention/loaded_pairs_0/pair_0/server.log
-+ sleep 1
-+ true
-+ grep -q 'DB loaded from disk' /mnt/appbench-sudarsun/experiments/redis_contention/baseline_contention/loaded_pairs_0/pair_0/server.log
-+ sleep 1
-+ true
-+ grep -q 'DB loaded from disk' /mnt/appbench-sudarsun/experiments/redis_contention/baseline_contention/loaded_pairs_0/pair_0/server.log
-+ echo 'Detected '\''DB loaded from disk'\'' in log. RDB load complete.'
-Detected 'DB loaded from disk' in log. RDB load complete.
-+ break
-+ for i in {1..100}
-+ /mnt/appbench-sudarsun/redis-3.0.0/src/redis-cli -h 127.0.0.1 -p 6500 PING
-+ READY=1
-+ echo '[INFO] Redis is ready on 127.0.0.1:6500 (after 200 ms)'
-[INFO] Redis is ready on 127.0.0.1:6500 (after 200 ms)
-+ echo READY
-+ break
-+ '[' 1 -ne 1 ']'
-+ vtune -collect memory-access -result-dir /mnt/appbench-sudarsun/vtune_projects/baseline_contention/loaded_pairs_0 -target-pid=748293 -knob analyze-mem-objects=true -finalization-mode=full -search-dir=/usr/lib/debug/boot
-++ pgrep -f 'vtune -collect memory-access'
-+ VTUNE_PID=748482
-+ echo '==> starting memtier_benchmark /usr/bin/time -v taskset -c 32 memtier_benchmark --port 6500 --test-time=60     --data-import=./databases/dump_0.rdb     --clients 8 --threads 4 --pipeline 1     --random-data --data-size-range=4-2048     --data-size-pattern=R --key-maximum=10000000     --ratio=0:1 --hide-histogram     --out-file=/mnt/appbench-sudarsun/experiments/redis_contention/baseline_contention/loaded_pairs_0/pair_0/redis.out --hdr-file-prefix=/mnt/appbench-sudarsun/experiments/redis_contention/baseline_contention/loaded_pairs_0/pair_0/latency.out 2>&1 &'
-==> starting memtier_benchmark /usr/bin/time -v taskset -c 32 memtier_benchmark --port 6500 --test-time=60     --data-import=./databases/dump_0.rdb     --clients 8 --threads 4 --pipeline 1     --random-data --data-size-range=4-2048     --data-size-pattern=R --key-maximum=10000000     --ratio=0:1 --hide-histogram     --out-file=/mnt/appbench-sudarsun/experiments/redis_contention/baseline_contention/loaded_pairs_0/pair_0/redis.out --hdr-file-prefix=/mnt/appbench-sudarsun/experiments/redis_contention/baseline_contention/loaded_pairs_0/pair_0/latency.out 2>&1 &
-+ MEMTIER_PID=748484
-+ echo '[MEMTIER PID]: 748484'
-[MEMTIER PID]: 748484
-+ /usr/bin/time -v taskset -c 32 memtier_benchmark --port 6500 --test-time=60 --clients 8 --threads 4 --pipeline 1 --random-data --data-size-range=4-2048 --data-size-pattern=R --key-maximum=10000000 --ratio=0:1 --hide-histogram --out-file=/mnt/appbench-sudarsun/experiments/redis_contention/baseline_contention/loaded_pairs_0/pair_0/redis.out --hdr-file-prefix=/mnt/appbench-sudarsun/experiments/redis_contention/baseline_contention/loaded_pairs_0/pair_0/latency.out
-+ wait 748484
-Writing results to /mnt/appbench-sudarsun/experiments/redis_contention/baseline_contention/loaded_pairs_0/pair_0/redis.out...
-[RUN #1] Preparing benchmark client...
-[RUN #1] Launching threads now...
-[RUN #1 2%,   0 secs]  4 threads  8 conns:      141928 ops,  143765 (avg:  143765) ops/sec, 145.63MB/sec (avg: 145.63MB/sec),  0.22 (avg:  0.22) msec latencyvtune: Warning: Measuring peak bandwidth may be not accurate in the attach mode since the system can be heavily loaded at the time of the measurement. Accurate peak DRAM bandwidth is important for further analysis. When collection is done, check the Bandwidth Utilization Histogram on the Summary view and make sure the Low/Medium/High utilization thresholds are correct for your system and manually adjust them, if required.
-vtune: Warning: To profile kernel modules during the session, make sure they are available in the /lib/modules/kernel_version/ location.
-[RUN #1 3%,   1 secs]  4 threads  8 conns:      301855 ops,  159912 (avg:  151891) ops/sec, 164.19MB/sec (avg: 154.97MB/sec),  0.20 (avg:  0.21) msec latencyvtune: Peak bandwidth measurement started.
-[RUN #1 5%,   2 secs]  4 threads  8 conns:      419728 ops,  117863 (avg:  140500) ops/sec, 120.69MB/sec (avg: 143.49MB/sec),  0.27 (avg:  0.23) msec latency[RUN #1 7%,   3 secs]  4 threads  8 conns:      460557 ops,   40824 (avg:  115500) ops/sec, 42.10MB/sec (avg: 118.06MB/sec),  0.77 (avg:  0.28) msec latency[RUN #1 8%,   4 secs]  4 threads  8 conns:      533660 ops,   73093 (avg:  106996) ops/sec, 75.47MB/sec (avg: 109.52MB/sec),  0.43 (avg:  0.30) msec latency[RUN #1 10%,   5 secs]  4 threads  8 conns:      701194 ops,  167520 (avg:  117105) ops/sec, 171.49MB/sec (avg: 119.87MB/sec),  0.19 (avg:  0.27) msec latency[RUN #1 12%,   6 secs]  4 threads  8 conns:      868629 ops,  167421 (avg:  124306) ops/sec, 169.26MB/sec (avg: 126.94MB/sec),  0.19 (avg:  0.26) msec latency[RUN #1 13%,   7 secs]  4 threads  8 conns:      946127 ops,   77491 (avg:  118445) ops/sec, 78.78MB/sec (avg: 120.91MB/sec),  0.41 (avg:  0.27) msec latencyvtune: Peak bandwidth measurement finished.
-[RUN #1 15%,   8 secs]  4 threads  8 conns:     1042888 ops,   96750 (avg:  116031) ops/sec, 99.30MB/sec (avg: 118.50MB/sec),  0.33 (avg:  0.27) msec latencyvtune: Collection started. To stop the collection, either press CTRL-C or enter from another console window: vtune -r /mnt/appbench-sudarsun/vtune_projects/baseline_contention/loaded_pairs_0 -command stop.
-[RUN #1 17%,   9 secs]  4 threads  8 conns:     1136657 ops,   93761 (avg:  113801) ops/sec, 95.36MB/sec (avg: 116.19MB/sec),  0.34 (avg:  0.28) msec latency[RUN #1 18%,  10 secs]  4 threads  8 conns:     1242558 ops,  105892 (avg:  113081) ops/sec, 108.87MB/sec (avg: 115.52MB/sec),  0.30 (avg:  0.28) msec latency[RUN #1 20%,  11 secs]  4 threads  8 conns:     1347470 ops,  104904 (avg:  112399) ops/sec, 109.07MB/sec (avg: 114.98MB/sec),  0.30 (avg:  0.28) msec latency[RUN #1 22%,  12 secs]  4 threads  8 conns:     1453027 ops,  105548 (avg:  111871) ops/sec, 109.59MB/sec (avg: 114.57MB/sec),  0.30 (avg:  0.28) msec latency[RUN #1 23%,  13 secs]  4 threads  8 conns:     1558006 ops,  104970 (avg:  111378) ops/sec, 106.84MB/sec (avg: 114.02MB/sec),  0.30 (avg:  0.29) msec latency[RUN #1 25%,  14 secs]  4 threads  8 conns:     1663297 ops,  105283 (avg:  110971) ops/sec, 108.61MB/sec (avg: 113.65MB/sec),  0.30 (avg:  0.29) msec latency[RUN #1 27%,  15 secs]  4 threads  8 conns:     1767655 ops,  104349 (avg:  110557) ops/sec, 107.20MB/sec (avg: 113.25MB/sec),  0.31 (avg:  0.29) msec latency[RUN #1 28%,  16 secs]  4 threads  8 conns:     1872544 ops,  104880 (avg:  110223) ops/sec, 107.42MB/sec (avg: 112.91MB/sec),  0.30 (avg:  0.29) msec latency[RUN #1 30%,  17 secs]  4 threads  8 conns:     1977522 ops,  104969 (avg:  109931) ops/sec, 105.56MB/sec (avg: 112.50MB/sec),  0.30 (avg:  0.29) msec latency[RUN #1 32%,  18 secs]  4 threads  8 conns:     2082255 ops,  104724 (avg:  109657) ops/sec, 106.89MB/sec (avg: 112.20MB/sec),  0.31 (avg:  0.29) msec latency[RUN #1 33%,  19 secs]  4 threads  8 conns:     2187079 ops,  104815 (avg:  109414) ops/sec, 107.16MB/sec (avg: 111.95MB/sec),  0.30 (avg:  0.29) msec latency[RUN #1 35%,  20 secs]  4 threads  8 conns:     2291240 ops,  104152 (avg:  109164) ops/sec, 105.58MB/sec (avg: 111.65MB/sec),  0.31 (avg:  0.29) msec latency[RUN #1 37%,  21 secs]  4 threads  8 conns:     2395314 ops,  104065 (avg:  108932) ops/sec, 106.97MB/sec (avg: 111.43MB/sec),  0.31 (avg:  0.29) msec latency[RUN #1 38%,  22 secs]  4 threads  8 conns:     2499162 ops,  103839 (avg:  108710) ops/sec, 105.21MB/sec (avg: 111.16MB/sec),  0.31 (avg:  0.29) msec latency[RUN #1 40%,  23 secs]  4 threads  8 conns:     2610345 ops,  111174 (avg:  108813) ops/sec, 111.96MB/sec (avg: 111.20MB/sec),  0.29 (avg:  0.29) msec latency[RUN #1 42%,  24 secs]  4 threads  8 conns:     2724223 ops,  113869 (avg:  109015) ops/sec, 117.10MB/sec (avg: 111.43MB/sec),  0.28 (avg:  0.29) msec latency[RUN #1 43%,  25 secs]  4 threads  8 conns:     2837872 ops,  113640 (avg:  109193) ops/sec, 118.40MB/sec (avg: 111.70MB/sec),  0.28 (avg:  0.29) msec latency[RUN #1 45%,  26 secs]  4 threads  8 conns:     2951696 ops,  113816 (avg:  109365) ops/sec, 115.68MB/sec (avg: 111.85MB/sec),  0.28 (avg:  0.29) msec latency[RUN #1 47%,  27 secs]  4 threads  8 conns:     3065347 ops,  113642 (avg:  109517) ops/sec, 115.29MB/sec (avg: 111.97MB/sec),  0.28 (avg:  0.29) msec latency[RUN #1 48%,  28 secs]  4 threads  8 conns:     3178616 ops,  113262 (avg:  109647) ops/sec, 115.47MB/sec (avg: 112.09MB/sec),  0.28 (avg:  0.29) msec latency[RUN #1 50%,  29 secs]  4 threads  8 conns:     3292578 ops,  113953 (avg:  109790) ops/sec, 115.60MB/sec (avg: 112.21MB/sec),  0.28 (avg:  0.29) msec latency[RUN #1 52%,  30 secs]  4 threads  8 conns:     3405719 ops,  113131 (avg:  109898) ops/sec, 115.07MB/sec (avg: 112.30MB/sec),  0.28 (avg:  0.29) msec latency[RUN #1 53%,  31 secs]  4 threads  8 conns:     3519439 ops,  113711 (avg:  110017) ops/sec, 115.45MB/sec (avg: 112.40MB/sec),  0.28 (avg:  0.29) msec latency[RUN #1 55%,  32 secs]  4 threads  8 conns:     3633533 ops,  114085 (avg:  110140) ops/sec, 114.95MB/sec (avg: 112.48MB/sec),  0.28 (avg:  0.29) msec latency[RUN #1 57%,  33 secs]  4 threads  8 conns:     3746680 ops,  113138 (avg:  110229) ops/sec, 115.82MB/sec (avg: 112.58MB/sec),  0.28 (avg:  0.29) msec latency[RUN #1 58%,  34 secs]  4 threads  8 conns:     3860868 ops,  114179 (avg:  110342) ops/sec, 114.45MB/sec (avg: 112.63MB/sec),  0.28 (avg:  0.29) msec latency[RUN #1 60%,  35 secs]  4 threads  8 conns:     3974474 ops,  113596 (avg:  110432) ops/sec, 115.98MB/sec (avg: 112.72MB/sec),  0.28 (avg:  0.29) msec latency[RUN #1 62%,  36 secs]  4 threads  8 conns:     4088264 ops,  113780 (avg:  110523) ops/sec, 115.57MB/sec (avg: 112.80MB/sec),  0.28 (avg:  0.29) msec latency[RUN #1 63%,  37 secs]  4 threads  8 conns:     4201685 ops,  113412 (avg:  110599) ops/sec, 113.57MB/sec (avg: 112.82MB/sec),  0.28 (avg:  0.29) msec latency[RUN #1 65%,  38 secs]  4 threads  8 conns:     4315918 ops,  114224 (avg:  110692) ops/sec, 118.56MB/sec (avg: 112.97MB/sec),  0.28 (avg:  0.29) msec latency[RUN #1 67%,  39 secs]  4 threads  8 conns:     4429634 ops,  113707 (avg:  110767) ops/sec, 116.03MB/sec (avg: 113.04MB/sec),  0.28 (avg:  0.29) msec latency[RUN #1 68%,  40 secs]  4 threads  8 conns:     4543384 ops,  113740 (avg:  110840) ops/sec, 115.84MB/sec (avg: 113.11MB/sec),  0.28 (avg:  0.29) msec latency[RUN #1 70%,  41 secs]  4 threads  8 conns:     4657266 ops,  113873 (avg:  110912) ops/sec, 115.18MB/sec (avg: 113.16MB/sec),  0.28 (avg:  0.29) msec latency[RUN #1 72%,  42 secs]  4 threads  8 conns:     4770981 ops,  113706 (avg:  110977) ops/sec, 115.57MB/sec (avg: 113.22MB/sec),  0.28 (avg:  0.29) msec latency[RUN #1 73%,  43 secs]  4 threads  8 conns:     4884679 ops,  113688 (avg:  111038) ops/sec, 115.98MB/sec (avg: 113.28MB/sec),  0.28 (avg:  0.29) msec latency[RUN #1 75%,  44 secs]  4 threads  8 conns:     4998409 ops,  113722 (avg:  111098) ops/sec, 116.79MB/sec (avg: 113.36MB/sec),  0.28 (avg:  0.29) msec latency[RUN #1 77%,  45 secs]  4 threads  8 conns:     5111815 ops,  113396 (avg:  111148) ops/sec, 115.54MB/sec (avg: 113.41MB/sec),  0.28 (avg:  0.29) msec latency[RUN #1 78%,  46 secs]  4 threads  8 conns:     5225154 ops,  113329 (avg:  111194) ops/sec, 115.07MB/sec (avg: 113.44MB/sec),  0.28 (avg:  0.29) msec latency[RUN #1 80%,  47 secs]  4 threads  8 conns:     5338681 ops,  113518 (avg:  111243) ops/sec, 116.30MB/sec (avg: 113.50MB/sec),  0.28 (avg:  0.29) msec latency[RUN #1 82%,  48 secs]  4 threads  8 conns:     5452268 ops,  113577 (avg:  111291) ops/sec, 116.06MB/sec (avg: 113.55MB/sec),  0.28 (avg:  0.29) msec latency[RUN #1 83%,  49 secs]  4 threads  8 conns:     5565975 ops,  113698 (avg:  111339) ops/sec, 117.34MB/sec (avg: 113.63MB/sec),  0.28 (avg:  0.29) msec latency[RUN #1 85%,  50 secs]  4 threads  8 conns:     5679507 ops,  113523 (avg:  111382) ops/sec, 116.80MB/sec (avg: 113.69MB/sec),  0.28 (avg:  0.29) msec latency[RUN #1 87%,  51 secs]  4 threads  8 conns:     5792969 ops,  113452 (avg:  111421) ops/sec, 116.08MB/sec (avg: 113.74MB/sec),  0.28 (avg:  0.29) msec latency[RUN #1 88%,  52 secs]  4 threads  8 conns:     5906899 ops,  113921 (avg:  111469) ops/sec, 115.01MB/sec (avg: 113.76MB/sec),  0.28 (avg:  0.29) msec latency[RUN #1 90%,  53 secs]  4 threads  8 conns:     6020107 ops,  113198 (avg:  111501) ops/sec, 116.40MB/sec (avg: 113.81MB/sec),  0.28 (avg:  0.29) msec latency[RUN #1 92%,  54 secs]  4 threads  8 conns:     6133613 ops,  113497 (avg:  111537) ops/sec, 115.48MB/sec (avg: 113.84MB/sec),  0.28 (avg:  0.29) msec latency[RUN #1 93%,  55 secs]  4 threads  8 conns:     6247187 ops,  113565 (avg:  111573) ops/sec, 113.92MB/sec (avg: 113.84MB/sec),  0.28 (avg:  0.29) msec latency[RUN #1 95%,  56 secs]  4 threads  8 conns:     6360476 ops,  113279 (avg:  111603) ops/sec, 115.51MB/sec (avg: 113.87MB/sec),  0.28 (avg:  0.29) msec latency[RUN #1 97%,  57 secs]  4 threads  8 conns:     6473778 ops,  113293 (avg:  111632) ops/sec, 115.31MB/sec (avg: 113.90MB/sec),  0.28 (avg:  0.29) msec latency[RUN #1 98%,  58 secs]  4 threads  8 conns:     6586262 ops,  112475 (avg:  111647) ops/sec, 115.34MB/sec (avg: 113.92MB/sec),  0.28 (avg:  0.29) msec latency[RUN #1 100%,  59 secs]  3 threads  8 conns:     6699206 ops,  112475 (avg:  111670) ops/sec, 115.34MB/sec (avg: 113.98MB/sec),  0.28 (avg:  0.29) msec latency[RUN #1 100%,  60 secs]  0 threads  8 conns:     6701715 ops,  112475 (avg:  111694) ops/sec, 115.34MB/sec (avg: 114.00MB/sec),  0.28 (avg:  0.29) msec latency
-
-Writing Full Run command HDR latency histogram results to /mnt/appbench-sudarsun/experiments/redis_contention/baseline_contention/loaded_pairs_0/pair_0/latency.out_FULL_RUN_1.txt...
-Writing Full Run command HDR latency histogram results in HistogramLogProcessor format to /mnt/appbench-sudarsun/experiments/redis_contention/baseline_contention/loaded_pairs_0/pair_0/latency.out_FULL_RUN_1.hgrm...
-Writing GET command HDR latency histogram results to /mnt/appbench-sudarsun/experiments/redis_contention/baseline_contention/loaded_pairs_0/pair_0/latency.out_GET_command_run_1.txt...
-Writing GET command HDR latency histogram results in HistogramLogProcessor format to /mnt/appbench-sudarsun/experiments/redis_contention/baseline_contention/loaded_pairs_0/pair_0/latency.out_GET_command_run_1.hgrm...
-	Command being timed: "taskset -c 32 memtier_benchmark --port 6500 --test-time=60 --clients 8 --threads 4 --pipeline 1 --random-data --data-size-range=4-2048 --data-size-pattern=R --key-maximum=10000000 --ratio=0:1 --hide-histogram --out-file=/mnt/appbench-sudarsun/experiments/redis_contention/baseline_contention/loaded_pairs_0/pair_0/redis.out --hdr-file-prefix=/mnt/appbench-sudarsun/experiments/redis_contention/baseline_contention/loaded_pairs_0/pair_0/latency.out"
-	User time (seconds): 14.23
-	System time (seconds): 37.71
-	Percent of CPU this job got: 85%
-	Elapsed (wall clock) time (h:mm:ss or m:ss): 1:01.03
-	Average shared text size (kbytes): 0
-	Average unshared data size (kbytes): 0
-	Average stack size (kbytes): 0
-	Average total size (kbytes): 0
-	Maximum resident set size (kbytes): 14680
-	Average resident set size (kbytes): 0
-	Major (requiring I/O) page faults: 20
-	Minor (reclaiming a frame) page faults: 10101
-	Voluntary context switches: 2002960
-	Involuntary context switches: 3017
-	Swaps: 0
-	File system inputs: 2296
-	File system outputs: 104
-	Socket messages sent: 0
-	Socket messages received: 0
-	Signals delivered: 0
-	Page size (bytes): 4096
-	Exit status: 0
-+ kill 748293
-+ wait 748293
-+ echo 'Done. Output: /mnt/appbench-sudarsun/experiments/redis_contention/baseline_contention/loaded_pairs_0/pair_0/redis.out'
-Done. Output: /mnt/appbench-sudarsun/experiments/redis_contention/baseline_contention/loaded_pairs_0/pair_0/redis.out
-+ set -x
-vtune: Collection detached.
-vtune: Collection stopped.
-vtune: Using result path `/mnt/appbench-sudarsun/vtune_projects/baseline_contention/loaded_pairs_0'
-vtune: Executing actions  0 %                                                  vtune: Executing actions  0 % Finalizing results                               vtune: Executing actions  0 % Finalizing the result                            vtune: Executing actions  0 % Clearing the database                            vtune: Executing actions  7 % Clearing the database                            vtune: Executing actions  7 % Loading raw data to the database                 vtune: Executing actions  7 % Loading 'systemcollector-748512-node0.redis-vtunevtune: Executing actions 12 % Loading 'systemcollector-748512-node0.redis-vtunevtune: Executing actions 12 % Loading 'system-wide.perf' file                  vtune: Executing actions 12 % Loading 'system-wide.stat.perf' file             vtune: Executing actions 12 % Loading '748192-748293.0.trace' file             vtune: Executing actions 12 % Updating precomputed scalar metrics              vtune: Executing actions 14 % Updating precomputed scalar metrics              vtune: Executing actions 14 % Processing profile metrics and debug information vtune: Executing actions 19 % Processing profile metrics and debug information vtune: Executing actions 19 % Setting data model parameters                    vtune: Executing actions 19 % Resolving module symbols                         vtune: Executing actions 19 % Resolving information for `[vdso]'               vtune: Executing actions 19 % Resolving information for `libdwarf.so'          vtune: Executing actions 19 % Resolving information for `ipod.ko'              vtune: Executing actions 19 % Resolving information for `libc.so.6'            
-vtune: Warning: Cannot locate debugging information for file `/lib/modules/5.15.0-160-generic/updates/dkms/ipod.ko'.
-vtune: Warning: Cannot read load addresses of sections from `/sys/module/ipod/sections'. This may affect the correctness of symbol resolution for `/lib/modules/5.15.0-160-generic/updates/dkms/ipod.ko'. Make sure this directory exists and all files in this directory have read permissions.
-vtune: Executing actions 19 % Resolving information for `libc.so.6'            
-vtune: Warning: Cannot locate file `/usr/lib/debug/.build-id/ac/af96d7b1a6bad57b559d646233d5dc1a23257c.debug'.
-`/usr/lib/debug/.build-id/ac/af96d7b1a6bad57b559d646233d5dc1a23257c.debug' is missing the .text section with code. The file may be a symbol file and not a binary module.
-vtune: Executing actions 19 % Resolving information for `af96d7b1a6bad57b559d64vtune: Executing actions 20 % Resolving information for `af96d7b1a6bad57b559d64vtune: Executing actions 20 % Resolving information for `libc++abi.so'         vtune: Executing actions 20 % Resolving information for `libm.so.6'            vtune: Executing actions 20 % Resolving information for `kvm.ko'               vtune: Executing actions 20 % Resolving information for `libc-dynamic.so'      vtune: Executing actions 20 % Resolving information for dangling locations     
-vtune: Warning: Cannot locate file `vvar.ko'.
-vtune: Executing actions 20 % Resolving information for `vvar'                 vtune: Executing actions 20 % Resolving information for `linker'               vtune: Executing actions 20 % Resolving information for `pinbin'               vtune: Executing actions 21 % Resolving information for `pinbin'               vtune: Executing actions 21 % Resolving information for `libxed.so'            vtune: Executing actions 21 % Resolving information for `redis-server'         vtune: Executing actions 21 % Resolving information for `libtpsstool.so'       
-vtune: Warning: Cannot read load addresses of sections from `/sys/module/kvm/sections'. This may affect the correctness of symbol resolution for `/lib/modules/5.15.0-160-generic/kernel/arch/x86/kvm/kvm.ko'. Make sure this directory exists and all files in this directory have read permissions.
-vtune: Warning: Cannot locate debugging information for file `/opt/intel/oneapi/vtune/2025.7/lib64/libtpsstool.so'.
-vtune: Warning: Cannot locate debugging information for file `/opt/intel/oneapi/vtune/2025.7/lib64/libtpsstool.so'.
-vtune: Executing actions 21 % Resolving information for `libc++.so'            vtune: Executing actions 21 % Resolving information for `libpindwarf.so'       vtune: Executing actions 22 % Resolving information for `libpindwarf.so'       vtune: Executing actions 22 % Resolving information for `vmlinux'              vtune: Executing actions 22 % Resolving bottom user stack information          vtune: Executing actions 23 % Resolving bottom user stack information          vtune: Executing actions 23 % Resolving thread name information                vtune: Executing actions 24 % Resolving thread name information                vtune: Executing actions 24 % Resolving call target names for dynamic code     vtune: Executing actions 25 % Resolving call target names for dynamic code     vtune: Executing actions 25 % Resolving interrupt name information             vtune: Executing actions 26 % Resolving interrupt name information             vtune: Executing actions 26 % Processing profile metrics and debug information vtune: Executing actions 27 % Processing profile metrics and debug information vtune: Executing actions 28 % Processing profile metrics and debug information vtune: Executing actions 29 % Processing profile metrics and debug information vtune: Executing actions 30 % Processing profile metrics and debug information vtune: Executing actions 31 % Processing profile metrics and debug information vtune: Executing actions 31 % Preparing output tree                            vtune: Executing actions 31 % Parsing columns in input tree                    vtune: Executing actions 32 % Parsing columns in input tree                    vtune: Executing actions 32 % Creating top-level columns                       vtune: Executing actions 32 % Creating top-level rows                          vtune: Executing actions 33 % Creating top-level rows                          vtune: Executing actions 33 % Preparing output tree                            vtune: Executing actions 33 % Parsing columns in input tree                    vtune: Executing actions 33 % Creating top-level columns                       vtune: Executing actions 34 % Creating top-level columns                       vtune: Executing actions 34 % Creating top-level rows                          vtune: Executing actions 35 % Creating top-level rows                          vtune: Executing actions 35 % Preparing output tree                            vtune: Executing actions 35 % Parsing columns in input tree                    vtune: Executing actions 35 % Creating top-level columns                       vtune: Executing actions 36 % Creating top-level columns                       vtune: Executing actions 36 % Creating top-level rows                          vtune: Executing actions 37 % Creating top-level rows                          vtune: Executing actions 37 % Preparing output tree                            vtune: Executing actions 37 % Parsing columns in input tree                    vtune: Executing actions 37 % Creating top-level columns                       vtune: Executing actions 38 % Creating top-level columns                       vtune: Executing actions 38 % Creating top-level rows                          vtune: Executing actions 39 % Creating top-level rows                          vtune: Executing actions 40 % Creating top-level rows                          vtune: Executing actions 40 % Preparing output tree                            vtune: Executing actions 40 % Parsing columns in input tree                    vtune: Executing actions 40 % Creating top-level columns                       vtune: Executing actions 41 % Creating top-level columns                       vtune: Executing actions 41 % Creating top-level rows                          vtune: Executing actions 42 % Creating top-level rows                          vtune: Executing actions 42 % Preparing output tree                            vtune: Executing actions 42 % Parsing columns in input tree                    vtune: Executing actions 42 % Creating top-level columns                       vtune: Executing actions 43 % Creating top-level columns                       vtune: Executing actions 43 % Creating top-level rows                          vtune: Executing actions 44 % Creating top-level rows                          vtune: Executing actions 44 % Preparing output tree                            vtune: Executing actions 44 % Parsing columns in input tree                    vtune: Executing actions 44 % Creating top-level columns                       vtune: Executing actions 45 % Creating top-level columns                       vtune: Executing actions 45 % Creating top-level rows                          vtune: Executing actions 46 % Creating top-level rows                          vtune: Executing actions 46 % Preparing output tree                            vtune: Executing actions 46 % Parsing columns in input tree                    vtune: Executing actions 46 % Creating top-level columns                       vtune: Executing actions 46 % Creating top-level rows                          vtune: Executing actions 47 % Creating top-level rows                          vtune: Executing actions 47 % Preparing output tree                            vtune: Executing actions 47 % Parsing columns in input tree                    vtune: Executing actions 48 % Parsing columns in input tree                    vtune: Executing actions 48 % Creating top-level columns                       vtune: Executing actions 48 % Creating top-level rows                          vtune: Executing actions 49 % Creating top-level rows                          vtune: Executing actions 49 % Preparing output tree                            vtune: Executing actions 49 % Parsing columns in input tree                    vtune: Executing actions 49 % Creating top-level columns                       vtune: Executing actions 50 % Creating top-level columns                       vtune: Executing actions 50 % Creating top-level rows                          vtune: Executing actions 50 % Preparing output tree                            vtune: Executing actions 50 % Parsing columns in input tree                    vtune: Executing actions 50 % Creating top-level columns                       vtune: Executing actions 50 % Creating top-level rows                          vtune: Executing actions 50 % Preparing output tree                            vtune: Executing actions 50 % Parsing columns in input tree                    vtune: Executing actions 50 % Creating top-level columns                       vtune: Executing actions 50 % Creating top-level rows                          vtune: Executing actions 50 % Preparing output tree                            vtune: Executing actions 50 % Parsing columns in input tree                    vtune: Executing actions 50 % Creating top-level columns                       vtune: Executing actions 50 % Creating top-level rows                          vtune: Executing actions 50 % Preparing output tree                            vtune: Executing actions 50 % Parsing columns in input tree                    vtune: Executing actions 50 % Creating top-level columns                       vtune: Executing actions 50 % Creating top-level rows                          vtune: Executing actions 50 % Preparing output tree                            vtune: Executing actions 50 % Parsing columns in input tree                    vtune: Executing actions 50 % Creating top-level columns                       vtune: Executing actions 50 % Creating top-level rows                          vtune: Executing actions 50 % Preparing output tree                            vtune: Executing actions 50 % Parsing columns in input tree                    vtune: Executing actions 50 % Creating top-level columns                       vtune: Executing actions 50 % Creating top-level rows                          vtune: Executing actions 50 % Preparing output tree                            vtune: Executing actions 50 % Parsing columns in input tree                    vtune: Executing actions 50 % Creating top-level columns                       vtune: Executing actions 50 % Creating top-level rows                          vtune: Executing actions 50 % Preparing output tree                            vtune: Executing actions 50 % Parsing columns in input tree                    vtune: Executing actions 50 % Creating top-level columns                       vtune: Executing actions 50 % Creating top-level rows                          vtune: Executing actions 50 % Setting data model parameters                    vtune: Executing actions 50 % Precomputing frequently used data                vtune: Executing actions 50 % Precomputing frequently used data                vtune: Executing actions 50 % Updating precomputed scalar metrics              vtune: Executing actions 50 % Discarding redundant overtime data               vtune: Executing actions 50 % Saving the result                                vtune: Executing actions 50 % Generating a report                              vtune: Executing actions 50 % Setting data model parameters                    vtune: Executing actions 75 % Setting data model parameters                    vtune: Executing actions 75 % Generating a report                              Elapsed Time: 51.971s
-    CPU Time: 28.370s
-    Memory Bound: 13.4% of Pipeline Slots
-        L1 Bound: 10.8% of Clockticks
-        L2 Bound: 2.0% of Clockticks
-        L3 Bound: 10.0% of Clockticks
-        DRAM Bound: 1.8% of Clockticks
-            DRAM Bandwidth Bound: 0.0% of Elapsed Time
-        Store Bound: 1.3% of Clockticks
-        NUMA: % of Remote Accesses: 0.0%
-        UPI Utilization Bound: 0.0% of Elapsed Time
-    Loads: 23,613,308,832
-    Stores: 20,470,122,720
-    LLC Miss Count: 7,392,819
-        Local Memory Access Count: 4,926,821
-        Remote Memory Access Count: 0
-        Remote Cache Access Count: 0
-    Total Memory Traffic, GB: 10.405
-        Read Traffic from Local Memory, GB: 1.892
-        Read Traffic from Remote Memory, GB: 0.000
-        Read Traffic from Sub-NUMA Memory, GB: 0.000
-        Write Memory Traffic, GB: 8.513
-    Average Latency (cycles): 12
-    Total Thread Count: 5
-    Paused Time: 0s
-
-Bandwidth Utilization
-Bandwidth Domain                  Platform Maximum  Observed Maximum  Average  % of Elapsed Time with High BW Utilization(%)
---------------------------------  ----------------  ----------------  -------  ---------------------------------------------
-DRAM, GB/sec                      264                          2.100    0.000                                           0.0%
-DRAM Single-Package, GB/sec       132                          1.900    0.011                                           0.0%
-UPI Utilization Single-link, (%)  100                          1.600    0.003                                           0.0%
-
-Top Memory Objects by Latency
-Memory Object              Total Latency           Loads          Stores  LLC Miss Count
--------------------------  -------------  --------------  --------------  --------------
-[vmlinux]                        65.155%  13,617,188,736  12,370,752,864               0
-[Unknown]                        27.537%   7,291,403,520   7,700,313,312       7,392,819
-[libtpsstool.so]                  2.046%     620,754,624               0               0
-[libm.so.6]                       0.612%     541,928,640     315,303,936               0
-zmalloc.c:173 ( 32.8 KB )         0.532%     118,238,976       9,853,248               0
-[Unknown]                         4.118%   1,423,794,336      73,899,360               0
-Collection and Platform Info
-    Operating System: 5.15.0-160-generic DISTRIB_ID=Ubuntu DISTRIB_RELEASE=22.04 DISTRIB_CODENAME=jammy DISTRIB_DESCRIPTION="Ubuntu 22.04.2 LTS"
-    Computer Name: node0.redis-vtune.lsm-pg0.wisc.cloudlab.us
-    Result Size: 297.9 MB 
-    Collection start time: 17:28:11 12/12/2025 UTC
-    Collection stop time: 17:29:03 12/12/2025 UTC
-    Collector Type: Driverless Perf system-wide sampling,User-mode sampling and tracing
-    CPU
-        Name: Intel(R) Xeon(R) Processor code named Icelake
-        Frequency: 2.400 GHz
-        Logical CPU Count: 64
-        Max DRAM Single-Package Bandwidth: 132.000 GB/s
-        LLC size: 25.2 MB 
-        Cache Allocation Technology
-            Level 2 capability: not detected
-            Level 3 capability: available
-
-If you want to skip descriptions of detected performance issues in the report,
-enter: vtune -report summary -report-knob show-issues=false -r <my_result_dir>.
-Alternatively, you may view the report in the csv format: vtune -report
-<report_name> -format=csv.
-vtune: Executing actions 100 % Generating a report                             vtune: Executing actions 100 % done                                            

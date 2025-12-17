@@ -1,3 +1,3 @@
-#define REDIS_GIT_SHA1 "2e81549a"
-#define REDIS_GIT_DIRTY "259"
-#define REDIS_BUILD_ID "node0.redis-vtune.lsm-pg0.wisc.cloudlab.us-1765402472"
+#define REDIS_GIT_SHA1 "52581df2"
+#define REDIS_GIT_DIRTY "548"
+#define REDIS_BUILD_ID "redis-contention-1765678027"

@@ -1,0 +1,592 @@
++ CODEBASE=/home/cc/contention-appbench
++ REDIS_DIR=/home/cc/contention-appbench/redis-3.0.0/src
++ REDIS_SERVER=/home/cc/contention-appbench/redis-3.0.0/src/redis-server
++ REDIS_BENCH=/home/cc/contention-appbench/redis-3.0.0/src/redis-benchmark
++ REDIS_CLI=/home/cc/contention-appbench/redis-3.0.0/src/redis-cli
++ REDIS_CONF=/home/cc/contention-appbench/redis-3.0.0/redis.conf
++ OUTPUT=/home/cc/contention-appbench/output/redis
++ FLUSH=1
++ HOST=127.0.0.1
++ CLIENTS=4
++ THREADS=1
++ PIPELINE=1
++ MULTI_GET_COUNT=50
++ REDIS_PORT=6565
++ REDIS_TESTTIME=60
++ REDIS_DATASIZE_RANGE=4-2048
++ REDIS_DATASIZE_PATTERN=R
++ REDIS_KEY_MAXIMUM=1000000
++ REDIS_KEY_PATTERN=R:R
++ REDIS_RATIO=0:1
++ REDIS_OUTPUT=/home/cc/contention-appbench/experiments/redis_contention/redis_numactl_2/clients_4_threads_1_pipeline_1_multi_key_50/loaded_pairs_80/pair_65/redis.out
++ REDIS_HISTOGRAM_FILE=/home/cc/contention-appbench/experiments/redis_contention/redis_numactl_2/clients_4_threads_1_pipeline_1_multi_key_50/loaded_pairs_80/pair_65/latency.out
++ SERVER_LOG=/home/cc/contention-appbench/experiments/redis_contention/redis_numactl_2/clients_4_threads_1_pipeline_1_multi_key_50/loaded_pairs_80/pair_65/server.log
++ REDIS_PREFIX='numactl -C 130 -m 0'
++ MEMTIER_PREFIX='/usr/bin/time -v numactl -C 131 -m 1'
++ echo '==> starting redis-server on 127.0.0.1:6565'
+==> starting redis-server on 127.0.0.1:6565
++ echo 'Printing server log to: /home/cc/contention-appbench/experiments/redis_contention/redis_numactl_2/clients_4_threads_1_pipeline_1_multi_key_50/loaded_pairs_80/pair_65/server.log'
+Printing server log to: /home/cc/contention-appbench/experiments/redis_contention/redis_numactl_2/clients_4_threads_1_pipeline_1_multi_key_50/loaded_pairs_80/pair_65/server.log
++ SRV_PID=2608803
++ echo '[SERVER PID]: 2608803'
+[SERVER PID]: 2608803
++ echo 'Waiting for Redis to finish loading RDB (watching log: /home/cc/contention-appbench/experiments/redis_contention/redis_numactl_2/clients_4_threads_1_pipeline_1_multi_key_50/loaded_pairs_80/pair_65/server.log)...'
+Waiting for Redis to finish loading RDB (watching log: /home/cc/contention-appbench/experiments/redis_contention/redis_numactl_2/clients_4_threads_1_pipeline_1_multi_key_50/loaded_pairs_80/pair_65/server.log)...
++ true
++ grep -q 'DB loaded from disk' /home/cc/contention-appbench/experiments/redis_contention/redis_numactl_2/clients_4_threads_1_pipeline_1_multi_key_50/loaded_pairs_80/pair_65/server.log
++ numactl -C 130 -m 0 /home/cc/contention-appbench/redis-3.0.0/src/redis-server /home/cc/contention-appbench/redis-3.0.0/redis.conf --bind 127.0.0.1 --port 6565 --daemonize no --dir ./databases --dbfilename dump_65.rdb
++ sleep 1
++ true
++ grep -q 'DB loaded from disk' /home/cc/contention-appbench/experiments/redis_contention/redis_numactl_2/clients_4_threads_1_pipeline_1_multi_key_50/loaded_pairs_80/pair_65/server.log
++ sleep 1
++ true
++ grep -q 'DB loaded from disk' /home/cc/contention-appbench/experiments/redis_contention/redis_numactl_2/clients_4_threads_1_pipeline_1_multi_key_50/loaded_pairs_80/pair_65/server.log
++ sleep 1
++ true
++ grep -q 'DB loaded from disk' /home/cc/contention-appbench/experiments/redis_contention/redis_numactl_2/clients_4_threads_1_pipeline_1_multi_key_50/loaded_pairs_80/pair_65/server.log
++ sleep 1
++ true
++ grep -q 'DB loaded from disk' /home/cc/contention-appbench/experiments/redis_contention/redis_numactl_2/clients_4_threads_1_pipeline_1_multi_key_50/loaded_pairs_80/pair_65/server.log
++ sleep 1
++ true
++ grep -q 'DB loaded from disk' /home/cc/contention-appbench/experiments/redis_contention/redis_numactl_2/clients_4_threads_1_pipeline_1_multi_key_50/loaded_pairs_80/pair_65/server.log
++ sleep 1
++ true
++ grep -q 'DB loaded from disk' /home/cc/contention-appbench/experiments/redis_contention/redis_numactl_2/clients_4_threads_1_pipeline_1_multi_key_50/loaded_pairs_80/pair_65/server.log
++ sleep 1
++ true
++ grep -q 'DB loaded from disk' /home/cc/contention-appbench/experiments/redis_contention/redis_numactl_2/clients_4_threads_1_pipeline_1_multi_key_50/loaded_pairs_80/pair_65/server.log
++ sleep 1
++ true
++ grep -q 'DB loaded from disk' /home/cc/contention-appbench/experiments/redis_contention/redis_numactl_2/clients_4_threads_1_pipeline_1_multi_key_50/loaded_pairs_80/pair_65/server.log
++ sleep 1
++ true
++ grep -q 'DB loaded from disk' /home/cc/contention-appbench/experiments/redis_contention/redis_numactl_2/clients_4_threads_1_pipeline_1_multi_key_50/loaded_pairs_80/pair_65/server.log
++ sleep 1
++ true
++ grep -q 'DB loaded from disk' /home/cc/contention-appbench/experiments/redis_contention/redis_numactl_2/clients_4_threads_1_pipeline_1_multi_key_50/loaded_pairs_80/pair_65/server.log
++ sleep 1
++ true
++ grep -q 'DB loaded from disk' /home/cc/contention-appbench/experiments/redis_contention/redis_numactl_2/clients_4_threads_1_pipeline_1_multi_key_50/loaded_pairs_80/pair_65/server.log
++ sleep 1
++ true
++ grep -q 'DB loaded from disk' /home/cc/contention-appbench/experiments/redis_contention/redis_numactl_2/clients_4_threads_1_pipeline_1_multi_key_50/loaded_pairs_80/pair_65/server.log
++ sleep 1
++ true
++ grep -q 'DB loaded from disk' /home/cc/contention-appbench/experiments/redis_contention/redis_numactl_2/clients_4_threads_1_pipeline_1_multi_key_50/loaded_pairs_80/pair_65/server.log
++ sleep 1
++ true
++ grep -q 'DB loaded from disk' /home/cc/contention-appbench/experiments/redis_contention/redis_numactl_2/clients_4_threads_1_pipeline_1_multi_key_50/loaded_pairs_80/pair_65/server.log
++ sleep 1
++ true
++ grep -q 'DB loaded from disk' /home/cc/contention-appbench/experiments/redis_contention/redis_numactl_2/clients_4_threads_1_pipeline_1_multi_key_50/loaded_pairs_80/pair_65/server.log
++ sleep 1
++ true
++ grep -q 'DB loaded from disk' /home/cc/contention-appbench/experiments/redis_contention/redis_numactl_2/clients_4_threads_1_pipeline_1_multi_key_50/loaded_pairs_80/pair_65/server.log
++ sleep 1
++ true
++ grep -q 'DB loaded from disk' /home/cc/contention-appbench/experiments/redis_contention/redis_numactl_2/clients_4_threads_1_pipeline_1_multi_key_50/loaded_pairs_80/pair_65/server.log
++ sleep 1
++ true
++ grep -q 'DB loaded from disk' /home/cc/contention-appbench/experiments/redis_contention/redis_numactl_2/clients_4_threads_1_pipeline_1_multi_key_50/loaded_pairs_80/pair_65/server.log
++ sleep 1
++ true
++ grep -q 'DB loaded from disk' /home/cc/contention-appbench/experiments/redis_contention/redis_numactl_2/clients_4_threads_1_pipeline_1_multi_key_50/loaded_pairs_80/pair_65/server.log
++ sleep 1
++ true
++ grep -q 'DB loaded from disk' /home/cc/contention-appbench/experiments/redis_contention/redis_numactl_2/clients_4_threads_1_pipeline_1_multi_key_50/loaded_pairs_80/pair_65/server.log
++ sleep 1
++ true
++ grep -q 'DB loaded from disk' /home/cc/contention-appbench/experiments/redis_contention/redis_numactl_2/clients_4_threads_1_pipeline_1_multi_key_50/loaded_pairs_80/pair_65/server.log
++ sleep 1
++ true
++ grep -q 'DB loaded from disk' /home/cc/contention-appbench/experiments/redis_contention/redis_numactl_2/clients_4_threads_1_pipeline_1_multi_key_50/loaded_pairs_80/pair_65/server.log
++ sleep 1
++ true
++ grep -q 'DB loaded from disk' /home/cc/contention-appbench/experiments/redis_contention/redis_numactl_2/clients_4_threads_1_pipeline_1_multi_key_50/loaded_pairs_80/pair_65/server.log
++ sleep 1
++ true
++ grep -q 'DB loaded from disk' /home/cc/contention-appbench/experiments/redis_contention/redis_numactl_2/clients_4_threads_1_pipeline_1_multi_key_50/loaded_pairs_80/pair_65/server.log
++ sleep 1
++ true
++ grep -q 'DB loaded from disk' /home/cc/contention-appbench/experiments/redis_contention/redis_numactl_2/clients_4_threads_1_pipeline_1_multi_key_50/loaded_pairs_80/pair_65/server.log
++ sleep 1
++ true
++ grep -q 'DB loaded from disk' /home/cc/contention-appbench/experiments/redis_contention/redis_numactl_2/clients_4_threads_1_pipeline_1_multi_key_50/loaded_pairs_80/pair_65/server.log
++ sleep 1
++ true
++ grep -q 'DB loaded from disk' /home/cc/contention-appbench/experiments/redis_contention/redis_numactl_2/clients_4_threads_1_pipeline_1_multi_key_50/loaded_pairs_80/pair_65/server.log
++ sleep 1
++ true
++ grep -q 'DB loaded from disk' /home/cc/contention-appbench/experiments/redis_contention/redis_numactl_2/clients_4_threads_1_pipeline_1_multi_key_50/loaded_pairs_80/pair_65/server.log
++ sleep 1
++ true
++ grep -q 'DB loaded from disk' /home/cc/contention-appbench/experiments/redis_contention/redis_numactl_2/clients_4_threads_1_pipeline_1_multi_key_50/loaded_pairs_80/pair_65/server.log
++ sleep 1
++ true
++ grep -q 'DB loaded from disk' /home/cc/contention-appbench/experiments/redis_contention/redis_numactl_2/clients_4_threads_1_pipeline_1_multi_key_50/loaded_pairs_80/pair_65/server.log
++ sleep 1
++ true
++ grep -q 'DB loaded from disk' /home/cc/contention-appbench/experiments/redis_contention/redis_numactl_2/clients_4_threads_1_pipeline_1_multi_key_50/loaded_pairs_80/pair_65/server.log
++ sleep 1
++ true
++ grep -q 'DB loaded from disk' /home/cc/contention-appbench/experiments/redis_contention/redis_numactl_2/clients_4_threads_1_pipeline_1_multi_key_50/loaded_pairs_80/pair_65/server.log
++ sleep 1
++ true
++ grep -q 'DB loaded from disk' /home/cc/contention-appbench/experiments/redis_contention/redis_numactl_2/clients_4_threads_1_pipeline_1_multi_key_50/loaded_pairs_80/pair_65/server.log
++ sleep 1
++ true
++ grep -q 'DB loaded from disk' /home/cc/contention-appbench/experiments/redis_contention/redis_numactl_2/clients_4_threads_1_pipeline_1_multi_key_50/loaded_pairs_80/pair_65/server.log
++ sleep 1
++ true
++ grep -q 'DB loaded from disk' /home/cc/contention-appbench/experiments/redis_contention/redis_numactl_2/clients_4_threads_1_pipeline_1_multi_key_50/loaded_pairs_80/pair_65/server.log
++ sleep 1
++ true
++ grep -q 'DB loaded from disk' /home/cc/contention-appbench/experiments/redis_contention/redis_numactl_2/clients_4_threads_1_pipeline_1_multi_key_50/loaded_pairs_80/pair_65/server.log
++ sleep 1
++ true
++ grep -q 'DB loaded from disk' /home/cc/contention-appbench/experiments/redis_contention/redis_numactl_2/clients_4_threads_1_pipeline_1_multi_key_50/loaded_pairs_80/pair_65/server.log
++ sleep 1
++ true
++ grep -q 'DB loaded from disk' /home/cc/contention-appbench/experiments/redis_contention/redis_numactl_2/clients_4_threads_1_pipeline_1_multi_key_50/loaded_pairs_80/pair_65/server.log
++ sleep 1
++ true
++ grep -q 'DB loaded from disk' /home/cc/contention-appbench/experiments/redis_contention/redis_numactl_2/clients_4_threads_1_pipeline_1_multi_key_50/loaded_pairs_80/pair_65/server.log
++ sleep 1
++ true
++ grep -q 'DB loaded from disk' /home/cc/contention-appbench/experiments/redis_contention/redis_numactl_2/clients_4_threads_1_pipeline_1_multi_key_50/loaded_pairs_80/pair_65/server.log
++ sleep 1
++ true
++ grep -q 'DB loaded from disk' /home/cc/contention-appbench/experiments/redis_contention/redis_numactl_2/clients_4_threads_1_pipeline_1_multi_key_50/loaded_pairs_80/pair_65/server.log
++ sleep 1
++ true
++ grep -q 'DB loaded from disk' /home/cc/contention-appbench/experiments/redis_contention/redis_numactl_2/clients_4_threads_1_pipeline_1_multi_key_50/loaded_pairs_80/pair_65/server.log
++ sleep 1
++ true
++ grep -q 'DB loaded from disk' /home/cc/contention-appbench/experiments/redis_contention/redis_numactl_2/clients_4_threads_1_pipeline_1_multi_key_50/loaded_pairs_80/pair_65/server.log
++ sleep 1
++ true
++ grep -q 'DB loaded from disk' /home/cc/contention-appbench/experiments/redis_contention/redis_numactl_2/clients_4_threads_1_pipeline_1_multi_key_50/loaded_pairs_80/pair_65/server.log
++ sleep 1
++ true
++ grep -q 'DB loaded from disk' /home/cc/contention-appbench/experiments/redis_contention/redis_numactl_2/clients_4_threads_1_pipeline_1_multi_key_50/loaded_pairs_80/pair_65/server.log
++ sleep 1
++ true
++ grep -q 'DB loaded from disk' /home/cc/contention-appbench/experiments/redis_contention/redis_numactl_2/clients_4_threads_1_pipeline_1_multi_key_50/loaded_pairs_80/pair_65/server.log
++ sleep 1
++ true
++ grep -q 'DB loaded from disk' /home/cc/contention-appbench/experiments/redis_contention/redis_numactl_2/clients_4_threads_1_pipeline_1_multi_key_50/loaded_pairs_80/pair_65/server.log
++ sleep 1
++ true
++ grep -q 'DB loaded from disk' /home/cc/contention-appbench/experiments/redis_contention/redis_numactl_2/clients_4_threads_1_pipeline_1_multi_key_50/loaded_pairs_80/pair_65/server.log
++ sleep 1
++ true
++ grep -q 'DB loaded from disk' /home/cc/contention-appbench/experiments/redis_contention/redis_numactl_2/clients_4_threads_1_pipeline_1_multi_key_50/loaded_pairs_80/pair_65/server.log
++ sleep 1
++ true
++ grep -q 'DB loaded from disk' /home/cc/contention-appbench/experiments/redis_contention/redis_numactl_2/clients_4_threads_1_pipeline_1_multi_key_50/loaded_pairs_80/pair_65/server.log
++ sleep 1
++ true
++ grep -q 'DB loaded from disk' /home/cc/contention-appbench/experiments/redis_contention/redis_numactl_2/clients_4_threads_1_pipeline_1_multi_key_50/loaded_pairs_80/pair_65/server.log
++ sleep 1
++ true
++ grep -q 'DB loaded from disk' /home/cc/contention-appbench/experiments/redis_contention/redis_numactl_2/clients_4_threads_1_pipeline_1_multi_key_50/loaded_pairs_80/pair_65/server.log
++ sleep 1
++ true
++ grep -q 'DB loaded from disk' /home/cc/contention-appbench/experiments/redis_contention/redis_numactl_2/clients_4_threads_1_pipeline_1_multi_key_50/loaded_pairs_80/pair_65/server.log
++ sleep 1
++ true
++ grep -q 'DB loaded from disk' /home/cc/contention-appbench/experiments/redis_contention/redis_numactl_2/clients_4_threads_1_pipeline_1_multi_key_50/loaded_pairs_80/pair_65/server.log
++ sleep 1
++ true
++ grep -q 'DB loaded from disk' /home/cc/contention-appbench/experiments/redis_contention/redis_numactl_2/clients_4_threads_1_pipeline_1_multi_key_50/loaded_pairs_80/pair_65/server.log
++ sleep 1
++ true
++ grep -q 'DB loaded from disk' /home/cc/contention-appbench/experiments/redis_contention/redis_numactl_2/clients_4_threads_1_pipeline_1_multi_key_50/loaded_pairs_80/pair_65/server.log
++ sleep 1
++ true
++ grep -q 'DB loaded from disk' /home/cc/contention-appbench/experiments/redis_contention/redis_numactl_2/clients_4_threads_1_pipeline_1_multi_key_50/loaded_pairs_80/pair_65/server.log
++ sleep 1
++ true
++ grep -q 'DB loaded from disk' /home/cc/contention-appbench/experiments/redis_contention/redis_numactl_2/clients_4_threads_1_pipeline_1_multi_key_50/loaded_pairs_80/pair_65/server.log
++ sleep 1
++ true
++ grep -q 'DB loaded from disk' /home/cc/contention-appbench/experiments/redis_contention/redis_numactl_2/clients_4_threads_1_pipeline_1_multi_key_50/loaded_pairs_80/pair_65/server.log
++ sleep 1
++ true
++ grep -q 'DB loaded from disk' /home/cc/contention-appbench/experiments/redis_contention/redis_numactl_2/clients_4_threads_1_pipeline_1_multi_key_50/loaded_pairs_80/pair_65/server.log
++ sleep 1
++ true
++ grep -q 'DB loaded from disk' /home/cc/contention-appbench/experiments/redis_contention/redis_numactl_2/clients_4_threads_1_pipeline_1_multi_key_50/loaded_pairs_80/pair_65/server.log
++ sleep 1
++ true
++ grep -q 'DB loaded from disk' /home/cc/contention-appbench/experiments/redis_contention/redis_numactl_2/clients_4_threads_1_pipeline_1_multi_key_50/loaded_pairs_80/pair_65/server.log
++ sleep 1
++ true
++ grep -q 'DB loaded from disk' /home/cc/contention-appbench/experiments/redis_contention/redis_numactl_2/clients_4_threads_1_pipeline_1_multi_key_50/loaded_pairs_80/pair_65/server.log
++ sleep 1
++ true
++ grep -q 'DB loaded from disk' /home/cc/contention-appbench/experiments/redis_contention/redis_numactl_2/clients_4_threads_1_pipeline_1_multi_key_50/loaded_pairs_80/pair_65/server.log
++ sleep 1
++ true
++ grep -q 'DB loaded from disk' /home/cc/contention-appbench/experiments/redis_contention/redis_numactl_2/clients_4_threads_1_pipeline_1_multi_key_50/loaded_pairs_80/pair_65/server.log
++ sleep 1
++ true
++ grep -q 'DB loaded from disk' /home/cc/contention-appbench/experiments/redis_contention/redis_numactl_2/clients_4_threads_1_pipeline_1_multi_key_50/loaded_pairs_80/pair_65/server.log
++ sleep 1
++ true
++ grep -q 'DB loaded from disk' /home/cc/contention-appbench/experiments/redis_contention/redis_numactl_2/clients_4_threads_1_pipeline_1_multi_key_50/loaded_pairs_80/pair_65/server.log
++ sleep 1
++ true
++ grep -q 'DB loaded from disk' /home/cc/contention-appbench/experiments/redis_contention/redis_numactl_2/clients_4_threads_1_pipeline_1_multi_key_50/loaded_pairs_80/pair_65/server.log
++ sleep 1
++ true
++ grep -q 'DB loaded from disk' /home/cc/contention-appbench/experiments/redis_contention/redis_numactl_2/clients_4_threads_1_pipeline_1_multi_key_50/loaded_pairs_80/pair_65/server.log
++ sleep 1
++ true
++ grep -q 'DB loaded from disk' /home/cc/contention-appbench/experiments/redis_contention/redis_numactl_2/clients_4_threads_1_pipeline_1_multi_key_50/loaded_pairs_80/pair_65/server.log
++ sleep 1
++ true
++ grep -q 'DB loaded from disk' /home/cc/contention-appbench/experiments/redis_contention/redis_numactl_2/clients_4_threads_1_pipeline_1_multi_key_50/loaded_pairs_80/pair_65/server.log
++ sleep 1
++ true
++ grep -q 'DB loaded from disk' /home/cc/contention-appbench/experiments/redis_contention/redis_numactl_2/clients_4_threads_1_pipeline_1_multi_key_50/loaded_pairs_80/pair_65/server.log
++ sleep 1
++ true
++ grep -q 'DB loaded from disk' /home/cc/contention-appbench/experiments/redis_contention/redis_numactl_2/clients_4_threads_1_pipeline_1_multi_key_50/loaded_pairs_80/pair_65/server.log
++ sleep 1
++ true
++ grep -q 'DB loaded from disk' /home/cc/contention-appbench/experiments/redis_contention/redis_numactl_2/clients_4_threads_1_pipeline_1_multi_key_50/loaded_pairs_80/pair_65/server.log
++ sleep 1
++ true
++ grep -q 'DB loaded from disk' /home/cc/contention-appbench/experiments/redis_contention/redis_numactl_2/clients_4_threads_1_pipeline_1_multi_key_50/loaded_pairs_80/pair_65/server.log
++ sleep 1
++ true
++ grep -q 'DB loaded from disk' /home/cc/contention-appbench/experiments/redis_contention/redis_numactl_2/clients_4_threads_1_pipeline_1_multi_key_50/loaded_pairs_80/pair_65/server.log
++ sleep 1
++ true
++ grep -q 'DB loaded from disk' /home/cc/contention-appbench/experiments/redis_contention/redis_numactl_2/clients_4_threads_1_pipeline_1_multi_key_50/loaded_pairs_80/pair_65/server.log
++ sleep 1
++ true
++ grep -q 'DB loaded from disk' /home/cc/contention-appbench/experiments/redis_contention/redis_numactl_2/clients_4_threads_1_pipeline_1_multi_key_50/loaded_pairs_80/pair_65/server.log
++ sleep 1
++ true
++ grep -q 'DB loaded from disk' /home/cc/contention-appbench/experiments/redis_contention/redis_numactl_2/clients_4_threads_1_pipeline_1_multi_key_50/loaded_pairs_80/pair_65/server.log
++ sleep 1
++ true
++ grep -q 'DB loaded from disk' /home/cc/contention-appbench/experiments/redis_contention/redis_numactl_2/clients_4_threads_1_pipeline_1_multi_key_50/loaded_pairs_80/pair_65/server.log
++ sleep 1
++ true
++ grep -q 'DB loaded from disk' /home/cc/contention-appbench/experiments/redis_contention/redis_numactl_2/clients_4_threads_1_pipeline_1_multi_key_50/loaded_pairs_80/pair_65/server.log
++ sleep 1
++ true
++ grep -q 'DB loaded from disk' /home/cc/contention-appbench/experiments/redis_contention/redis_numactl_2/clients_4_threads_1_pipeline_1_multi_key_50/loaded_pairs_80/pair_65/server.log
++ sleep 1
++ true
++ grep -q 'DB loaded from disk' /home/cc/contention-appbench/experiments/redis_contention/redis_numactl_2/clients_4_threads_1_pipeline_1_multi_key_50/loaded_pairs_80/pair_65/server.log
++ sleep 1
++ true
++ grep -q 'DB loaded from disk' /home/cc/contention-appbench/experiments/redis_contention/redis_numactl_2/clients_4_threads_1_pipeline_1_multi_key_50/loaded_pairs_80/pair_65/server.log
++ sleep 1
++ true
++ grep -q 'DB loaded from disk' /home/cc/contention-appbench/experiments/redis_contention/redis_numactl_2/clients_4_threads_1_pipeline_1_multi_key_50/loaded_pairs_80/pair_65/server.log
++ sleep 1
++ true
++ grep -q 'DB loaded from disk' /home/cc/contention-appbench/experiments/redis_contention/redis_numactl_2/clients_4_threads_1_pipeline_1_multi_key_50/loaded_pairs_80/pair_65/server.log
++ sleep 1
++ true
++ grep -q 'DB loaded from disk' /home/cc/contention-appbench/experiments/redis_contention/redis_numactl_2/clients_4_threads_1_pipeline_1_multi_key_50/loaded_pairs_80/pair_65/server.log
++ sleep 1
++ true
++ grep -q 'DB loaded from disk' /home/cc/contention-appbench/experiments/redis_contention/redis_numactl_2/clients_4_threads_1_pipeline_1_multi_key_50/loaded_pairs_80/pair_65/server.log
++ sleep 1
++ true
++ grep -q 'DB loaded from disk' /home/cc/contention-appbench/experiments/redis_contention/redis_numactl_2/clients_4_threads_1_pipeline_1_multi_key_50/loaded_pairs_80/pair_65/server.log
++ sleep 1
++ true
++ grep -q 'DB loaded from disk' /home/cc/contention-appbench/experiments/redis_contention/redis_numactl_2/clients_4_threads_1_pipeline_1_multi_key_50/loaded_pairs_80/pair_65/server.log
++ sleep 1
++ true
++ grep -q 'DB loaded from disk' /home/cc/contention-appbench/experiments/redis_contention/redis_numactl_2/clients_4_threads_1_pipeline_1_multi_key_50/loaded_pairs_80/pair_65/server.log
++ sleep 1
++ true
++ grep -q 'DB loaded from disk' /home/cc/contention-appbench/experiments/redis_contention/redis_numactl_2/clients_4_threads_1_pipeline_1_multi_key_50/loaded_pairs_80/pair_65/server.log
++ sleep 1
++ true
++ grep -q 'DB loaded from disk' /home/cc/contention-appbench/experiments/redis_contention/redis_numactl_2/clients_4_threads_1_pipeline_1_multi_key_50/loaded_pairs_80/pair_65/server.log
++ sleep 1
++ true
++ grep -q 'DB loaded from disk' /home/cc/contention-appbench/experiments/redis_contention/redis_numactl_2/clients_4_threads_1_pipeline_1_multi_key_50/loaded_pairs_80/pair_65/server.log
++ sleep 1
++ true
++ grep -q 'DB loaded from disk' /home/cc/contention-appbench/experiments/redis_contention/redis_numactl_2/clients_4_threads_1_pipeline_1_multi_key_50/loaded_pairs_80/pair_65/server.log
++ sleep 1
++ true
++ grep -q 'DB loaded from disk' /home/cc/contention-appbench/experiments/redis_contention/redis_numactl_2/clients_4_threads_1_pipeline_1_multi_key_50/loaded_pairs_80/pair_65/server.log
++ sleep 1
++ true
++ grep -q 'DB loaded from disk' /home/cc/contention-appbench/experiments/redis_contention/redis_numactl_2/clients_4_threads_1_pipeline_1_multi_key_50/loaded_pairs_80/pair_65/server.log
++ sleep 1
++ true
++ grep -q 'DB loaded from disk' /home/cc/contention-appbench/experiments/redis_contention/redis_numactl_2/clients_4_threads_1_pipeline_1_multi_key_50/loaded_pairs_80/pair_65/server.log
++ sleep 1
++ true
++ grep -q 'DB loaded from disk' /home/cc/contention-appbench/experiments/redis_contention/redis_numactl_2/clients_4_threads_1_pipeline_1_multi_key_50/loaded_pairs_80/pair_65/server.log
++ sleep 1
++ true
++ grep -q 'DB loaded from disk' /home/cc/contention-appbench/experiments/redis_contention/redis_numactl_2/clients_4_threads_1_pipeline_1_multi_key_50/loaded_pairs_80/pair_65/server.log
++ sleep 1
++ true
++ grep -q 'DB loaded from disk' /home/cc/contention-appbench/experiments/redis_contention/redis_numactl_2/clients_4_threads_1_pipeline_1_multi_key_50/loaded_pairs_80/pair_65/server.log
++ sleep 1
++ true
++ grep -q 'DB loaded from disk' /home/cc/contention-appbench/experiments/redis_contention/redis_numactl_2/clients_4_threads_1_pipeline_1_multi_key_50/loaded_pairs_80/pair_65/server.log
++ sleep 1
++ true
++ grep -q 'DB loaded from disk' /home/cc/contention-appbench/experiments/redis_contention/redis_numactl_2/clients_4_threads_1_pipeline_1_multi_key_50/loaded_pairs_80/pair_65/server.log
++ sleep 1
++ true
++ grep -q 'DB loaded from disk' /home/cc/contention-appbench/experiments/redis_contention/redis_numactl_2/clients_4_threads_1_pipeline_1_multi_key_50/loaded_pairs_80/pair_65/server.log
++ sleep 1
++ true
++ grep -q 'DB loaded from disk' /home/cc/contention-appbench/experiments/redis_contention/redis_numactl_2/clients_4_threads_1_pipeline_1_multi_key_50/loaded_pairs_80/pair_65/server.log
++ sleep 1
++ true
++ grep -q 'DB loaded from disk' /home/cc/contention-appbench/experiments/redis_contention/redis_numactl_2/clients_4_threads_1_pipeline_1_multi_key_50/loaded_pairs_80/pair_65/server.log
++ sleep 1
++ true
++ grep -q 'DB loaded from disk' /home/cc/contention-appbench/experiments/redis_contention/redis_numactl_2/clients_4_threads_1_pipeline_1_multi_key_50/loaded_pairs_80/pair_65/server.log
++ sleep 1
++ true
++ grep -q 'DB loaded from disk' /home/cc/contention-appbench/experiments/redis_contention/redis_numactl_2/clients_4_threads_1_pipeline_1_multi_key_50/loaded_pairs_80/pair_65/server.log
++ sleep 1
++ true
++ grep -q 'DB loaded from disk' /home/cc/contention-appbench/experiments/redis_contention/redis_numactl_2/clients_4_threads_1_pipeline_1_multi_key_50/loaded_pairs_80/pair_65/server.log
++ sleep 1
++ true
++ grep -q 'DB loaded from disk' /home/cc/contention-appbench/experiments/redis_contention/redis_numactl_2/clients_4_threads_1_pipeline_1_multi_key_50/loaded_pairs_80/pair_65/server.log
++ sleep 1
++ true
++ grep -q 'DB loaded from disk' /home/cc/contention-appbench/experiments/redis_contention/redis_numactl_2/clients_4_threads_1_pipeline_1_multi_key_50/loaded_pairs_80/pair_65/server.log
++ sleep 1
++ true
++ grep -q 'DB loaded from disk' /home/cc/contention-appbench/experiments/redis_contention/redis_numactl_2/clients_4_threads_1_pipeline_1_multi_key_50/loaded_pairs_80/pair_65/server.log
++ sleep 1
++ true
++ grep -q 'DB loaded from disk' /home/cc/contention-appbench/experiments/redis_contention/redis_numactl_2/clients_4_threads_1_pipeline_1_multi_key_50/loaded_pairs_80/pair_65/server.log
++ sleep 1
++ true
++ grep -q 'DB loaded from disk' /home/cc/contention-appbench/experiments/redis_contention/redis_numactl_2/clients_4_threads_1_pipeline_1_multi_key_50/loaded_pairs_80/pair_65/server.log
++ sleep 1
++ true
++ grep -q 'DB loaded from disk' /home/cc/contention-appbench/experiments/redis_contention/redis_numactl_2/clients_4_threads_1_pipeline_1_multi_key_50/loaded_pairs_80/pair_65/server.log
++ sleep 1
++ true
++ grep -q 'DB loaded from disk' /home/cc/contention-appbench/experiments/redis_contention/redis_numactl_2/clients_4_threads_1_pipeline_1_multi_key_50/loaded_pairs_80/pair_65/server.log
++ sleep 1
++ true
++ grep -q 'DB loaded from disk' /home/cc/contention-appbench/experiments/redis_contention/redis_numactl_2/clients_4_threads_1_pipeline_1_multi_key_50/loaded_pairs_80/pair_65/server.log
++ sleep 1
++ true
++ grep -q 'DB loaded from disk' /home/cc/contention-appbench/experiments/redis_contention/redis_numactl_2/clients_4_threads_1_pipeline_1_multi_key_50/loaded_pairs_80/pair_65/server.log
++ sleep 1
++ true
++ grep -q 'DB loaded from disk' /home/cc/contention-appbench/experiments/redis_contention/redis_numactl_2/clients_4_threads_1_pipeline_1_multi_key_50/loaded_pairs_80/pair_65/server.log
++ sleep 1
++ true
++ grep -q 'DB loaded from disk' /home/cc/contention-appbench/experiments/redis_contention/redis_numactl_2/clients_4_threads_1_pipeline_1_multi_key_50/loaded_pairs_80/pair_65/server.log
++ sleep 1
++ true
++ grep -q 'DB loaded from disk' /home/cc/contention-appbench/experiments/redis_contention/redis_numactl_2/clients_4_threads_1_pipeline_1_multi_key_50/loaded_pairs_80/pair_65/server.log
++ sleep 1
++ true
++ grep -q 'DB loaded from disk' /home/cc/contention-appbench/experiments/redis_contention/redis_numactl_2/clients_4_threads_1_pipeline_1_multi_key_50/loaded_pairs_80/pair_65/server.log
++ sleep 1
++ true
++ grep -q 'DB loaded from disk' /home/cc/contention-appbench/experiments/redis_contention/redis_numactl_2/clients_4_threads_1_pipeline_1_multi_key_50/loaded_pairs_80/pair_65/server.log
++ sleep 1
++ true
++ grep -q 'DB loaded from disk' /home/cc/contention-appbench/experiments/redis_contention/redis_numactl_2/clients_4_threads_1_pipeline_1_multi_key_50/loaded_pairs_80/pair_65/server.log
++ sleep 1
++ true
++ grep -q 'DB loaded from disk' /home/cc/contention-appbench/experiments/redis_contention/redis_numactl_2/clients_4_threads_1_pipeline_1_multi_key_50/loaded_pairs_80/pair_65/server.log
++ sleep 1
++ true
++ grep -q 'DB loaded from disk' /home/cc/contention-appbench/experiments/redis_contention/redis_numactl_2/clients_4_threads_1_pipeline_1_multi_key_50/loaded_pairs_80/pair_65/server.log
++ sleep 1
++ true
++ grep -q 'DB loaded from disk' /home/cc/contention-appbench/experiments/redis_contention/redis_numactl_2/clients_4_threads_1_pipeline_1_multi_key_50/loaded_pairs_80/pair_65/server.log
++ sleep 1
++ true
++ grep -q 'DB loaded from disk' /home/cc/contention-appbench/experiments/redis_contention/redis_numactl_2/clients_4_threads_1_pipeline_1_multi_key_50/loaded_pairs_80/pair_65/server.log
++ sleep 1
++ true
++ grep -q 'DB loaded from disk' /home/cc/contention-appbench/experiments/redis_contention/redis_numactl_2/clients_4_threads_1_pipeline_1_multi_key_50/loaded_pairs_80/pair_65/server.log
++ sleep 1
++ true
++ grep -q 'DB loaded from disk' /home/cc/contention-appbench/experiments/redis_contention/redis_numactl_2/clients_4_threads_1_pipeline_1_multi_key_50/loaded_pairs_80/pair_65/server.log
++ sleep 1
++ true
++ grep -q 'DB loaded from disk' /home/cc/contention-appbench/experiments/redis_contention/redis_numactl_2/clients_4_threads_1_pipeline_1_multi_key_50/loaded_pairs_80/pair_65/server.log
++ sleep 1
++ true
++ grep -q 'DB loaded from disk' /home/cc/contention-appbench/experiments/redis_contention/redis_numactl_2/clients_4_threads_1_pipeline_1_multi_key_50/loaded_pairs_80/pair_65/server.log
++ sleep 1
++ true
++ grep -q 'DB loaded from disk' /home/cc/contention-appbench/experiments/redis_contention/redis_numactl_2/clients_4_threads_1_pipeline_1_multi_key_50/loaded_pairs_80/pair_65/server.log
++ sleep 1
++ true
++ grep -q 'DB loaded from disk' /home/cc/contention-appbench/experiments/redis_contention/redis_numactl_2/clients_4_threads_1_pipeline_1_multi_key_50/loaded_pairs_80/pair_65/server.log
++ sleep 1
++ true
++ grep -q 'DB loaded from disk' /home/cc/contention-appbench/experiments/redis_contention/redis_numactl_2/clients_4_threads_1_pipeline_1_multi_key_50/loaded_pairs_80/pair_65/server.log
++ sleep 1
++ true
++ grep -q 'DB loaded from disk' /home/cc/contention-appbench/experiments/redis_contention/redis_numactl_2/clients_4_threads_1_pipeline_1_multi_key_50/loaded_pairs_80/pair_65/server.log
++ sleep 1
++ true
++ grep -q 'DB loaded from disk' /home/cc/contention-appbench/experiments/redis_contention/redis_numactl_2/clients_4_threads_1_pipeline_1_multi_key_50/loaded_pairs_80/pair_65/server.log
++ sleep 1
++ true
++ grep -q 'DB loaded from disk' /home/cc/contention-appbench/experiments/redis_contention/redis_numactl_2/clients_4_threads_1_pipeline_1_multi_key_50/loaded_pairs_80/pair_65/server.log
++ sleep 1
++ true
++ grep -q 'DB loaded from disk' /home/cc/contention-appbench/experiments/redis_contention/redis_numactl_2/clients_4_threads_1_pipeline_1_multi_key_50/loaded_pairs_80/pair_65/server.log
++ sleep 1
++ true
++ grep -q 'DB loaded from disk' /home/cc/contention-appbench/experiments/redis_contention/redis_numactl_2/clients_4_threads_1_pipeline_1_multi_key_50/loaded_pairs_80/pair_65/server.log
++ sleep 1
++ true
++ grep -q 'DB loaded from disk' /home/cc/contention-appbench/experiments/redis_contention/redis_numactl_2/clients_4_threads_1_pipeline_1_multi_key_50/loaded_pairs_80/pair_65/server.log
++ sleep 1
++ true
++ grep -q 'DB loaded from disk' /home/cc/contention-appbench/experiments/redis_contention/redis_numactl_2/clients_4_threads_1_pipeline_1_multi_key_50/loaded_pairs_80/pair_65/server.log
++ sleep 1
++ true
++ grep -q 'DB loaded from disk' /home/cc/contention-appbench/experiments/redis_contention/redis_numactl_2/clients_4_threads_1_pipeline_1_multi_key_50/loaded_pairs_80/pair_65/server.log
++ sleep 1
++ true
++ grep -q 'DB loaded from disk' /home/cc/contention-appbench/experiments/redis_contention/redis_numactl_2/clients_4_threads_1_pipeline_1_multi_key_50/loaded_pairs_80/pair_65/server.log
++ sleep 1
++ true
++ grep -q 'DB loaded from disk' /home/cc/contention-appbench/experiments/redis_contention/redis_numactl_2/clients_4_threads_1_pipeline_1_multi_key_50/loaded_pairs_80/pair_65/server.log
++ sleep 1
++ true
++ grep -q 'DB loaded from disk' /home/cc/contention-appbench/experiments/redis_contention/redis_numactl_2/clients_4_threads_1_pipeline_1_multi_key_50/loaded_pairs_80/pair_65/server.log
++ sleep 1
++ true
++ grep -q 'DB loaded from disk' /home/cc/contention-appbench/experiments/redis_contention/redis_numactl_2/clients_4_threads_1_pipeline_1_multi_key_50/loaded_pairs_80/pair_65/server.log
++ sleep 1
++ true
++ grep -q 'DB loaded from disk' /home/cc/contention-appbench/experiments/redis_contention/redis_numactl_2/clients_4_threads_1_pipeline_1_multi_key_50/loaded_pairs_80/pair_65/server.log
++ sleep 1
++ true
++ grep -q 'DB loaded from disk' /home/cc/contention-appbench/experiments/redis_contention/redis_numactl_2/clients_4_threads_1_pipeline_1_multi_key_50/loaded_pairs_80/pair_65/server.log
++ sleep 1
++ true
++ grep -q 'DB loaded from disk' /home/cc/contention-appbench/experiments/redis_contention/redis_numactl_2/clients_4_threads_1_pipeline_1_multi_key_50/loaded_pairs_80/pair_65/server.log
++ sleep 1
++ true
++ grep -q 'DB loaded from disk' /home/cc/contention-appbench/experiments/redis_contention/redis_numactl_2/clients_4_threads_1_pipeline_1_multi_key_50/loaded_pairs_80/pair_65/server.log
++ sleep 1
++ true
++ grep -q 'DB loaded from disk' /home/cc/contention-appbench/experiments/redis_contention/redis_numactl_2/clients_4_threads_1_pipeline_1_multi_key_50/loaded_pairs_80/pair_65/server.log
++ sleep 1
++ true
++ grep -q 'DB loaded from disk' /home/cc/contention-appbench/experiments/redis_contention/redis_numactl_2/clients_4_threads_1_pipeline_1_multi_key_50/loaded_pairs_80/pair_65/server.log
++ sleep 1
++ true
++ grep -q 'DB loaded from disk' /home/cc/contention-appbench/experiments/redis_contention/redis_numactl_2/clients_4_threads_1_pipeline_1_multi_key_50/loaded_pairs_80/pair_65/server.log
++ sleep 1
++ true
++ grep -q 'DB loaded from disk' /home/cc/contention-appbench/experiments/redis_contention/redis_numactl_2/clients_4_threads_1_pipeline_1_multi_key_50/loaded_pairs_80/pair_65/server.log
++ sleep 1
++ true
++ grep -q 'DB loaded from disk' /home/cc/contention-appbench/experiments/redis_contention/redis_numactl_2/clients_4_threads_1_pipeline_1_multi_key_50/loaded_pairs_80/pair_65/server.log
++ sleep 1
++ true
++ grep -q 'DB loaded from disk' /home/cc/contention-appbench/experiments/redis_contention/redis_numactl_2/clients_4_threads_1_pipeline_1_multi_key_50/loaded_pairs_80/pair_65/server.log
++ sleep 1
++ true
++ grep -q 'DB loaded from disk' /home/cc/contention-appbench/experiments/redis_contention/redis_numactl_2/clients_4_threads_1_pipeline_1_multi_key_50/loaded_pairs_80/pair_65/server.log
++ sleep 1
++ true
++ grep -q 'DB loaded from disk' /home/cc/contention-appbench/experiments/redis_contention/redis_numactl_2/clients_4_threads_1_pipeline_1_multi_key_50/loaded_pairs_80/pair_65/server.log
++ sleep 1
++ true
++ grep -q 'DB loaded from disk' /home/cc/contention-appbench/experiments/redis_contention/redis_numactl_2/clients_4_threads_1_pipeline_1_multi_key_50/loaded_pairs_80/pair_65/server.log
++ sleep 1
++ true
++ grep -q 'DB loaded from disk' /home/cc/contention-appbench/experiments/redis_contention/redis_numactl_2/clients_4_threads_1_pipeline_1_multi_key_50/loaded_pairs_80/pair_65/server.log
++ sleep 1
++ true
++ grep -q 'DB loaded from disk' /home/cc/contention-appbench/experiments/redis_contention/redis_numactl_2/clients_4_threads_1_pipeline_1_multi_key_50/loaded_pairs_80/pair_65/server.log
++ sleep 1
++ true
++ grep -q 'DB loaded from disk' /home/cc/contention-appbench/experiments/redis_contention/redis_numactl_2/clients_4_threads_1_pipeline_1_multi_key_50/loaded_pairs_80/pair_65/server.log
++ sleep 1
++ true
++ grep -q 'DB loaded from disk' /home/cc/contention-appbench/experiments/redis_contention/redis_numactl_2/clients_4_threads_1_pipeline_1_multi_key_50/loaded_pairs_80/pair_65/server.log
++ sleep 1
++ true
++ grep -q 'DB loaded from disk' /home/cc/contention-appbench/experiments/redis_contention/redis_numactl_2/clients_4_threads_1_pipeline_1_multi_key_50/loaded_pairs_80/pair_65/server.log
++ sleep 1
++ true
++ grep -q 'DB loaded from disk' /home/cc/contention-appbench/experiments/redis_contention/redis_numactl_2/clients_4_threads_1_pipeline_1_multi_key_50/loaded_pairs_80/pair_65/server.log
++ sleep 1
++ true
++ grep -q 'DB loaded from disk' /home/cc/contention-appbench/experiments/redis_contention/redis_numactl_2/clients_4_threads_1_pipeline_1_multi_key_50/loaded_pairs_80/pair_65/server.log
++ sleep 1
++ true
++ grep -q 'DB loaded from disk' /home/cc/contention-appbench/experiments/redis_contention/redis_numactl_2/clients_4_threads_1_pipeline_1_multi_key_50/loaded_pairs_80/pair_65/server.log
++ sleep 1
++ true
++ grep -q 'DB loaded from disk' /home/cc/contention-appbench/experiments/redis_contention/redis_numactl_2/clients_4_threads_1_pipeline_1_multi_key_50/loaded_pairs_80/pair_65/server.log
++ echo 'Detected '\''DB loaded from disk'\'' in log. RDB load complete.'
+Detected 'DB loaded from disk' in log. RDB load complete.
++ break
++ echo 'waiting for READY_FLAG: /home/cc/contention-appbench/experiments/redis_contention/redis_numactl_2/clients_4_threads_1_pipeline_1_multi_key_50/loaded_pairs_80/ready.txt'
+waiting for READY_FLAG: /home/cc/contention-appbench/experiments/redis_contention/redis_numactl_2/clients_4_threads_1_pipeline_1_multi_key_50/loaded_pairs_80/ready.txt
++ '[' '!' -s /home/cc/contention-appbench/experiments/redis_contention/redis_numactl_2/clients_4_threads_1_pipeline_1_multi_key_50/loaded_pairs_80/ready.txt ']'
++ MEMTIER_PID=2639338
++ echo '[MEMTIER PID]: 2639338'
+[MEMTIER PID]: 2639338
++ wait 2639338
++ /usr/bin/time -v numactl -C 131 -m 1 memtier_benchmark --port 6565 --test-time=60 --clients 4 --threads 1 --pipeline 1 --multi-key-get 50 --random-data --data-size-range=4-2048 --data-size-pattern=R --key-maximum=1000000 --ratio=0:1 --hide-histogram --out-file=/home/cc/contention-appbench/experiments/redis_contention/redis_numactl_2/clients_4_threads_1_pipeline_1_multi_key_50/loaded_pairs_80/pair_65/redis.out --hdr-file-prefix=/home/cc/contention-appbench/experiments/redis_contention/redis_numactl_2/clients_4_threads_1_pipeline_1_multi_key_50/loaded_pairs_80/pair_65/latency.out
+Writing results to /home/cc/contention-appbench/experiments/redis_contention/redis_numactl_2/clients_4_threads_1_pipeline_1_multi_key_50/loaded_pairs_80/pair_65/redis.out...
+[RUN #1] Preparing benchmark client...
+[RUN #1] Launching threads now...
+[RUN #1 2%,   0 secs]  1 threads  4 conns:        6258 ops,    6258 (avg:    6258) ops/sec, 314.46MB/sec (avg: 314.46MB/sec),  0.64 (avg:  0.64) msec latency[RUN #1 3%,   2 secs]  1 threads  4 conns:       12093 ops,    5834 (avg:    6046) ops/sec, 294.44MB/sec (avg: 304.45MB/sec),  0.68 (avg:  0.66) msec latency[RUN #1 5%,   3 secs]  1 threads  4 conns:       17847 ops,    5753 (avg:    5948) ops/sec, 290.06MB/sec (avg: 299.65MB/sec),  0.69 (avg:  0.67) msec latency[RUN #1 7%,   4 secs]  1 threads  4 conns:       23601 ops,    5753 (avg:    5899) ops/sec, 289.71MB/sec (avg: 297.17MB/sec),  0.69 (avg:  0.68) msec latency[RUN #1 8%,   5 secs]  1 threads  4 conns:       29353 ops,    5751 (avg:    5870) ops/sec, 289.54MB/sec (avg: 295.64MB/sec),  0.69 (avg:  0.68) msec latency[RUN #1 10%,   6 secs]  1 threads  4 conns:       35119 ops,    5765 (avg:    5852) ops/sec, 290.81MB/sec (avg: 294.84MB/sec),  0.69 (avg:  0.68) msec latency[RUN #1 12%,   7 secs]  1 threads  4 conns:       40933 ops,    5813 (avg:    5847) ops/sec, 293.07MB/sec (avg: 294.58MB/sec),  0.69 (avg:  0.68) msec latency[RUN #1 13%,   8 secs]  1 threads  4 conns:       46710 ops,    5776 (avg:    5838) ops/sec, 290.22MB/sec (avg: 294.04MB/sec),  0.69 (avg:  0.68) msec latency[RUN #1 15%,   9 secs]  1 threads  4 conns:       52468 ops,    5757 (avg:    5829) ops/sec, 289.47MB/sec (avg: 293.53MB/sec),  0.69 (avg:  0.68) msec latency[RUN #1 17%,  10 secs]  1 threads  4 conns:       58223 ops,    5754 (avg:    5821) ops/sec, 290.47MB/sec (avg: 293.22MB/sec),  0.69 (avg:  0.69) msec latency[RUN #1 18%,  11 secs]  1 threads  4 conns:       63984 ops,    5760 (avg:    5816) ops/sec, 290.17MB/sec (avg: 292.95MB/sec),  0.69 (avg:  0.69) msec latency[RUN #1 20%,  12 secs]  1 threads  4 conns:       69799 ops,    5814 (avg:    5816) ops/sec, 291.76MB/sec (avg: 292.85MB/sec),  0.69 (avg:  0.69) msec latency[RUN #1 22%,  13 secs]  1 threads  4 conns:       75594 ops,    5794 (avg:    5814) ops/sec, 292.02MB/sec (avg: 292.78MB/sec),  0.69 (avg:  0.69) msec latency[RUN #1 23%,  14 secs]  1 threads  4 conns:       81299 ops,    5704 (avg:    5806) ops/sec, 288.07MB/sec (avg: 292.45MB/sec),  0.70 (avg:  0.69) msec latency[RUN #1 25%,  15 secs]  1 threads  4 conns:       87068 ops,    5768 (avg:    5804) ops/sec, 290.42MB/sec (avg: 292.31MB/sec),  0.69 (avg:  0.69) msec latency[RUN #1 27%,  16 secs]  1 threads  4 conns:       92824 ops,    5755 (avg:    5801) ops/sec, 289.48MB/sec (avg: 292.14MB/sec),  0.69 (avg:  0.69) msec latency[RUN #1 28%,  17 secs]  1 threads  4 conns:       98595 ops,    5770 (avg:    5799) ops/sec, 289.99MB/sec (avg: 292.01MB/sec),  0.69 (avg:  0.69) msec latency[RUN #1 30%,  18 secs]  1 threads  4 conns:      104372 ops,    5776 (avg:    5797) ops/sec, 289.92MB/sec (avg: 291.89MB/sec),  0.69 (avg:  0.69) msec latency[RUN #1 32%,  19 secs]  1 threads  4 conns:      110126 ops,    5753 (avg:    5795) ops/sec, 289.28MB/sec (avg: 291.76MB/sec),  0.69 (avg:  0.69) msec latency[RUN #1 33%,  20 secs]  1 threads  4 conns:      115870 ops,    5743 (avg:    5793) ops/sec, 288.97MB/sec (avg: 291.62MB/sec),  0.69 (avg:  0.69) msec latency[RUN #1 35%,  21 secs]  1 threads  4 conns:      121591 ops,    5720 (avg:    5789) ops/sec, 289.01MB/sec (avg: 291.49MB/sec),  0.70 (avg:  0.69) msec latency[RUN #1 37%,  22 secs]  1 threads  4 conns:      127340 ops,    5748 (avg:    5787) ops/sec, 289.68MB/sec (avg: 291.41MB/sec),  0.69 (avg:  0.69) msec latency[RUN #1 38%,  23 secs]  1 threads  4 conns:      133085 ops,    5744 (avg:    5785) ops/sec, 289.56MB/sec (avg: 291.33MB/sec),  0.69 (avg:  0.69) msec latency[RUN #1 40%,  24 secs]  1 threads  4 conns:      138858 ops,    5772 (avg:    5785) ops/sec, 290.43MB/sec (avg: 291.29MB/sec),  0.69 (avg:  0.69) msec latency[RUN #1 42%,  25 secs]  1 threads  4 conns:      144634 ops,    5775 (avg:    5784) ops/sec, 291.22MB/sec (avg: 291.29MB/sec),  0.69 (avg:  0.69) msec latency[RUN #1 43%,  26 secs]  1 threads  4 conns:      150398 ops,    5763 (avg:    5784) ops/sec, 290.10MB/sec (avg: 291.24MB/sec),  0.69 (avg:  0.69) msec latency[RUN #1 45%,  27 secs]  1 threads  4 conns:      156174 ops,    5775 (avg:    5783) ops/sec, 291.09MB/sec (avg: 291.24MB/sec),  0.69 (avg:  0.69) msec latency[RUN #1 47%,  28 secs]  1 threads  4 conns:      161920 ops,    5745 (avg:    5782) ops/sec, 289.20MB/sec (avg: 291.16MB/sec),  0.69 (avg:  0.69) msec latency[RUN #1 48%,  29 secs]  1 threads  4 conns:      167664 ops,    5743 (avg:    5781) ops/sec, 289.10MB/sec (avg: 291.09MB/sec),  0.69 (avg:  0.69) msec latency[RUN #1 50%,  30 secs]  1 threads  4 conns:      173425 ops,    5760 (avg:    5780) ops/sec, 291.36MB/sec (avg: 291.10MB/sec),  0.69 (avg:  0.69) msec latency[RUN #1 52%,  31 secs]  1 threads  4 conns:      179193 ops,    5767 (avg:    5779) ops/sec, 290.26MB/sec (avg: 291.08MB/sec),  0.69 (avg:  0.69) msec latency[RUN #1 53%,  32 secs]  1 threads  4 conns:      184951 ops,    5757 (avg:    5779) ops/sec, 290.52MB/sec (avg: 291.06MB/sec),  0.69 (avg:  0.69) msec latency[RUN #1 55%,  33 secs]  1 threads  4 conns:      190707 ops,    5755 (avg:    5778) ops/sec, 289.76MB/sec (avg: 291.02MB/sec),  0.69 (avg:  0.69) msec latency[RUN #1 57%,  34 secs]  1 threads  4 conns:      196484 ops,    5776 (avg:    5778) ops/sec, 291.45MB/sec (avg: 291.03MB/sec),  0.69 (avg:  0.69) msec latency[RUN #1 58%,  35 secs]  1 threads  4 conns:      202258 ops,    5773 (avg:    5778) ops/sec, 290.66MB/sec (avg: 291.02MB/sec),  0.69 (avg:  0.69) msec latency[RUN #1 60%,  36 secs]  1 threads  4 conns:      208024 ops,    5765 (avg:    5777) ops/sec, 290.44MB/sec (avg: 291.00MB/sec),  0.69 (avg:  0.69) msec latency[RUN #1 62%,  37 secs]  1 threads  4 conns:      213795 ops,    5770 (avg:    5777) ops/sec, 289.81MB/sec (avg: 290.97MB/sec),  0.69 (avg:  0.69) msec latency[RUN #1 63%,  38 secs]  1 threads  4 conns:      219570 ops,    5774 (avg:    5777) ops/sec, 289.56MB/sec (avg: 290.93MB/sec),  0.69 (avg:  0.69) msec latency[RUN #1 65%,  39 secs]  1 threads  4 conns:      225269 ops,    5698 (avg:    5775) ops/sec, 286.32MB/sec (avg: 290.82MB/sec),  0.70 (avg:  0.69) msec latency[RUN #1 67%,  40 secs]  1 threads  4 conns:      231018 ops,    5748 (avg:    5774) ops/sec, 289.69MB/sec (avg: 290.79MB/sec),  0.69 (avg:  0.69) msec latency[RUN #1 68%,  41 secs]  1 threads  4 conns:      236814 ops,    5795 (avg:    5775) ops/sec, 291.76MB/sec (avg: 290.81MB/sec),  0.69 (avg:  0.69) msec latency[RUN #1 70%,  42 secs]  1 threads  4 conns:      242565 ops,    5750 (avg:    5774) ops/sec, 289.43MB/sec (avg: 290.78MB/sec),  0.69 (avg:  0.69) msec latency[RUN #1 72%,  43 secs]  1 threads  4 conns:      248409 ops,    5843 (avg:    5776) ops/sec, 294.18MB/sec (avg: 290.86MB/sec),  0.68 (avg:  0.69) msec latency[RUN #1 73%,  44 secs]  1 threads  4 conns:      254152 ops,    5742 (avg:    5775) ops/sec, 288.88MB/sec (avg: 290.81MB/sec),  0.70 (avg:  0.69) msec latency[RUN #1 75%,  45 secs]  1 threads  4 conns:      259885 ops,    5732 (avg:    5774) ops/sec, 289.66MB/sec (avg: 290.79MB/sec),  0.70 (avg:  0.69) msec latency[RUN #1 77%,  46 secs]  1 threads  4 conns:      265575 ops,    5689 (avg:    5772) ops/sec, 286.46MB/sec (avg: 290.69MB/sec),  0.70 (avg:  0.69) msec latency[RUN #1 78%,  47 secs]  1 threads  4 conns:      271378 ops,    5802 (avg:    5773) ops/sec, 291.51MB/sec (avg: 290.71MB/sec),  0.69 (avg:  0.69) msec latency[RUN #1 80%,  48 secs]  1 threads  4 conns:      277119 ops,    5740 (avg:    5772) ops/sec, 289.64MB/sec (avg: 290.69MB/sec),  0.70 (avg:  0.69) msec latency[RUN #1 82%,  49 secs]  1 threads  4 conns:      282888 ops,    5768 (avg:    5772) ops/sec, 290.19MB/sec (avg: 290.68MB/sec),  0.69 (avg:  0.69) msec latency[RUN #1 83%,  50 secs]  1 threads  4 conns:      288618 ops,    5729 (avg:    5771) ops/sec, 289.22MB/sec (avg: 290.65MB/sec),  0.70 (avg:  0.69) msec latency[RUN #1 85%,  51 secs]  1 threads  4 conns:      294347 ops,    5728 (avg:    5771) ops/sec, 289.28MB/sec (avg: 290.62MB/sec),  0.70 (avg:  0.69) msec latency[RUN #1 87%,  52 secs]  1 threads  4 conns:      300088 ops,    5740 (avg:    5770) ops/sec, 289.95MB/sec (avg: 290.61MB/sec),  0.70 (avg:  0.69) msec latency[RUN #1 88%,  53 secs]  1 threads  4 conns:      305812 ops,    5723 (avg:    5769) ops/sec, 288.73MB/sec (avg: 290.57MB/sec),  0.70 (avg:  0.69) msec latency[RUN #1 90%,  54 secs]  1 threads  4 conns:      311563 ops,    5750 (avg:    5769) ops/sec, 289.32MB/sec (avg: 290.55MB/sec),  0.69 (avg:  0.69) msec latency[RUN #1 92%,  55 secs]  1 threads  4 conns:      317308 ops,    5744 (avg:    5768) ops/sec, 289.72MB/sec (avg: 290.54MB/sec),  0.69 (avg:  0.69) msec latency[RUN #1 93%,  56 secs]  1 threads  4 conns:      323054 ops,    5745 (avg:    5768) ops/sec, 289.86MB/sec (avg: 290.52MB/sec),  0.69 (avg:  0.69) msec latency[RUN #1 95%,  57 secs]  1 threads  4 conns:      328806 ops,    5751 (avg:    5768) ops/sec, 289.49MB/sec (avg: 290.51MB/sec),  0.69 (avg:  0.69) msec latency[RUN #1 97%,  58 secs]  1 threads  4 conns:      334563 ops,    5756 (avg:    5767) ops/sec, 289.55MB/sec (avg: 290.49MB/sec),  0.69 (avg:  0.69) msec latency[RUN #1 98%,  59 secs]  1 threads  4 conns:      340330 ops,    5766 (avg:    5767) ops/sec, 289.67MB/sec (avg: 290.48MB/sec),  0.69 (avg:  0.69) msec latency[RUN #1 100%,  60 secs]  0 threads  4 conns:      346068 ops,    5766 (avg:    5767) ops/sec, 289.67MB/sec (avg: 290.46MB/sec),  0.69 (avg:  0.69) msec latency
+
+Writing Full Run command HDR latency histogram results to /home/cc/contention-appbench/experiments/redis_contention/redis_numactl_2/clients_4_threads_1_pipeline_1_multi_key_50/loaded_pairs_80/pair_65/latency.out_FULL_RUN_1.txt...
+Writing Full Run command HDR latency histogram results in HistogramLogProcessor format to /home/cc/contention-appbench/experiments/redis_contention/redis_numactl_2/clients_4_threads_1_pipeline_1_multi_key_50/loaded_pairs_80/pair_65/latency.out_FULL_RUN_1.hgrm...
+Writing GET command HDR latency histogram results to /home/cc/contention-appbench/experiments/redis_contention/redis_numactl_2/clients_4_threads_1_pipeline_1_multi_key_50/loaded_pairs_80/pair_65/latency.out_GET_command_run_1.txt...
+Writing GET command HDR latency histogram results in HistogramLogProcessor format to /home/cc/contention-appbench/experiments/redis_contention/redis_numactl_2/clients_4_threads_1_pipeline_1_multi_key_50/loaded_pairs_80/pair_65/latency.out_GET_command_run_1.hgrm...
+	Command being timed: "numactl -C 131 -m 1 memtier_benchmark --port 6565 --test-time=60 --clients 4 --threads 1 --pipeline 1 --multi-key-get 50 --random-data --data-size-range=4-2048 --data-size-pattern=R --key-maximum=1000000 --ratio=0:1 --hide-histogram --out-file=/home/cc/contention-appbench/experiments/redis_contention/redis_numactl_2/clients_4_threads_1_pipeline_1_multi_key_50/loaded_pairs_80/pair_65/redis.out --hdr-file-prefix=/home/cc/contention-appbench/experiments/redis_contention/redis_numactl_2/clients_4_threads_1_pipeline_1_multi_key_50/loaded_pairs_80/pair_65/latency.out"
+	User time (seconds): 19.39
+	System time (seconds): 23.71
+	Percent of CPU this job got: 71%
+	Elapsed (wall clock) time (h:mm:ss or m:ss): 1:00.01
+	Average shared text size (kbytes): 0
+	Average unshared data size (kbytes): 0
+	Average stack size (kbytes): 0
+	Average total size (kbytes): 0
+	Maximum resident set size (kbytes): 8144
+	Average resident set size (kbytes): 0
+	Major (requiring I/O) page faults: 0
+	Minor (reclaiming a frame) page faults: 750
+	Voluntary context switches: 262557
+	Involuntary context switches: 740
+	Swaps: 0
+	File system inputs: 0
+	File system outputs: 176
+	Socket messages sent: 0
+	Socket messages received: 0
+	Signals delivered: 0
+	Page size (bytes): 4096
+	Exit status: 0
++ kill 2608803
++ wait 2608803
++ echo 'Done. Output: /home/cc/contention-appbench/experiments/redis_contention/redis_numactl_2/clients_4_threads_1_pipeline_1_multi_key_50/loaded_pairs_80/pair_65/redis.out'
+Done. Output: /home/cc/contention-appbench/experiments/redis_contention/redis_numactl_2/clients_4_threads_1_pipeline_1_multi_key_50/loaded_pairs_80/pair_65/redis.out
++ set -x

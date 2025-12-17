@@ -1,0 +1,505 @@
++ CODEBASE=/home/cc/contention-appbench
++ REDIS_DIR=/home/cc/contention-appbench/redis-3.0.0/src
++ REDIS_SERVER=/home/cc/contention-appbench/redis-3.0.0/src/redis-server
++ REDIS_BENCH=/home/cc/contention-appbench/redis-3.0.0/src/redis-benchmark
++ REDIS_CLI=/home/cc/contention-appbench/redis-3.0.0/src/redis-cli
++ REDIS_CONF=/home/cc/contention-appbench/redis-3.0.0/redis.conf
++ OUTPUT=/home/cc/contention-appbench/output/redis
++ FLUSH=1
++ HOST=127.0.0.1
++ CLIENTS=4
++ THREADS=1
++ PIPELINE=1
++ MULTI_GET_COUNT=50
++ REDIS_PORT=6525
++ REDIS_TESTTIME=60
++ REDIS_DATASIZE_RANGE=4-2048
++ REDIS_DATASIZE_PATTERN=R
++ REDIS_KEY_MAXIMUM=1000000
++ REDIS_KEY_PATTERN=R:R
++ REDIS_RATIO=0:1
++ REDIS_OUTPUT=/home/cc/contention-appbench/experiments/redis_contention/redis_numactl_same_node/clients_4_threads_1_pipeline_1_multi_key_50/loaded_pairs_32/pair_25/redis.out
++ REDIS_HISTOGRAM_FILE=/home/cc/contention-appbench/experiments/redis_contention/redis_numactl_same_node/clients_4_threads_1_pipeline_1_multi_key_50/loaded_pairs_32/pair_25/latency.out
++ SERVER_LOG=/home/cc/contention-appbench/experiments/redis_contention/redis_numactl_same_node/clients_4_threads_1_pipeline_1_multi_key_50/loaded_pairs_32/pair_25/server.log
++ REDIS_PREFIX='numactl -C 100 --membind=0'
++ MEMTIER_PREFIX='/usr/bin/time -v numactl -C 102 --membind=1'
++ echo '==> starting redis-server on 127.0.0.1:6525'
+==> starting redis-server on 127.0.0.1:6525
++ echo 'Printing server log to: /home/cc/contention-appbench/experiments/redis_contention/redis_numactl_same_node/clients_4_threads_1_pipeline_1_multi_key_50/loaded_pairs_32/pair_25/server.log'
+Printing server log to: /home/cc/contention-appbench/experiments/redis_contention/redis_numactl_same_node/clients_4_threads_1_pipeline_1_multi_key_50/loaded_pairs_32/pair_25/server.log
++ SRV_PID=2780702
++ echo '[SERVER PID]: 2780702'
+[SERVER PID]: 2780702
++ echo 'Waiting for Redis to finish loading RDB (watching log: /home/cc/contention-appbench/experiments/redis_contention/redis_numactl_same_node/clients_4_threads_1_pipeline_1_multi_key_50/loaded_pairs_32/pair_25/server.log)...'
+Waiting for Redis to finish loading RDB (watching log: /home/cc/contention-appbench/experiments/redis_contention/redis_numactl_same_node/clients_4_threads_1_pipeline_1_multi_key_50/loaded_pairs_32/pair_25/server.log)...
++ true
++ grep -q 'DB loaded from disk' /home/cc/contention-appbench/experiments/redis_contention/redis_numactl_same_node/clients_4_threads_1_pipeline_1_multi_key_50/loaded_pairs_32/pair_25/server.log
++ numactl -C 100 --membind=0 /home/cc/contention-appbench/redis-3.0.0/src/redis-server /home/cc/contention-appbench/redis-3.0.0/redis.conf --bind 127.0.0.1 --port 6525 --daemonize no --dir ./databases --dbfilename dump_25.rdb
++ sleep 1
++ true
++ grep -q 'DB loaded from disk' /home/cc/contention-appbench/experiments/redis_contention/redis_numactl_same_node/clients_4_threads_1_pipeline_1_multi_key_50/loaded_pairs_32/pair_25/server.log
++ sleep 1
++ true
++ grep -q 'DB loaded from disk' /home/cc/contention-appbench/experiments/redis_contention/redis_numactl_same_node/clients_4_threads_1_pipeline_1_multi_key_50/loaded_pairs_32/pair_25/server.log
++ sleep 1
++ true
++ grep -q 'DB loaded from disk' /home/cc/contention-appbench/experiments/redis_contention/redis_numactl_same_node/clients_4_threads_1_pipeline_1_multi_key_50/loaded_pairs_32/pair_25/server.log
++ sleep 1
++ true
++ grep -q 'DB loaded from disk' /home/cc/contention-appbench/experiments/redis_contention/redis_numactl_same_node/clients_4_threads_1_pipeline_1_multi_key_50/loaded_pairs_32/pair_25/server.log
++ sleep 1
++ true
++ grep -q 'DB loaded from disk' /home/cc/contention-appbench/experiments/redis_contention/redis_numactl_same_node/clients_4_threads_1_pipeline_1_multi_key_50/loaded_pairs_32/pair_25/server.log
++ sleep 1
++ true
++ grep -q 'DB loaded from disk' /home/cc/contention-appbench/experiments/redis_contention/redis_numactl_same_node/clients_4_threads_1_pipeline_1_multi_key_50/loaded_pairs_32/pair_25/server.log
++ sleep 1
++ true
++ grep -q 'DB loaded from disk' /home/cc/contention-appbench/experiments/redis_contention/redis_numactl_same_node/clients_4_threads_1_pipeline_1_multi_key_50/loaded_pairs_32/pair_25/server.log
++ sleep 1
++ true
++ grep -q 'DB loaded from disk' /home/cc/contention-appbench/experiments/redis_contention/redis_numactl_same_node/clients_4_threads_1_pipeline_1_multi_key_50/loaded_pairs_32/pair_25/server.log
++ sleep 1
++ true
++ grep -q 'DB loaded from disk' /home/cc/contention-appbench/experiments/redis_contention/redis_numactl_same_node/clients_4_threads_1_pipeline_1_multi_key_50/loaded_pairs_32/pair_25/server.log
++ sleep 1
++ true
++ grep -q 'DB loaded from disk' /home/cc/contention-appbench/experiments/redis_contention/redis_numactl_same_node/clients_4_threads_1_pipeline_1_multi_key_50/loaded_pairs_32/pair_25/server.log
++ sleep 1
++ true
++ grep -q 'DB loaded from disk' /home/cc/contention-appbench/experiments/redis_contention/redis_numactl_same_node/clients_4_threads_1_pipeline_1_multi_key_50/loaded_pairs_32/pair_25/server.log
++ sleep 1
++ true
++ grep -q 'DB loaded from disk' /home/cc/contention-appbench/experiments/redis_contention/redis_numactl_same_node/clients_4_threads_1_pipeline_1_multi_key_50/loaded_pairs_32/pair_25/server.log
++ sleep 1
++ true
++ grep -q 'DB loaded from disk' /home/cc/contention-appbench/experiments/redis_contention/redis_numactl_same_node/clients_4_threads_1_pipeline_1_multi_key_50/loaded_pairs_32/pair_25/server.log
++ sleep 1
++ true
++ grep -q 'DB loaded from disk' /home/cc/contention-appbench/experiments/redis_contention/redis_numactl_same_node/clients_4_threads_1_pipeline_1_multi_key_50/loaded_pairs_32/pair_25/server.log
++ sleep 1
++ true
++ grep -q 'DB loaded from disk' /home/cc/contention-appbench/experiments/redis_contention/redis_numactl_same_node/clients_4_threads_1_pipeline_1_multi_key_50/loaded_pairs_32/pair_25/server.log
++ sleep 1
++ true
++ grep -q 'DB loaded from disk' /home/cc/contention-appbench/experiments/redis_contention/redis_numactl_same_node/clients_4_threads_1_pipeline_1_multi_key_50/loaded_pairs_32/pair_25/server.log
++ sleep 1
++ true
++ grep -q 'DB loaded from disk' /home/cc/contention-appbench/experiments/redis_contention/redis_numactl_same_node/clients_4_threads_1_pipeline_1_multi_key_50/loaded_pairs_32/pair_25/server.log
++ sleep 1
++ true
++ grep -q 'DB loaded from disk' /home/cc/contention-appbench/experiments/redis_contention/redis_numactl_same_node/clients_4_threads_1_pipeline_1_multi_key_50/loaded_pairs_32/pair_25/server.log
++ sleep 1
++ true
++ grep -q 'DB loaded from disk' /home/cc/contention-appbench/experiments/redis_contention/redis_numactl_same_node/clients_4_threads_1_pipeline_1_multi_key_50/loaded_pairs_32/pair_25/server.log
++ sleep 1
++ true
++ grep -q 'DB loaded from disk' /home/cc/contention-appbench/experiments/redis_contention/redis_numactl_same_node/clients_4_threads_1_pipeline_1_multi_key_50/loaded_pairs_32/pair_25/server.log
++ sleep 1
++ true
++ grep -q 'DB loaded from disk' /home/cc/contention-appbench/experiments/redis_contention/redis_numactl_same_node/clients_4_threads_1_pipeline_1_multi_key_50/loaded_pairs_32/pair_25/server.log
++ sleep 1
++ true
++ grep -q 'DB loaded from disk' /home/cc/contention-appbench/experiments/redis_contention/redis_numactl_same_node/clients_4_threads_1_pipeline_1_multi_key_50/loaded_pairs_32/pair_25/server.log
++ sleep 1
++ true
++ grep -q 'DB loaded from disk' /home/cc/contention-appbench/experiments/redis_contention/redis_numactl_same_node/clients_4_threads_1_pipeline_1_multi_key_50/loaded_pairs_32/pair_25/server.log
++ sleep 1
++ true
++ grep -q 'DB loaded from disk' /home/cc/contention-appbench/experiments/redis_contention/redis_numactl_same_node/clients_4_threads_1_pipeline_1_multi_key_50/loaded_pairs_32/pair_25/server.log
++ sleep 1
++ true
++ grep -q 'DB loaded from disk' /home/cc/contention-appbench/experiments/redis_contention/redis_numactl_same_node/clients_4_threads_1_pipeline_1_multi_key_50/loaded_pairs_32/pair_25/server.log
++ sleep 1
++ true
++ grep -q 'DB loaded from disk' /home/cc/contention-appbench/experiments/redis_contention/redis_numactl_same_node/clients_4_threads_1_pipeline_1_multi_key_50/loaded_pairs_32/pair_25/server.log
++ sleep 1
++ true
++ grep -q 'DB loaded from disk' /home/cc/contention-appbench/experiments/redis_contention/redis_numactl_same_node/clients_4_threads_1_pipeline_1_multi_key_50/loaded_pairs_32/pair_25/server.log
++ sleep 1
++ true
++ grep -q 'DB loaded from disk' /home/cc/contention-appbench/experiments/redis_contention/redis_numactl_same_node/clients_4_threads_1_pipeline_1_multi_key_50/loaded_pairs_32/pair_25/server.log
++ sleep 1
++ true
++ grep -q 'DB loaded from disk' /home/cc/contention-appbench/experiments/redis_contention/redis_numactl_same_node/clients_4_threads_1_pipeline_1_multi_key_50/loaded_pairs_32/pair_25/server.log
++ sleep 1
++ true
++ grep -q 'DB loaded from disk' /home/cc/contention-appbench/experiments/redis_contention/redis_numactl_same_node/clients_4_threads_1_pipeline_1_multi_key_50/loaded_pairs_32/pair_25/server.log
++ sleep 1
++ true
++ grep -q 'DB loaded from disk' /home/cc/contention-appbench/experiments/redis_contention/redis_numactl_same_node/clients_4_threads_1_pipeline_1_multi_key_50/loaded_pairs_32/pair_25/server.log
++ sleep 1
++ true
++ grep -q 'DB loaded from disk' /home/cc/contention-appbench/experiments/redis_contention/redis_numactl_same_node/clients_4_threads_1_pipeline_1_multi_key_50/loaded_pairs_32/pair_25/server.log
++ sleep 1
++ true
++ grep -q 'DB loaded from disk' /home/cc/contention-appbench/experiments/redis_contention/redis_numactl_same_node/clients_4_threads_1_pipeline_1_multi_key_50/loaded_pairs_32/pair_25/server.log
++ sleep 1
++ true
++ grep -q 'DB loaded from disk' /home/cc/contention-appbench/experiments/redis_contention/redis_numactl_same_node/clients_4_threads_1_pipeline_1_multi_key_50/loaded_pairs_32/pair_25/server.log
++ sleep 1
++ true
++ grep -q 'DB loaded from disk' /home/cc/contention-appbench/experiments/redis_contention/redis_numactl_same_node/clients_4_threads_1_pipeline_1_multi_key_50/loaded_pairs_32/pair_25/server.log
++ sleep 1
++ true
++ grep -q 'DB loaded from disk' /home/cc/contention-appbench/experiments/redis_contention/redis_numactl_same_node/clients_4_threads_1_pipeline_1_multi_key_50/loaded_pairs_32/pair_25/server.log
++ sleep 1
++ true
++ grep -q 'DB loaded from disk' /home/cc/contention-appbench/experiments/redis_contention/redis_numactl_same_node/clients_4_threads_1_pipeline_1_multi_key_50/loaded_pairs_32/pair_25/server.log
++ sleep 1
++ true
++ grep -q 'DB loaded from disk' /home/cc/contention-appbench/experiments/redis_contention/redis_numactl_same_node/clients_4_threads_1_pipeline_1_multi_key_50/loaded_pairs_32/pair_25/server.log
++ sleep 1
++ true
++ grep -q 'DB loaded from disk' /home/cc/contention-appbench/experiments/redis_contention/redis_numactl_same_node/clients_4_threads_1_pipeline_1_multi_key_50/loaded_pairs_32/pair_25/server.log
++ sleep 1
++ true
++ grep -q 'DB loaded from disk' /home/cc/contention-appbench/experiments/redis_contention/redis_numactl_same_node/clients_4_threads_1_pipeline_1_multi_key_50/loaded_pairs_32/pair_25/server.log
++ sleep 1
++ true
++ grep -q 'DB loaded from disk' /home/cc/contention-appbench/experiments/redis_contention/redis_numactl_same_node/clients_4_threads_1_pipeline_1_multi_key_50/loaded_pairs_32/pair_25/server.log
++ sleep 1
++ true
++ grep -q 'DB loaded from disk' /home/cc/contention-appbench/experiments/redis_contention/redis_numactl_same_node/clients_4_threads_1_pipeline_1_multi_key_50/loaded_pairs_32/pair_25/server.log
++ sleep 1
++ true
++ grep -q 'DB loaded from disk' /home/cc/contention-appbench/experiments/redis_contention/redis_numactl_same_node/clients_4_threads_1_pipeline_1_multi_key_50/loaded_pairs_32/pair_25/server.log
++ sleep 1
++ true
++ grep -q 'DB loaded from disk' /home/cc/contention-appbench/experiments/redis_contention/redis_numactl_same_node/clients_4_threads_1_pipeline_1_multi_key_50/loaded_pairs_32/pair_25/server.log
++ sleep 1
++ true
++ grep -q 'DB loaded from disk' /home/cc/contention-appbench/experiments/redis_contention/redis_numactl_same_node/clients_4_threads_1_pipeline_1_multi_key_50/loaded_pairs_32/pair_25/server.log
++ sleep 1
++ true
++ grep -q 'DB loaded from disk' /home/cc/contention-appbench/experiments/redis_contention/redis_numactl_same_node/clients_4_threads_1_pipeline_1_multi_key_50/loaded_pairs_32/pair_25/server.log
++ sleep 1
++ true
++ grep -q 'DB loaded from disk' /home/cc/contention-appbench/experiments/redis_contention/redis_numactl_same_node/clients_4_threads_1_pipeline_1_multi_key_50/loaded_pairs_32/pair_25/server.log
++ sleep 1
++ true
++ grep -q 'DB loaded from disk' /home/cc/contention-appbench/experiments/redis_contention/redis_numactl_same_node/clients_4_threads_1_pipeline_1_multi_key_50/loaded_pairs_32/pair_25/server.log
++ sleep 1
++ true
++ grep -q 'DB loaded from disk' /home/cc/contention-appbench/experiments/redis_contention/redis_numactl_same_node/clients_4_threads_1_pipeline_1_multi_key_50/loaded_pairs_32/pair_25/server.log
++ sleep 1
++ true
++ grep -q 'DB loaded from disk' /home/cc/contention-appbench/experiments/redis_contention/redis_numactl_same_node/clients_4_threads_1_pipeline_1_multi_key_50/loaded_pairs_32/pair_25/server.log
++ sleep 1
++ true
++ grep -q 'DB loaded from disk' /home/cc/contention-appbench/experiments/redis_contention/redis_numactl_same_node/clients_4_threads_1_pipeline_1_multi_key_50/loaded_pairs_32/pair_25/server.log
++ sleep 1
++ true
++ grep -q 'DB loaded from disk' /home/cc/contention-appbench/experiments/redis_contention/redis_numactl_same_node/clients_4_threads_1_pipeline_1_multi_key_50/loaded_pairs_32/pair_25/server.log
++ sleep 1
++ true
++ grep -q 'DB loaded from disk' /home/cc/contention-appbench/experiments/redis_contention/redis_numactl_same_node/clients_4_threads_1_pipeline_1_multi_key_50/loaded_pairs_32/pair_25/server.log
++ sleep 1
++ true
++ grep -q 'DB loaded from disk' /home/cc/contention-appbench/experiments/redis_contention/redis_numactl_same_node/clients_4_threads_1_pipeline_1_multi_key_50/loaded_pairs_32/pair_25/server.log
++ echo 'Detected '\''DB loaded from disk'\'' in log. RDB load complete.'
+Detected 'DB loaded from disk' in log. RDB load complete.
++ break
++ echo 'waiting for READY_FLAG: /home/cc/contention-appbench/experiments/redis_contention/redis_numactl_same_node/clients_4_threads_1_pipeline_1_multi_key_50/loaded_pairs_32/ready.txt'
+waiting for READY_FLAG: /home/cc/contention-appbench/experiments/redis_contention/redis_numactl_same_node/clients_4_threads_1_pipeline_1_multi_key_50/loaded_pairs_32/ready.txt
++ '[' '!' -s /home/cc/contention-appbench/experiments/redis_contention/redis_numactl_same_node/clients_4_threads_1_pipeline_1_multi_key_50/loaded_pairs_32/ready.txt ']'
++ sleep 0.1
++ '[' '!' -s /home/cc/contention-appbench/experiments/redis_contention/redis_numactl_same_node/clients_4_threads_1_pipeline_1_multi_key_50/loaded_pairs_32/ready.txt ']'
++ sleep 0.1
++ '[' '!' -s /home/cc/contention-appbench/experiments/redis_contention/redis_numactl_same_node/clients_4_threads_1_pipeline_1_multi_key_50/loaded_pairs_32/ready.txt ']'
++ sleep 0.1
++ '[' '!' -s /home/cc/contention-appbench/experiments/redis_contention/redis_numactl_same_node/clients_4_threads_1_pipeline_1_multi_key_50/loaded_pairs_32/ready.txt ']'
++ sleep 0.1
++ '[' '!' -s /home/cc/contention-appbench/experiments/redis_contention/redis_numactl_same_node/clients_4_threads_1_pipeline_1_multi_key_50/loaded_pairs_32/ready.txt ']'
++ sleep 0.1
++ '[' '!' -s /home/cc/contention-appbench/experiments/redis_contention/redis_numactl_same_node/clients_4_threads_1_pipeline_1_multi_key_50/loaded_pairs_32/ready.txt ']'
++ sleep 0.1
++ '[' '!' -s /home/cc/contention-appbench/experiments/redis_contention/redis_numactl_same_node/clients_4_threads_1_pipeline_1_multi_key_50/loaded_pairs_32/ready.txt ']'
++ sleep 0.1
++ '[' '!' -s /home/cc/contention-appbench/experiments/redis_contention/redis_numactl_same_node/clients_4_threads_1_pipeline_1_multi_key_50/loaded_pairs_32/ready.txt ']'
++ sleep 0.1
++ '[' '!' -s /home/cc/contention-appbench/experiments/redis_contention/redis_numactl_same_node/clients_4_threads_1_pipeline_1_multi_key_50/loaded_pairs_32/ready.txt ']'
++ sleep 0.1
++ '[' '!' -s /home/cc/contention-appbench/experiments/redis_contention/redis_numactl_same_node/clients_4_threads_1_pipeline_1_multi_key_50/loaded_pairs_32/ready.txt ']'
++ sleep 0.1
++ '[' '!' -s /home/cc/contention-appbench/experiments/redis_contention/redis_numactl_same_node/clients_4_threads_1_pipeline_1_multi_key_50/loaded_pairs_32/ready.txt ']'
++ sleep 0.1
++ '[' '!' -s /home/cc/contention-appbench/experiments/redis_contention/redis_numactl_same_node/clients_4_threads_1_pipeline_1_multi_key_50/loaded_pairs_32/ready.txt ']'
++ sleep 0.1
++ '[' '!' -s /home/cc/contention-appbench/experiments/redis_contention/redis_numactl_same_node/clients_4_threads_1_pipeline_1_multi_key_50/loaded_pairs_32/ready.txt ']'
++ sleep 0.1
++ '[' '!' -s /home/cc/contention-appbench/experiments/redis_contention/redis_numactl_same_node/clients_4_threads_1_pipeline_1_multi_key_50/loaded_pairs_32/ready.txt ']'
++ sleep 0.1
++ '[' '!' -s /home/cc/contention-appbench/experiments/redis_contention/redis_numactl_same_node/clients_4_threads_1_pipeline_1_multi_key_50/loaded_pairs_32/ready.txt ']'
++ sleep 0.1
++ '[' '!' -s /home/cc/contention-appbench/experiments/redis_contention/redis_numactl_same_node/clients_4_threads_1_pipeline_1_multi_key_50/loaded_pairs_32/ready.txt ']'
++ sleep 0.1
++ '[' '!' -s /home/cc/contention-appbench/experiments/redis_contention/redis_numactl_same_node/clients_4_threads_1_pipeline_1_multi_key_50/loaded_pairs_32/ready.txt ']'
++ sleep 0.1
++ '[' '!' -s /home/cc/contention-appbench/experiments/redis_contention/redis_numactl_same_node/clients_4_threads_1_pipeline_1_multi_key_50/loaded_pairs_32/ready.txt ']'
++ sleep 0.1
++ '[' '!' -s /home/cc/contention-appbench/experiments/redis_contention/redis_numactl_same_node/clients_4_threads_1_pipeline_1_multi_key_50/loaded_pairs_32/ready.txt ']'
++ sleep 0.1
++ '[' '!' -s /home/cc/contention-appbench/experiments/redis_contention/redis_numactl_same_node/clients_4_threads_1_pipeline_1_multi_key_50/loaded_pairs_32/ready.txt ']'
++ sleep 0.1
++ '[' '!' -s /home/cc/contention-appbench/experiments/redis_contention/redis_numactl_same_node/clients_4_threads_1_pipeline_1_multi_key_50/loaded_pairs_32/ready.txt ']'
++ sleep 0.1
++ '[' '!' -s /home/cc/contention-appbench/experiments/redis_contention/redis_numactl_same_node/clients_4_threads_1_pipeline_1_multi_key_50/loaded_pairs_32/ready.txt ']'
++ sleep 0.1
++ '[' '!' -s /home/cc/contention-appbench/experiments/redis_contention/redis_numactl_same_node/clients_4_threads_1_pipeline_1_multi_key_50/loaded_pairs_32/ready.txt ']'
++ sleep 0.1
++ '[' '!' -s /home/cc/contention-appbench/experiments/redis_contention/redis_numactl_same_node/clients_4_threads_1_pipeline_1_multi_key_50/loaded_pairs_32/ready.txt ']'
++ sleep 0.1
++ '[' '!' -s /home/cc/contention-appbench/experiments/redis_contention/redis_numactl_same_node/clients_4_threads_1_pipeline_1_multi_key_50/loaded_pairs_32/ready.txt ']'
++ sleep 0.1
++ '[' '!' -s /home/cc/contention-appbench/experiments/redis_contention/redis_numactl_same_node/clients_4_threads_1_pipeline_1_multi_key_50/loaded_pairs_32/ready.txt ']'
++ sleep 0.1
++ '[' '!' -s /home/cc/contention-appbench/experiments/redis_contention/redis_numactl_same_node/clients_4_threads_1_pipeline_1_multi_key_50/loaded_pairs_32/ready.txt ']'
++ sleep 0.1
++ '[' '!' -s /home/cc/contention-appbench/experiments/redis_contention/redis_numactl_same_node/clients_4_threads_1_pipeline_1_multi_key_50/loaded_pairs_32/ready.txt ']'
++ sleep 0.1
++ '[' '!' -s /home/cc/contention-appbench/experiments/redis_contention/redis_numactl_same_node/clients_4_threads_1_pipeline_1_multi_key_50/loaded_pairs_32/ready.txt ']'
++ sleep 0.1
++ '[' '!' -s /home/cc/contention-appbench/experiments/redis_contention/redis_numactl_same_node/clients_4_threads_1_pipeline_1_multi_key_50/loaded_pairs_32/ready.txt ']'
++ sleep 0.1
++ '[' '!' -s /home/cc/contention-appbench/experiments/redis_contention/redis_numactl_same_node/clients_4_threads_1_pipeline_1_multi_key_50/loaded_pairs_32/ready.txt ']'
++ sleep 0.1
++ '[' '!' -s /home/cc/contention-appbench/experiments/redis_contention/redis_numactl_same_node/clients_4_threads_1_pipeline_1_multi_key_50/loaded_pairs_32/ready.txt ']'
++ sleep 0.1
++ '[' '!' -s /home/cc/contention-appbench/experiments/redis_contention/redis_numactl_same_node/clients_4_threads_1_pipeline_1_multi_key_50/loaded_pairs_32/ready.txt ']'
++ sleep 0.1
++ '[' '!' -s /home/cc/contention-appbench/experiments/redis_contention/redis_numactl_same_node/clients_4_threads_1_pipeline_1_multi_key_50/loaded_pairs_32/ready.txt ']'
++ sleep 0.1
++ '[' '!' -s /home/cc/contention-appbench/experiments/redis_contention/redis_numactl_same_node/clients_4_threads_1_pipeline_1_multi_key_50/loaded_pairs_32/ready.txt ']'
++ sleep 0.1
++ '[' '!' -s /home/cc/contention-appbench/experiments/redis_contention/redis_numactl_same_node/clients_4_threads_1_pipeline_1_multi_key_50/loaded_pairs_32/ready.txt ']'
++ sleep 0.1
++ '[' '!' -s /home/cc/contention-appbench/experiments/redis_contention/redis_numactl_same_node/clients_4_threads_1_pipeline_1_multi_key_50/loaded_pairs_32/ready.txt ']'
++ sleep 0.1
++ '[' '!' -s /home/cc/contention-appbench/experiments/redis_contention/redis_numactl_same_node/clients_4_threads_1_pipeline_1_multi_key_50/loaded_pairs_32/ready.txt ']'
++ sleep 0.1
++ '[' '!' -s /home/cc/contention-appbench/experiments/redis_contention/redis_numactl_same_node/clients_4_threads_1_pipeline_1_multi_key_50/loaded_pairs_32/ready.txt ']'
++ sleep 0.1
++ '[' '!' -s /home/cc/contention-appbench/experiments/redis_contention/redis_numactl_same_node/clients_4_threads_1_pipeline_1_multi_key_50/loaded_pairs_32/ready.txt ']'
++ sleep 0.1
++ '[' '!' -s /home/cc/contention-appbench/experiments/redis_contention/redis_numactl_same_node/clients_4_threads_1_pipeline_1_multi_key_50/loaded_pairs_32/ready.txt ']'
++ sleep 0.1
++ '[' '!' -s /home/cc/contention-appbench/experiments/redis_contention/redis_numactl_same_node/clients_4_threads_1_pipeline_1_multi_key_50/loaded_pairs_32/ready.txt ']'
++ sleep 0.1
++ '[' '!' -s /home/cc/contention-appbench/experiments/redis_contention/redis_numactl_same_node/clients_4_threads_1_pipeline_1_multi_key_50/loaded_pairs_32/ready.txt ']'
++ sleep 0.1
++ '[' '!' -s /home/cc/contention-appbench/experiments/redis_contention/redis_numactl_same_node/clients_4_threads_1_pipeline_1_multi_key_50/loaded_pairs_32/ready.txt ']'
++ sleep 0.1
++ '[' '!' -s /home/cc/contention-appbench/experiments/redis_contention/redis_numactl_same_node/clients_4_threads_1_pipeline_1_multi_key_50/loaded_pairs_32/ready.txt ']'
++ sleep 0.1
++ '[' '!' -s /home/cc/contention-appbench/experiments/redis_contention/redis_numactl_same_node/clients_4_threads_1_pipeline_1_multi_key_50/loaded_pairs_32/ready.txt ']'
++ sleep 0.1
++ '[' '!' -s /home/cc/contention-appbench/experiments/redis_contention/redis_numactl_same_node/clients_4_threads_1_pipeline_1_multi_key_50/loaded_pairs_32/ready.txt ']'
++ sleep 0.1
++ '[' '!' -s /home/cc/contention-appbench/experiments/redis_contention/redis_numactl_same_node/clients_4_threads_1_pipeline_1_multi_key_50/loaded_pairs_32/ready.txt ']'
++ sleep 0.1
++ '[' '!' -s /home/cc/contention-appbench/experiments/redis_contention/redis_numactl_same_node/clients_4_threads_1_pipeline_1_multi_key_50/loaded_pairs_32/ready.txt ']'
++ sleep 0.1
++ '[' '!' -s /home/cc/contention-appbench/experiments/redis_contention/redis_numactl_same_node/clients_4_threads_1_pipeline_1_multi_key_50/loaded_pairs_32/ready.txt ']'
++ sleep 0.1
++ '[' '!' -s /home/cc/contention-appbench/experiments/redis_contention/redis_numactl_same_node/clients_4_threads_1_pipeline_1_multi_key_50/loaded_pairs_32/ready.txt ']'
++ sleep 0.1
++ '[' '!' -s /home/cc/contention-appbench/experiments/redis_contention/redis_numactl_same_node/clients_4_threads_1_pipeline_1_multi_key_50/loaded_pairs_32/ready.txt ']'
++ sleep 0.1
++ '[' '!' -s /home/cc/contention-appbench/experiments/redis_contention/redis_numactl_same_node/clients_4_threads_1_pipeline_1_multi_key_50/loaded_pairs_32/ready.txt ']'
++ sleep 0.1
++ '[' '!' -s /home/cc/contention-appbench/experiments/redis_contention/redis_numactl_same_node/clients_4_threads_1_pipeline_1_multi_key_50/loaded_pairs_32/ready.txt ']'
++ sleep 0.1
++ '[' '!' -s /home/cc/contention-appbench/experiments/redis_contention/redis_numactl_same_node/clients_4_threads_1_pipeline_1_multi_key_50/loaded_pairs_32/ready.txt ']'
++ sleep 0.1
++ '[' '!' -s /home/cc/contention-appbench/experiments/redis_contention/redis_numactl_same_node/clients_4_threads_1_pipeline_1_multi_key_50/loaded_pairs_32/ready.txt ']'
++ sleep 0.1
++ '[' '!' -s /home/cc/contention-appbench/experiments/redis_contention/redis_numactl_same_node/clients_4_threads_1_pipeline_1_multi_key_50/loaded_pairs_32/ready.txt ']'
++ sleep 0.1
++ '[' '!' -s /home/cc/contention-appbench/experiments/redis_contention/redis_numactl_same_node/clients_4_threads_1_pipeline_1_multi_key_50/loaded_pairs_32/ready.txt ']'
++ sleep 0.1
++ '[' '!' -s /home/cc/contention-appbench/experiments/redis_contention/redis_numactl_same_node/clients_4_threads_1_pipeline_1_multi_key_50/loaded_pairs_32/ready.txt ']'
++ sleep 0.1
++ '[' '!' -s /home/cc/contention-appbench/experiments/redis_contention/redis_numactl_same_node/clients_4_threads_1_pipeline_1_multi_key_50/loaded_pairs_32/ready.txt ']'
++ sleep 0.1
++ '[' '!' -s /home/cc/contention-appbench/experiments/redis_contention/redis_numactl_same_node/clients_4_threads_1_pipeline_1_multi_key_50/loaded_pairs_32/ready.txt ']'
++ sleep 0.1
++ '[' '!' -s /home/cc/contention-appbench/experiments/redis_contention/redis_numactl_same_node/clients_4_threads_1_pipeline_1_multi_key_50/loaded_pairs_32/ready.txt ']'
++ sleep 0.1
++ '[' '!' -s /home/cc/contention-appbench/experiments/redis_contention/redis_numactl_same_node/clients_4_threads_1_pipeline_1_multi_key_50/loaded_pairs_32/ready.txt ']'
++ sleep 0.1
++ '[' '!' -s /home/cc/contention-appbench/experiments/redis_contention/redis_numactl_same_node/clients_4_threads_1_pipeline_1_multi_key_50/loaded_pairs_32/ready.txt ']'
++ sleep 0.1
++ '[' '!' -s /home/cc/contention-appbench/experiments/redis_contention/redis_numactl_same_node/clients_4_threads_1_pipeline_1_multi_key_50/loaded_pairs_32/ready.txt ']'
++ sleep 0.1
++ '[' '!' -s /home/cc/contention-appbench/experiments/redis_contention/redis_numactl_same_node/clients_4_threads_1_pipeline_1_multi_key_50/loaded_pairs_32/ready.txt ']'
++ sleep 0.1
++ '[' '!' -s /home/cc/contention-appbench/experiments/redis_contention/redis_numactl_same_node/clients_4_threads_1_pipeline_1_multi_key_50/loaded_pairs_32/ready.txt ']'
++ sleep 0.1
++ '[' '!' -s /home/cc/contention-appbench/experiments/redis_contention/redis_numactl_same_node/clients_4_threads_1_pipeline_1_multi_key_50/loaded_pairs_32/ready.txt ']'
++ sleep 0.1
++ '[' '!' -s /home/cc/contention-appbench/experiments/redis_contention/redis_numactl_same_node/clients_4_threads_1_pipeline_1_multi_key_50/loaded_pairs_32/ready.txt ']'
++ sleep 0.1
++ '[' '!' -s /home/cc/contention-appbench/experiments/redis_contention/redis_numactl_same_node/clients_4_threads_1_pipeline_1_multi_key_50/loaded_pairs_32/ready.txt ']'
++ sleep 0.1
++ '[' '!' -s /home/cc/contention-appbench/experiments/redis_contention/redis_numactl_same_node/clients_4_threads_1_pipeline_1_multi_key_50/loaded_pairs_32/ready.txt ']'
++ sleep 0.1
++ '[' '!' -s /home/cc/contention-appbench/experiments/redis_contention/redis_numactl_same_node/clients_4_threads_1_pipeline_1_multi_key_50/loaded_pairs_32/ready.txt ']'
++ sleep 0.1
++ '[' '!' -s /home/cc/contention-appbench/experiments/redis_contention/redis_numactl_same_node/clients_4_threads_1_pipeline_1_multi_key_50/loaded_pairs_32/ready.txt ']'
++ sleep 0.1
++ '[' '!' -s /home/cc/contention-appbench/experiments/redis_contention/redis_numactl_same_node/clients_4_threads_1_pipeline_1_multi_key_50/loaded_pairs_32/ready.txt ']'
++ sleep 0.1
++ '[' '!' -s /home/cc/contention-appbench/experiments/redis_contention/redis_numactl_same_node/clients_4_threads_1_pipeline_1_multi_key_50/loaded_pairs_32/ready.txt ']'
++ sleep 0.1
++ '[' '!' -s /home/cc/contention-appbench/experiments/redis_contention/redis_numactl_same_node/clients_4_threads_1_pipeline_1_multi_key_50/loaded_pairs_32/ready.txt ']'
++ sleep 0.1
++ '[' '!' -s /home/cc/contention-appbench/experiments/redis_contention/redis_numactl_same_node/clients_4_threads_1_pipeline_1_multi_key_50/loaded_pairs_32/ready.txt ']'
++ sleep 0.1
++ '[' '!' -s /home/cc/contention-appbench/experiments/redis_contention/redis_numactl_same_node/clients_4_threads_1_pipeline_1_multi_key_50/loaded_pairs_32/ready.txt ']'
++ sleep 0.1
++ '[' '!' -s /home/cc/contention-appbench/experiments/redis_contention/redis_numactl_same_node/clients_4_threads_1_pipeline_1_multi_key_50/loaded_pairs_32/ready.txt ']'
++ sleep 0.1
++ '[' '!' -s /home/cc/contention-appbench/experiments/redis_contention/redis_numactl_same_node/clients_4_threads_1_pipeline_1_multi_key_50/loaded_pairs_32/ready.txt ']'
++ sleep 0.1
++ '[' '!' -s /home/cc/contention-appbench/experiments/redis_contention/redis_numactl_same_node/clients_4_threads_1_pipeline_1_multi_key_50/loaded_pairs_32/ready.txt ']'
++ sleep 0.1
++ '[' '!' -s /home/cc/contention-appbench/experiments/redis_contention/redis_numactl_same_node/clients_4_threads_1_pipeline_1_multi_key_50/loaded_pairs_32/ready.txt ']'
++ sleep 0.1
++ '[' '!' -s /home/cc/contention-appbench/experiments/redis_contention/redis_numactl_same_node/clients_4_threads_1_pipeline_1_multi_key_50/loaded_pairs_32/ready.txt ']'
++ sleep 0.1
++ '[' '!' -s /home/cc/contention-appbench/experiments/redis_contention/redis_numactl_same_node/clients_4_threads_1_pipeline_1_multi_key_50/loaded_pairs_32/ready.txt ']'
++ sleep 0.1
++ '[' '!' -s /home/cc/contention-appbench/experiments/redis_contention/redis_numactl_same_node/clients_4_threads_1_pipeline_1_multi_key_50/loaded_pairs_32/ready.txt ']'
++ sleep 0.1
++ '[' '!' -s /home/cc/contention-appbench/experiments/redis_contention/redis_numactl_same_node/clients_4_threads_1_pipeline_1_multi_key_50/loaded_pairs_32/ready.txt ']'
++ sleep 0.1
++ '[' '!' -s /home/cc/contention-appbench/experiments/redis_contention/redis_numactl_same_node/clients_4_threads_1_pipeline_1_multi_key_50/loaded_pairs_32/ready.txt ']'
++ sleep 0.1
++ '[' '!' -s /home/cc/contention-appbench/experiments/redis_contention/redis_numactl_same_node/clients_4_threads_1_pipeline_1_multi_key_50/loaded_pairs_32/ready.txt ']'
++ sleep 0.1
++ '[' '!' -s /home/cc/contention-appbench/experiments/redis_contention/redis_numactl_same_node/clients_4_threads_1_pipeline_1_multi_key_50/loaded_pairs_32/ready.txt ']'
++ sleep 0.1
++ '[' '!' -s /home/cc/contention-appbench/experiments/redis_contention/redis_numactl_same_node/clients_4_threads_1_pipeline_1_multi_key_50/loaded_pairs_32/ready.txt ']'
++ sleep 0.1
++ '[' '!' -s /home/cc/contention-appbench/experiments/redis_contention/redis_numactl_same_node/clients_4_threads_1_pipeline_1_multi_key_50/loaded_pairs_32/ready.txt ']'
++ sleep 0.1
++ '[' '!' -s /home/cc/contention-appbench/experiments/redis_contention/redis_numactl_same_node/clients_4_threads_1_pipeline_1_multi_key_50/loaded_pairs_32/ready.txt ']'
++ sleep 0.1
++ '[' '!' -s /home/cc/contention-appbench/experiments/redis_contention/redis_numactl_same_node/clients_4_threads_1_pipeline_1_multi_key_50/loaded_pairs_32/ready.txt ']'
++ sleep 0.1
++ '[' '!' -s /home/cc/contention-appbench/experiments/redis_contention/redis_numactl_same_node/clients_4_threads_1_pipeline_1_multi_key_50/loaded_pairs_32/ready.txt ']'
++ sleep 0.1
++ '[' '!' -s /home/cc/contention-appbench/experiments/redis_contention/redis_numactl_same_node/clients_4_threads_1_pipeline_1_multi_key_50/loaded_pairs_32/ready.txt ']'
++ sleep 0.1
++ '[' '!' -s /home/cc/contention-appbench/experiments/redis_contention/redis_numactl_same_node/clients_4_threads_1_pipeline_1_multi_key_50/loaded_pairs_32/ready.txt ']'
++ sleep 0.1
++ '[' '!' -s /home/cc/contention-appbench/experiments/redis_contention/redis_numactl_same_node/clients_4_threads_1_pipeline_1_multi_key_50/loaded_pairs_32/ready.txt ']'
++ sleep 0.1
++ '[' '!' -s /home/cc/contention-appbench/experiments/redis_contention/redis_numactl_same_node/clients_4_threads_1_pipeline_1_multi_key_50/loaded_pairs_32/ready.txt ']'
++ sleep 0.1
++ '[' '!' -s /home/cc/contention-appbench/experiments/redis_contention/redis_numactl_same_node/clients_4_threads_1_pipeline_1_multi_key_50/loaded_pairs_32/ready.txt ']'
++ sleep 0.1
++ '[' '!' -s /home/cc/contention-appbench/experiments/redis_contention/redis_numactl_same_node/clients_4_threads_1_pipeline_1_multi_key_50/loaded_pairs_32/ready.txt ']'
++ sleep 0.1
++ '[' '!' -s /home/cc/contention-appbench/experiments/redis_contention/redis_numactl_same_node/clients_4_threads_1_pipeline_1_multi_key_50/loaded_pairs_32/ready.txt ']'
++ sleep 0.1
++ '[' '!' -s /home/cc/contention-appbench/experiments/redis_contention/redis_numactl_same_node/clients_4_threads_1_pipeline_1_multi_key_50/loaded_pairs_32/ready.txt ']'
++ sleep 0.1
++ '[' '!' -s /home/cc/contention-appbench/experiments/redis_contention/redis_numactl_same_node/clients_4_threads_1_pipeline_1_multi_key_50/loaded_pairs_32/ready.txt ']'
++ sleep 0.1
++ '[' '!' -s /home/cc/contention-appbench/experiments/redis_contention/redis_numactl_same_node/clients_4_threads_1_pipeline_1_multi_key_50/loaded_pairs_32/ready.txt ']'
++ sleep 0.1
++ '[' '!' -s /home/cc/contention-appbench/experiments/redis_contention/redis_numactl_same_node/clients_4_threads_1_pipeline_1_multi_key_50/loaded_pairs_32/ready.txt ']'
++ sleep 0.1
++ '[' '!' -s /home/cc/contention-appbench/experiments/redis_contention/redis_numactl_same_node/clients_4_threads_1_pipeline_1_multi_key_50/loaded_pairs_32/ready.txt ']'
++ sleep 0.1
++ '[' '!' -s /home/cc/contention-appbench/experiments/redis_contention/redis_numactl_same_node/clients_4_threads_1_pipeline_1_multi_key_50/loaded_pairs_32/ready.txt ']'
++ sleep 0.1
++ '[' '!' -s /home/cc/contention-appbench/experiments/redis_contention/redis_numactl_same_node/clients_4_threads_1_pipeline_1_multi_key_50/loaded_pairs_32/ready.txt ']'
++ sleep 0.1
++ '[' '!' -s /home/cc/contention-appbench/experiments/redis_contention/redis_numactl_same_node/clients_4_threads_1_pipeline_1_multi_key_50/loaded_pairs_32/ready.txt ']'
++ sleep 0.1
++ '[' '!' -s /home/cc/contention-appbench/experiments/redis_contention/redis_numactl_same_node/clients_4_threads_1_pipeline_1_multi_key_50/loaded_pairs_32/ready.txt ']'
++ sleep 0.1
++ '[' '!' -s /home/cc/contention-appbench/experiments/redis_contention/redis_numactl_same_node/clients_4_threads_1_pipeline_1_multi_key_50/loaded_pairs_32/ready.txt ']'
++ sleep 0.1
++ '[' '!' -s /home/cc/contention-appbench/experiments/redis_contention/redis_numactl_same_node/clients_4_threads_1_pipeline_1_multi_key_50/loaded_pairs_32/ready.txt ']'
++ sleep 0.1
++ '[' '!' -s /home/cc/contention-appbench/experiments/redis_contention/redis_numactl_same_node/clients_4_threads_1_pipeline_1_multi_key_50/loaded_pairs_32/ready.txt ']'
++ sleep 0.1
++ '[' '!' -s /home/cc/contention-appbench/experiments/redis_contention/redis_numactl_same_node/clients_4_threads_1_pipeline_1_multi_key_50/loaded_pairs_32/ready.txt ']'
++ sleep 0.1
++ '[' '!' -s /home/cc/contention-appbench/experiments/redis_contention/redis_numactl_same_node/clients_4_threads_1_pipeline_1_multi_key_50/loaded_pairs_32/ready.txt ']'
++ sleep 0.1
++ '[' '!' -s /home/cc/contention-appbench/experiments/redis_contention/redis_numactl_same_node/clients_4_threads_1_pipeline_1_multi_key_50/loaded_pairs_32/ready.txt ']'
++ sleep 0.1
++ '[' '!' -s /home/cc/contention-appbench/experiments/redis_contention/redis_numactl_same_node/clients_4_threads_1_pipeline_1_multi_key_50/loaded_pairs_32/ready.txt ']'
++ sleep 0.1
++ '[' '!' -s /home/cc/contention-appbench/experiments/redis_contention/redis_numactl_same_node/clients_4_threads_1_pipeline_1_multi_key_50/loaded_pairs_32/ready.txt ']'
++ sleep 0.1
++ '[' '!' -s /home/cc/contention-appbench/experiments/redis_contention/redis_numactl_same_node/clients_4_threads_1_pipeline_1_multi_key_50/loaded_pairs_32/ready.txt ']'
++ sleep 0.1
++ '[' '!' -s /home/cc/contention-appbench/experiments/redis_contention/redis_numactl_same_node/clients_4_threads_1_pipeline_1_multi_key_50/loaded_pairs_32/ready.txt ']'
++ sleep 0.1
++ '[' '!' -s /home/cc/contention-appbench/experiments/redis_contention/redis_numactl_same_node/clients_4_threads_1_pipeline_1_multi_key_50/loaded_pairs_32/ready.txt ']'
++ sleep 0.1
++ '[' '!' -s /home/cc/contention-appbench/experiments/redis_contention/redis_numactl_same_node/clients_4_threads_1_pipeline_1_multi_key_50/loaded_pairs_32/ready.txt ']'
++ sleep 0.1
++ '[' '!' -s /home/cc/contention-appbench/experiments/redis_contention/redis_numactl_same_node/clients_4_threads_1_pipeline_1_multi_key_50/loaded_pairs_32/ready.txt ']'
++ sleep 0.1
++ '[' '!' -s /home/cc/contention-appbench/experiments/redis_contention/redis_numactl_same_node/clients_4_threads_1_pipeline_1_multi_key_50/loaded_pairs_32/ready.txt ']'
++ sleep 0.1
++ '[' '!' -s /home/cc/contention-appbench/experiments/redis_contention/redis_numactl_same_node/clients_4_threads_1_pipeline_1_multi_key_50/loaded_pairs_32/ready.txt ']'
++ sleep 0.1
++ '[' '!' -s /home/cc/contention-appbench/experiments/redis_contention/redis_numactl_same_node/clients_4_threads_1_pipeline_1_multi_key_50/loaded_pairs_32/ready.txt ']'
++ sleep 0.1
++ '[' '!' -s /home/cc/contention-appbench/experiments/redis_contention/redis_numactl_same_node/clients_4_threads_1_pipeline_1_multi_key_50/loaded_pairs_32/ready.txt ']'
++ sleep 0.1
++ '[' '!' -s /home/cc/contention-appbench/experiments/redis_contention/redis_numactl_same_node/clients_4_threads_1_pipeline_1_multi_key_50/loaded_pairs_32/ready.txt ']'
++ sleep 0.1
++ '[' '!' -s /home/cc/contention-appbench/experiments/redis_contention/redis_numactl_same_node/clients_4_threads_1_pipeline_1_multi_key_50/loaded_pairs_32/ready.txt ']'
++ sleep 0.1
++ '[' '!' -s /home/cc/contention-appbench/experiments/redis_contention/redis_numactl_same_node/clients_4_threads_1_pipeline_1_multi_key_50/loaded_pairs_32/ready.txt ']'
++ MEMTIER_PID=2786540
++ echo '[MEMTIER PID]: 2786540'
+[MEMTIER PID]: 2786540
++ wait 2786540
++ /usr/bin/time -v numactl -C 102 --membind=1 memtier_benchmark --port 6525 --test-time=60 --clients 4 --threads 1 --pipeline 1 --multi-key-get 50 --random-data --data-size-range=4-2048 --data-size-pattern=R --key-maximum=1000000 --ratio=0:1 --hide-histogram --out-file=/home/cc/contention-appbench/experiments/redis_contention/redis_numactl_same_node/clients_4_threads_1_pipeline_1_multi_key_50/loaded_pairs_32/pair_25/redis.out --hdr-file-prefix=/home/cc/contention-appbench/experiments/redis_contention/redis_numactl_same_node/clients_4_threads_1_pipeline_1_multi_key_50/loaded_pairs_32/pair_25/latency.out
+Writing results to /home/cc/contention-appbench/experiments/redis_contention/redis_numactl_same_node/clients_4_threads_1_pipeline_1_multi_key_50/loaded_pairs_32/pair_25/redis.out...
+[RUN #1] Preparing benchmark client...
+[RUN #1] Launching threads now...
+[RUN #1 2%,   0 secs]  1 threads  4 conns:       10912 ops,   10912 (avg:   10912) ops/sec, 548.92MB/sec (avg: 548.92MB/sec),  0.37 (avg:  0.37) msec latency[RUN #1 3%,   2 secs]  1 threads  4 conns:       21819 ops,   10906 (avg:   10909) ops/sec, 549.68MB/sec (avg: 549.30MB/sec),  0.37 (avg:  0.37) msec latency[RUN #1 5%,   3 secs]  1 threads  4 conns:       32416 ops,   10596 (avg:   10804) ops/sec, 534.23MB/sec (avg: 544.28MB/sec),  0.38 (avg:  0.37) msec latency[RUN #1 7%,   4 secs]  1 threads  4 conns:       42964 ops,   10547 (avg:   10740) ops/sec, 531.72MB/sec (avg: 541.14MB/sec),  0.38 (avg:  0.37) msec latency[RUN #1 8%,   5 secs]  1 threads  4 conns:       53525 ops,   10560 (avg:   10704) ops/sec, 530.73MB/sec (avg: 539.06MB/sec),  0.38 (avg:  0.37) msec latency[RUN #1 10%,   6 secs]  1 threads  4 conns:       64049 ops,   10523 (avg:   10674) ops/sec, 530.47MB/sec (avg: 537.63MB/sec),  0.38 (avg:  0.37) msec latency[RUN #1 12%,   7 secs]  1 threads  4 conns:       74582 ops,   10532 (avg:   10653) ops/sec, 529.39MB/sec (avg: 536.45MB/sec),  0.38 (avg:  0.37) msec latency[RUN #1 13%,   8 secs]  1 threads  4 conns:       85102 ops,   10519 (avg:   10636) ops/sec, 530.25MB/sec (avg: 535.67MB/sec),  0.38 (avg:  0.37) msec latency[RUN #1 15%,   9 secs]  1 threads  4 conns:       95634 ops,   10531 (avg:   10625) ops/sec, 529.93MB/sec (avg: 535.04MB/sec),  0.38 (avg:  0.38) msec latency[RUN #1 17%,  10 secs]  1 threads  4 conns:      106156 ops,   10519 (avg:   10614) ops/sec, 528.23MB/sec (avg: 534.36MB/sec),  0.38 (avg:  0.38) msec latency[RUN #1 18%,  11 secs]  1 threads  4 conns:      116656 ops,   10498 (avg:   10604) ops/sec, 528.12MB/sec (avg: 533.79MB/sec),  0.38 (avg:  0.38) msec latency[RUN #1 20%,  12 secs]  1 threads  4 conns:      127122 ops,   10465 (avg:   10592) ops/sec, 528.29MB/sec (avg: 533.33MB/sec),  0.38 (avg:  0.38) msec latency[RUN #1 22%,  13 secs]  1 threads  4 conns:      137587 ops,   10464 (avg:   10582) ops/sec, 526.97MB/sec (avg: 532.84MB/sec),  0.38 (avg:  0.38) msec latency[RUN #1 23%,  14 secs]  1 threads  4 conns:      148016 ops,   10427 (avg:   10571) ops/sec, 525.56MB/sec (avg: 532.32MB/sec),  0.38 (avg:  0.38) msec latency[RUN #1 25%,  15 secs]  1 threads  4 conns:      158453 ops,   10436 (avg:   10562) ops/sec, 525.40MB/sec (avg: 531.86MB/sec),  0.38 (avg:  0.38) msec latency[RUN #1 27%,  16 secs]  1 threads  4 conns:      168867 ops,   10413 (avg:   10553) ops/sec, 524.35MB/sec (avg: 531.39MB/sec),  0.38 (avg:  0.38) msec latency[RUN #1 28%,  17 secs]  1 threads  4 conns:      179303 ops,   10435 (avg:   10546) ops/sec, 526.60MB/sec (avg: 531.11MB/sec),  0.38 (avg:  0.38) msec latency[RUN #1 30%,  18 secs]  1 threads  4 conns:      189606 ops,   10302 (avg:   10532) ops/sec, 519.41MB/sec (avg: 530.46MB/sec),  0.39 (avg:  0.38) msec latency[RUN #1 32%,  19 secs]  1 threads  4 conns:      200033 ops,   10426 (avg:   10527) ops/sec, 525.21MB/sec (avg: 530.18MB/sec),  0.38 (avg:  0.38) msec latency[RUN #1 33%,  20 secs]  1 threads  4 conns:      210529 ops,   10495 (avg:   10525) ops/sec, 528.76MB/sec (avg: 530.11MB/sec),  0.38 (avg:  0.38) msec latency[RUN #1 35%,  21 secs]  1 threads  4 conns:      220858 ops,   10328 (avg:   10516) ops/sec, 517.86MB/sec (avg: 529.53MB/sec),  0.39 (avg:  0.38) msec latency[RUN #1 37%,  22 secs]  1 threads  4 conns:      231209 ops,   10350 (avg:   10508) ops/sec, 520.81MB/sec (avg: 529.13MB/sec),  0.39 (avg:  0.38) msec latency[RUN #1 38%,  23 secs]  1 threads  4 conns:      241642 ops,   10432 (avg:   10505) ops/sec, 525.37MB/sec (avg: 528.97MB/sec),  0.38 (avg:  0.38) msec latency[RUN #1 40%,  24 secs]  1 threads  4 conns:      252088 ops,   10445 (avg:   10502) ops/sec, 525.58MB/sec (avg: 528.83MB/sec),  0.38 (avg:  0.38) msec latency[RUN #1 42%,  25 secs]  1 threads  4 conns:      262509 ops,   10420 (avg:   10499) ops/sec, 526.54MB/sec (avg: 528.74MB/sec),  0.38 (avg:  0.38) msec latency[RUN #1 43%,  26 secs]  1 threads  4 conns:      272874 ops,   10364 (avg:   10494) ops/sec, 520.12MB/sec (avg: 528.40MB/sec),  0.38 (avg:  0.38) msec latency[RUN #1 45%,  27 secs]  1 threads  4 conns:      283309 ops,   10434 (avg:   10491) ops/sec, 526.13MB/sec (avg: 528.32MB/sec),  0.38 (avg:  0.38) msec latency[RUN #1 47%,  28 secs]  1 threads  4 conns:      293710 ops,   10400 (avg:   10488) ops/sec, 524.73MB/sec (avg: 528.19MB/sec),  0.38 (avg:  0.38) msec latency[RUN #1 48%,  29 secs]  1 threads  4 conns:      304109 ops,   10398 (avg:   10485) ops/sec, 525.38MB/sec (avg: 528.10MB/sec),  0.38 (avg:  0.38) msec latency[RUN #1 50%,  30 secs]  1 threads  4 conns:      314495 ops,   10385 (avg:   10482) ops/sec, 522.44MB/sec (avg: 527.91MB/sec),  0.38 (avg:  0.38) msec latency[RUN #1 52%,  31 secs]  1 threads  4 conns:      324878 ops,   10382 (avg:   10478) ops/sec, 523.70MB/sec (avg: 527.77MB/sec),  0.38 (avg:  0.38) msec latency[RUN #1 53%,  32 secs]  1 threads  4 conns:      335202 ops,   10323 (avg:   10474) ops/sec, 519.74MB/sec (avg: 527.52MB/sec),  0.39 (avg:  0.38) msec latency[RUN #1 55%,  33 secs]  1 threads  4 conns:      345577 ops,   10374 (avg:   10471) ops/sec, 521.56MB/sec (avg: 527.34MB/sec),  0.38 (avg:  0.38) msec latency[RUN #1 57%,  34 secs]  1 threads  4 conns:      356010 ops,   10432 (avg:   10469) ops/sec, 525.31MB/sec (avg: 527.28MB/sec),  0.38 (avg:  0.38) msec latency[RUN #1 58%,  35 secs]  1 threads  4 conns:      366255 ops,   10244 (avg:   10463) ops/sec, 516.48MB/sec (avg: 526.97MB/sec),  0.39 (avg:  0.38) msec latency[RUN #1 60%,  36 secs]  1 threads  4 conns:      376521 ops,   10265 (avg:   10457) ops/sec, 516.14MB/sec (avg: 526.67MB/sec),  0.39 (avg:  0.38) msec latency[RUN #1 62%,  37 secs]  1 threads  4 conns:      386892 ops,   10370 (avg:   10455) ops/sec, 522.25MB/sec (avg: 526.55MB/sec),  0.38 (avg:  0.38) msec latency[RUN #1 63%,  38 secs]  1 threads  4 conns:      397111 ops,   10218 (avg:   10449) ops/sec, 514.37MB/sec (avg: 526.23MB/sec),  0.39 (avg:  0.38) msec latency[RUN #1 65%,  39 secs]  1 threads  4 conns:      407473 ops,   10360 (avg:   10447) ops/sec, 523.06MB/sec (avg: 526.15MB/sec),  0.38 (avg:  0.38) msec latency[RUN #1 67%,  40 secs]  1 threads  4 conns:      417749 ops,   10273 (avg:   10442) ops/sec, 517.87MB/sec (avg: 525.94MB/sec),  0.39 (avg:  0.38) msec latency[RUN #1 68%,  41 secs]  1 threads  4 conns:      428020 ops,   10270 (avg:   10438) ops/sec, 515.64MB/sec (avg: 525.69MB/sec),  0.39 (avg:  0.38) msec latency[RUN #1 70%,  42 secs]  1 threads  4 conns:      438104 ops,   10082 (avg:   10430) ops/sec, 507.35MB/sec (avg: 525.25MB/sec),  0.40 (avg:  0.38) msec latency[RUN #1 72%,  43 secs]  1 threads  4 conns:      448539 ops,   10434 (avg:   10430) ops/sec, 524.84MB/sec (avg: 525.24MB/sec),  0.38 (avg:  0.38) msec latency[RUN #1 73%,  44 secs]  1 threads  4 conns:      458989 ops,   10449 (avg:   10430) ops/sec, 524.73MB/sec (avg: 525.23MB/sec),  0.38 (avg:  0.38) msec latency[RUN #1 75%,  45 secs]  1 threads  4 conns:      469314 ops,   10324 (avg:   10428) ops/sec, 521.24MB/sec (avg: 525.14MB/sec),  0.39 (avg:  0.38) msec latency[RUN #1 77%,  46 secs]  1 threads  4 conns:      479355 ops,   10040 (avg:   10419) ops/sec, 506.02MB/sec (avg: 524.73MB/sec),  0.40 (avg:  0.38) msec latency[RUN #1 78%,  47 secs]  1 threads  4 conns:      489401 ops,   10044 (avg:   10411) ops/sec, 506.41MB/sec (avg: 524.34MB/sec),  0.40 (avg:  0.38) msec latency[RUN #1 80%,  48 secs]  1 threads  4 conns:      499472 ops,   10070 (avg:   10404) ops/sec, 506.49MB/sec (avg: 523.97MB/sec),  0.40 (avg:  0.38) msec latency[RUN #1 82%,  49 secs]  1 threads  4 conns:      509793 ops,   10320 (avg:   10402) ops/sec, 521.52MB/sec (avg: 523.92MB/sec),  0.39 (avg:  0.38) msec latency[RUN #1 83%,  50 secs]  1 threads  4 conns:      519833 ops,   10039 (avg:   10395) ops/sec, 506.11MB/sec (avg: 523.56MB/sec),  0.40 (avg:  0.38) msec latency[RUN #1 85%,  51 secs]  1 threads  4 conns:      530090 ops,   10256 (avg:   10392) ops/sec, 516.75MB/sec (avg: 523.43MB/sec),  0.39 (avg:  0.38) msec latency[RUN #1 87%,  52 secs]  1 threads  4 conns:      540306 ops,   10215 (avg:   10389) ops/sec, 515.94MB/sec (avg: 523.28MB/sec),  0.39 (avg:  0.38) msec latency[RUN #1 88%,  53 secs]  1 threads  4 conns:      550666 ops,   10359 (avg:   10388) ops/sec, 521.98MB/sec (avg: 523.26MB/sec),  0.38 (avg:  0.38) msec latency[RUN #1 90%,  54 secs]  1 threads  4 conns:      560932 ops,   10265 (avg:   10386) ops/sec, 517.50MB/sec (avg: 523.15MB/sec),  0.39 (avg:  0.38) msec latency[RUN #1 92%,  55 secs]  1 threads  4 conns:      571358 ops,   10424 (avg:   10387) ops/sec, 525.07MB/sec (avg: 523.19MB/sec),  0.38 (avg:  0.38) msec latency[RUN #1 93%,  56 secs]  1 threads  4 conns:      581606 ops,   10247 (avg:   10384) ops/sec, 515.80MB/sec (avg: 523.05MB/sec),  0.39 (avg:  0.38) msec latency[RUN #1 95%,  57 secs]  1 threads  4 conns:      591877 ops,   10270 (avg:   10382) ops/sec, 516.66MB/sec (avg: 522.94MB/sec),  0.39 (avg:  0.38) msec latency[RUN #1 97%,  58 secs]  1 threads  4 conns:      602136 ops,   10258 (avg:   10380) ops/sec, 515.51MB/sec (avg: 522.81MB/sec),  0.39 (avg:  0.38) msec latency[RUN #1 98%,  59 secs]  1 threads  4 conns:      612556 ops,   10418 (avg:   10381) ops/sec, 524.25MB/sec (avg: 522.84MB/sec),  0.38 (avg:  0.38) msec latency[RUN #1 100%,  60 secs]  0 threads  4 conns:      622741 ops,   10418 (avg:   10378) ops/sec, 524.25MB/sec (avg: 522.73MB/sec),  0.38 (avg:  0.38) msec latency
+
+Writing Full Run command HDR latency histogram results to /home/cc/contention-appbench/experiments/redis_contention/redis_numactl_same_node/clients_4_threads_1_pipeline_1_multi_key_50/loaded_pairs_32/pair_25/latency.out_FULL_RUN_1.txt...
+Writing Full Run command HDR latency histogram results in HistogramLogProcessor format to /home/cc/contention-appbench/experiments/redis_contention/redis_numactl_same_node/clients_4_threads_1_pipeline_1_multi_key_50/loaded_pairs_32/pair_25/latency.out_FULL_RUN_1.hgrm...
+Writing GET command HDR latency histogram results to /home/cc/contention-appbench/experiments/redis_contention/redis_numactl_same_node/clients_4_threads_1_pipeline_1_multi_key_50/loaded_pairs_32/pair_25/latency.out_GET_command_run_1.txt...
+Writing GET command HDR latency histogram results in HistogramLogProcessor format to /home/cc/contention-appbench/experiments/redis_contention/redis_numactl_same_node/clients_4_threads_1_pipeline_1_multi_key_50/loaded_pairs_32/pair_25/latency.out_GET_command_run_1.hgrm...
+	Command being timed: "numactl -C 102 --membind=1 memtier_benchmark --port 6525 --test-time=60 --clients 4 --threads 1 --pipeline 1 --multi-key-get 50 --random-data --data-size-range=4-2048 --data-size-pattern=R --key-maximum=1000000 --ratio=0:1 --hide-histogram --out-file=/home/cc/contention-appbench/experiments/redis_contention/redis_numactl_same_node/clients_4_threads_1_pipeline_1_multi_key_50/loaded_pairs_32/pair_25/redis.out --hdr-file-prefix=/home/cc/contention-appbench/experiments/redis_contention/redis_numactl_same_node/clients_4_threads_1_pipeline_1_multi_key_50/loaded_pairs_32/pair_25/latency.out"
+	User time (seconds): 34.16
+	System time (seconds): 25.83
+	Percent of CPU this job got: 99%
+	Elapsed (wall clock) time (h:mm:ss or m:ss): 1:00.02
+	Average shared text size (kbytes): 0
+	Average unshared data size (kbytes): 0
+	Average stack size (kbytes): 0
+	Average total size (kbytes): 0
+	Maximum resident set size (kbytes): 8248
+	Average resident set size (kbytes): 0
+	Major (requiring I/O) page faults: 26
+	Minor (reclaiming a frame) page faults: 746
+	Voluntary context switches: 170
+	Involuntary context switches: 503
+	Swaps: 0
+	File system inputs: 40
+	File system outputs: 112
+	Socket messages sent: 0
+	Socket messages received: 0
+	Signals delivered: 0
+	Page size (bytes): 4096
+	Exit status: 0
++ kill 2780702
++ wait 2780702
++ echo 'Done. Output: /home/cc/contention-appbench/experiments/redis_contention/redis_numactl_same_node/clients_4_threads_1_pipeline_1_multi_key_50/loaded_pairs_32/pair_25/redis.out'
+Done. Output: /home/cc/contention-appbench/experiments/redis_contention/redis_numactl_same_node/clients_4_threads_1_pipeline_1_multi_key_50/loaded_pairs_32/pair_25/redis.out
++ set -x

@@ -24,6 +24,11 @@ sudo apt install linux-modules-$(uname -r)-dbgsym
 Using vtune command, add this argument:
 `-search-dir=/usr/lib/debug/boot`
 
+One Time Token: `one-time-token=565130a506da264cce91a5fff9edebcc`
 
-
-One Time Token: `one-time-token=b479b347bcbcfd1823d079a507569c85`
+# Connect local machine port to remote VTUNE port
+```
+ssh -i ~/.ssh/chameleon \
+    -L <PORT>:localhost:<PORT> \
+    cc@129.114.109.240
+```

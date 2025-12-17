@@ -1,0 +1,180 @@
++ CODEBASE=/home/cc/contention-appbench
++ REDIS_DIR=/home/cc/contention-appbench/redis-3.0.0/src
++ REDIS_SERVER=/home/cc/contention-appbench/redis-3.0.0/src/redis-server
++ REDIS_BENCH=/home/cc/contention-appbench/redis-3.0.0/src/redis-benchmark
++ REDIS_CLI=/home/cc/contention-appbench/redis-3.0.0/src/redis-cli
++ REDIS_CONF=/home/cc/contention-appbench/redis-3.0.0/redis.conf
++ OUTPUT=/home/cc/contention-appbench/output/redis
++ FLUSH=1
++ HOST=127.0.0.1
++ CLIENTS=4
++ THREADS=1
++ PIPELINE=1
++ LOADED_PAIRS=0
++ REDIS_PORT=6500
++ REDIS_TESTTIME=60
++ REDIS_DATASIZE_RANGE=4-2048
++ REDIS_DATASIZE_PATTERN=R
++ REDIS_KEY_MAXIMUM=1000000
++ REDIS_KEY_PATTERN=S:R
++ REDIS_RATIO=0:1
++ REDIS_OUTPUT=/home/cc/contention-appbench/experiments/redis_contention/redis_numactl_same_node_vtune/clients_4_threads_1_pipeline_1_multi_key_50/loaded_pairs_0/pair_0/redis.out
++ REDIS_HISTOGRAM_FILE=/home/cc/contention-appbench/experiments/redis_contention/redis_numactl_same_node_vtune/clients_4_threads_1_pipeline_1_multi_key_50/loaded_pairs_0/pair_0/latency.out
++ SERVER_LOG=/home/cc/contention-appbench/experiments/redis_contention/redis_numactl_same_node_vtune/clients_4_threads_1_pipeline_1_multi_key_50/loaded_pairs_0/pair_0/server.log
++ REDIS_PREFIX='numactl -C 0 --membind=0'
++ MEMTIER_PREFIX='/usr/bin/time -v numactl -C 2 --membind=1'
++ VTUNE_DIR=redis_numactl_same_node_vtune/loaded_pairs_0
++ VTUNE_LOG=/home/cc/contention-appbench/experiments/redis_contention/redis_numactl_same_node_vtune/clients_4_threads_1_pipeline_1_multi_key_50/loaded_pairs_0/pair_0/vtune.log
++ echo '==> starting redis-server on 127.0.0.1:6500'
+==> starting redis-server on 127.0.0.1:6500
++ flush
++ '[' 1 = 1 ']'
++ sudo sh -c 'sync; echo 3 > /proc/sys/vm/drop_caches'
++ echo 'Printing server log to: /home/cc/contention-appbench/experiments/redis_contention/redis_numactl_same_node_vtune/clients_4_threads_1_pipeline_1_multi_key_50/loaded_pairs_0/pair_0/server.log'
+Printing server log to: /home/cc/contention-appbench/experiments/redis_contention/redis_numactl_same_node_vtune/clients_4_threads_1_pipeline_1_multi_key_50/loaded_pairs_0/pair_0/server.log
++ rm -f /home/cc/contention-appbench/experiments/redis_contention/redis_numactl_same_node_vtune/clients_4_threads_1_pipeline_1_multi_key_50/loaded_pairs_0/ready.txt
++ SRV_PID=2832586
++ echo '[SERVER PID]: 2832586'
+[SERVER PID]: 2832586
++ echo 'Waiting for Redis to finish loading RDB (watching log: /home/cc/contention-appbench/experiments/redis_contention/redis_numactl_same_node_vtune/clients_4_threads_1_pipeline_1_multi_key_50/loaded_pairs_0/pair_0/server.log)...'
+Waiting for Redis to finish loading RDB (watching log: /home/cc/contention-appbench/experiments/redis_contention/redis_numactl_same_node_vtune/clients_4_threads_1_pipeline_1_multi_key_50/loaded_pairs_0/pair_0/server.log)...
++ true
++ grep -q 'DB loaded from disk' /home/cc/contention-appbench/experiments/redis_contention/redis_numactl_same_node_vtune/clients_4_threads_1_pipeline_1_multi_key_50/loaded_pairs_0/pair_0/server.log
++ numactl -C 0 --membind=0 /home/cc/contention-appbench/redis-3.0.0/src/redis-server /home/cc/contention-appbench/redis-3.0.0/redis.conf --bind 127.0.0.1 --port 6500 --daemonize no --dir ./databases --dbfilename dump_0.rdb
++ sleep 1
++ true
++ grep -q 'DB loaded from disk' /home/cc/contention-appbench/experiments/redis_contention/redis_numactl_same_node_vtune/clients_4_threads_1_pipeline_1_multi_key_50/loaded_pairs_0/pair_0/server.log
++ sleep 1
++ true
++ grep -q 'DB loaded from disk' /home/cc/contention-appbench/experiments/redis_contention/redis_numactl_same_node_vtune/clients_4_threads_1_pipeline_1_multi_key_50/loaded_pairs_0/pair_0/server.log
++ sleep 1
++ true
++ grep -q 'DB loaded from disk' /home/cc/contention-appbench/experiments/redis_contention/redis_numactl_same_node_vtune/clients_4_threads_1_pipeline_1_multi_key_50/loaded_pairs_0/pair_0/server.log
++ sleep 1
++ true
++ grep -q 'DB loaded from disk' /home/cc/contention-appbench/experiments/redis_contention/redis_numactl_same_node_vtune/clients_4_threads_1_pipeline_1_multi_key_50/loaded_pairs_0/pair_0/server.log
++ sleep 1
++ true
++ grep -q 'DB loaded from disk' /home/cc/contention-appbench/experiments/redis_contention/redis_numactl_same_node_vtune/clients_4_threads_1_pipeline_1_multi_key_50/loaded_pairs_0/pair_0/server.log
++ echo 'Detected '\''DB loaded from disk'\'' in log. RDB load complete.'
+Detected 'DB loaded from disk' in log. RDB load complete.
++ break
++ vtune -collect memory-access -result-dir /home/cc/contention-appbench/vtune_projects/redis_numactl_same_node_vtune/loaded_pairs_0 -target-pid=2832586 -knob analyze-mem-objects=true -finalization-mode=full -search-dir=/usr/lib/debug/boot
+++ pgrep -f 'vtune -collect memory-access'
++ VTUNE_PID=2832675
++ echo 'Waiting for VTUNE to start monitoring (PID: 2832675)...'
+Waiting for VTUNE to start monitoring (PID: 2832675)...
++ true
++ grep -q 'vtune: Collection started' /home/cc/contention-appbench/experiments/redis_contention/redis_numactl_same_node_vtune/clients_4_threads_1_pipeline_1_multi_key_50/loaded_pairs_0/pair_0/vtune.log
++ sleep 1
++ true
++ grep -q 'vtune: Collection started' /home/cc/contention-appbench/experiments/redis_contention/redis_numactl_same_node_vtune/clients_4_threads_1_pipeline_1_multi_key_50/loaded_pairs_0/pair_0/vtune.log
++ sleep 1
++ true
++ grep -q 'vtune: Collection started' /home/cc/contention-appbench/experiments/redis_contention/redis_numactl_same_node_vtune/clients_4_threads_1_pipeline_1_multi_key_50/loaded_pairs_0/pair_0/vtune.log
++ sleep 1
++ true
++ grep -q 'vtune: Collection started' /home/cc/contention-appbench/experiments/redis_contention/redis_numactl_same_node_vtune/clients_4_threads_1_pipeline_1_multi_key_50/loaded_pairs_0/pair_0/vtune.log
++ sleep 1
++ true
++ grep -q 'vtune: Collection started' /home/cc/contention-appbench/experiments/redis_contention/redis_numactl_same_node_vtune/clients_4_threads_1_pipeline_1_multi_key_50/loaded_pairs_0/pair_0/vtune.log
++ sleep 1
++ true
++ grep -q 'vtune: Collection started' /home/cc/contention-appbench/experiments/redis_contention/redis_numactl_same_node_vtune/clients_4_threads_1_pipeline_1_multi_key_50/loaded_pairs_0/pair_0/vtune.log
++ sleep 1
++ true
++ grep -q 'vtune: Collection started' /home/cc/contention-appbench/experiments/redis_contention/redis_numactl_same_node_vtune/clients_4_threads_1_pipeline_1_multi_key_50/loaded_pairs_0/pair_0/vtune.log
++ sleep 1
++ true
++ grep -q 'vtune: Collection started' /home/cc/contention-appbench/experiments/redis_contention/redis_numactl_same_node_vtune/clients_4_threads_1_pipeline_1_multi_key_50/loaded_pairs_0/pair_0/vtune.log
++ sleep 1
++ true
++ grep -q 'vtune: Collection started' /home/cc/contention-appbench/experiments/redis_contention/redis_numactl_same_node_vtune/clients_4_threads_1_pipeline_1_multi_key_50/loaded_pairs_0/pair_0/vtune.log
++ sleep 1
++ true
++ grep -q 'vtune: Collection started' /home/cc/contention-appbench/experiments/redis_contention/redis_numactl_same_node_vtune/clients_4_threads_1_pipeline_1_multi_key_50/loaded_pairs_0/pair_0/vtune.log
++ sleep 1
++ true
++ grep -q 'vtune: Collection started' /home/cc/contention-appbench/experiments/redis_contention/redis_numactl_same_node_vtune/clients_4_threads_1_pipeline_1_multi_key_50/loaded_pairs_0/pair_0/vtune.log
++ sleep 1
++ true
++ grep -q 'vtune: Collection started' /home/cc/contention-appbench/experiments/redis_contention/redis_numactl_same_node_vtune/clients_4_threads_1_pipeline_1_multi_key_50/loaded_pairs_0/pair_0/vtune.log
++ sleep 1
++ true
++ grep -q 'vtune: Collection started' /home/cc/contention-appbench/experiments/redis_contention/redis_numactl_same_node_vtune/clients_4_threads_1_pipeline_1_multi_key_50/loaded_pairs_0/pair_0/vtune.log
++ sleep 1
++ true
++ grep -q 'vtune: Collection started' /home/cc/contention-appbench/experiments/redis_contention/redis_numactl_same_node_vtune/clients_4_threads_1_pipeline_1_multi_key_50/loaded_pairs_0/pair_0/vtune.log
++ sleep 1
++ true
++ grep -q 'vtune: Collection started' /home/cc/contention-appbench/experiments/redis_contention/redis_numactl_same_node_vtune/clients_4_threads_1_pipeline_1_multi_key_50/loaded_pairs_0/pair_0/vtune.log
++ sleep 1
++ true
++ grep -q 'vtune: Collection started' /home/cc/contention-appbench/experiments/redis_contention/redis_numactl_same_node_vtune/clients_4_threads_1_pipeline_1_multi_key_50/loaded_pairs_0/pair_0/vtune.log
++ sleep 1
++ true
++ grep -q 'vtune: Collection started' /home/cc/contention-appbench/experiments/redis_contention/redis_numactl_same_node_vtune/clients_4_threads_1_pipeline_1_multi_key_50/loaded_pairs_0/pair_0/vtune.log
++ sleep 1
++ true
++ grep -q 'vtune: Collection started' /home/cc/contention-appbench/experiments/redis_contention/redis_numactl_same_node_vtune/clients_4_threads_1_pipeline_1_multi_key_50/loaded_pairs_0/pair_0/vtune.log
++ sleep 1
++ true
++ grep -q 'vtune: Collection started' /home/cc/contention-appbench/experiments/redis_contention/redis_numactl_same_node_vtune/clients_4_threads_1_pipeline_1_multi_key_50/loaded_pairs_0/pair_0/vtune.log
++ sleep 1
++ true
++ grep -q 'vtune: Collection started' /home/cc/contention-appbench/experiments/redis_contention/redis_numactl_same_node_vtune/clients_4_threads_1_pipeline_1_multi_key_50/loaded_pairs_0/pair_0/vtune.log
++ echo 'VTUNE has started. Running memtier_benchmark now.'
+VTUNE has started. Running memtier_benchmark now.
++ break
++ for i in {1..100}
++ /home/cc/contention-appbench/redis-3.0.0/src/redis-cli -h 127.0.0.1 -p 6500 PING
++ READY=1
++ echo '[INFO] Redis is ready on 127.0.0.1:6500 (after 200 ms)'
+[INFO] Redis is ready on 127.0.0.1:6500 (after 200 ms)
++ echo READY
++ break
++ '[' 1 -ne 1 ']'
++ echo '==> starting memtier_benchmark /usr/bin/time -v numactl -C 2 --membind=1 memtier_benchmark --port 6500 --test-time=60     --data-import=./databases/dump_0.rdb     --clients 4 --threads 1 --pipeline 1     --random-data --data-size-range=4-2048     --data-size-pattern=R --key-maximum=1000000     --ratio=0:1 --hide-histogram     --out-file=/home/cc/contention-appbench/experiments/redis_contention/redis_numactl_same_node_vtune/clients_4_threads_1_pipeline_1_multi_key_50/loaded_pairs_0/pair_0/redis.out --hdr-file-prefix=/home/cc/contention-appbench/experiments/redis_contention/redis_numactl_same_node_vtune/clients_4_threads_1_pipeline_1_multi_key_50/loaded_pairs_0/pair_0/latency.out 2>&1 &'
+==> starting memtier_benchmark /usr/bin/time -v numactl -C 2 --membind=1 memtier_benchmark --port 6500 --test-time=60     --data-import=./databases/dump_0.rdb     --clients 4 --threads 1 --pipeline 1     --random-data --data-size-range=4-2048     --data-size-pattern=R --key-maximum=1000000     --ratio=0:1 --hide-histogram     --out-file=/home/cc/contention-appbench/experiments/redis_contention/redis_numactl_same_node_vtune/clients_4_threads_1_pipeline_1_multi_key_50/loaded_pairs_0/pair_0/redis.out --hdr-file-prefix=/home/cc/contention-appbench/experiments/redis_contention/redis_numactl_same_node_vtune/clients_4_threads_1_pipeline_1_multi_key_50/loaded_pairs_0/pair_0/latency.out 2>&1 &
++ MEMTIER_PID=2833299
++ echo '[MEMTIER PID]: 2833299'
+[MEMTIER PID]: 2833299
++ wait 2833299
++ /usr/bin/time -v numactl -C 2 --membind=1 memtier_benchmark --port 6500 --test-time=60 --clients 4 --threads 1 --pipeline 1 --random-data --data-size-range=4-2048 --data-size-pattern=R --key-maximum=1000000 --ratio=0:1 --hide-histogram --out-file=/home/cc/contention-appbench/experiments/redis_contention/redis_numactl_same_node_vtune/clients_4_threads_1_pipeline_1_multi_key_50/loaded_pairs_0/pair_0/redis.out --hdr-file-prefix=/home/cc/contention-appbench/experiments/redis_contention/redis_numactl_same_node_vtune/clients_4_threads_1_pipeline_1_multi_key_50/loaded_pairs_0/pair_0/latency.out
+Writing results to /home/cc/contention-appbench/experiments/redis_contention/redis_numactl_same_node_vtune/clients_4_threads_1_pipeline_1_multi_key_50/loaded_pairs_0/pair_0/redis.out...
+[RUN #1] Preparing benchmark client...
+[RUN #1] Launching threads now...
+[RUN #1 2%,   1 secs]  1 threads  4 conns:       92781 ops,   92780 (avg:   92780) ops/sec, 94.16MB/sec (avg: 94.16MB/sec),  0.04 (avg:  0.04) msec latency[RUN #1 3%,   2 secs]  1 threads  4 conns:      185299 ops,   92511 (avg:   92645) ops/sec, 94.55MB/sec (avg: 94.35MB/sec),  0.04 (avg:  0.04) msec latency[RUN #1 5%,   3 secs]  1 threads  4 conns:      277765 ops,   92459 (avg:   92583) ops/sec, 94.12MB/sec (avg: 94.28MB/sec),  0.04 (avg:  0.04) msec latency[RUN #1 7%,   4 secs]  1 threads  4 conns:      370189 ops,   92416 (avg:   92541) ops/sec, 93.51MB/sec (avg: 94.09MB/sec),  0.04 (avg:  0.04) msec latency[RUN #1 8%,   5 secs]  1 threads  4 conns:      462528 ops,   92331 (avg:   92499) ops/sec, 94.44MB/sec (avg: 94.16MB/sec),  0.04 (avg:  0.04) msec latency[RUN #1 10%,   6 secs]  1 threads  4 conns:      554943 ops,   92408 (avg:   92484) ops/sec, 94.34MB/sec (avg: 94.19MB/sec),  0.04 (avg:  0.04) msec latency[RUN #1 12%,   7 secs]  1 threads  4 conns:      647201 ops,   92251 (avg:   92451) ops/sec, 94.37MB/sec (avg: 94.21MB/sec),  0.04 (avg:  0.04) msec latency[RUN #1 13%,   8 secs]  1 threads  4 conns:      739303 ops,   92095 (avg:   92406) ops/sec, 93.87MB/sec (avg: 94.17MB/sec),  0.04 (avg:  0.04) msec latency[RUN #1 15%,   9 secs]  1 threads  4 conns:      831423 ops,   92112 (avg:   92373) ops/sec, 93.89MB/sec (avg: 94.14MB/sec),  0.04 (avg:  0.04) msec latency[RUN #1 17%,  10 secs]  1 threads  4 conns:      923516 ops,   92085 (avg:   92345) ops/sec, 94.24MB/sec (avg: 94.15MB/sec),  0.04 (avg:  0.04) msec latency[RUN #1 18%,  11 secs]  1 threads  4 conns:     1015425 ops,   91902 (avg:   92304) ops/sec, 93.23MB/sec (avg: 94.07MB/sec),  0.04 (avg:  0.04) msec latency[RUN #1 20%,  12 secs]  1 threads  4 conns:     1107463 ops,   92031 (avg:   92282) ops/sec, 93.75MB/sec (avg: 94.04MB/sec),  0.04 (avg:  0.04) msec latency[RUN #1 22%,  13 secs]  1 threads  4 conns:     1199539 ops,   92068 (avg:   92265) ops/sec, 94.31MB/sec (avg: 94.06MB/sec),  0.04 (avg:  0.04) msec latency[RUN #1 23%,  14 secs]  1 threads  4 conns:     1291605 ops,   92059 (avg:   92250) ops/sec, 93.96MB/sec (avg: 94.05MB/sec),  0.04 (avg:  0.04) msec latency[RUN #1 25%,  15 secs]  1 threads  4 conns:     1383513 ops,   91900 (avg:   92227) ops/sec, 93.54MB/sec (avg: 94.02MB/sec),  0.04 (avg:  0.04) msec latency[RUN #1 27%,  16 secs]  1 threads  4 conns:     1475330 ops,   91810 (avg:   92201) ops/sec, 93.34MB/sec (avg: 93.98MB/sec),  0.04 (avg:  0.04) msec latency[RUN #1 28%,  17 secs]  1 threads  4 conns:     1567073 ops,   91735 (avg:   92174) ops/sec, 93.57MB/sec (avg: 93.95MB/sec),  0.04 (avg:  0.04) msec latency[RUN #1 30%,  18 secs]  1 threads  4 conns:     1658823 ops,   91742 (avg:   92150) ops/sec, 93.77MB/sec (avg: 93.94MB/sec),  0.04 (avg:  0.04) msec latency[RUN #1 32%,  19 secs]  1 threads  4 conns:     1750220 ops,   91390 (avg:   92110) ops/sec, 93.21MB/sec (avg: 93.90MB/sec),  0.04 (avg:  0.04) msec latency[RUN #1 33%,  20 secs]  1 threads  4 conns:     1841659 ops,   91432 (avg:   92076) ops/sec, 93.68MB/sec (avg: 93.89MB/sec),  0.04 (avg:  0.04) msec latency[RUN #1 35%,  21 secs]  1 threads  4 conns:     1932923 ops,   91256 (avg:   92037) ops/sec, 92.92MB/sec (avg: 93.85MB/sec),  0.04 (avg:  0.04) msec latency[RUN #1 37%,  22 secs]  1 threads  4 conns:     2024236 ops,   91305 (avg:   92003) ops/sec, 93.06MB/sec (avg: 93.81MB/sec),  0.04 (avg:  0.04) msec latency[RUN #1 38%,  23 secs]  1 threads  4 conns:     2115654 ops,   91410 (avg:   91978) ops/sec, 92.97MB/sec (avg: 93.77MB/sec),  0.04 (avg:  0.04) msec latency[RUN #1 40%,  24 secs]  1 threads  4 conns:     2206888 ops,   91227 (avg:   91946) ops/sec, 93.19MB/sec (avg: 93.75MB/sec),  0.04 (avg:  0.04) msec latency[RUN #1 42%,  25 secs]  1 threads  4 conns:     2298095 ops,   91199 (avg:   91916) ops/sec, 92.42MB/sec (avg: 93.70MB/sec),  0.04 (avg:  0.04) msec latency[RUN #1 43%,  26 secs]  1 threads  4 conns:     2389240 ops,   91140 (avg:   91887) ops/sec, 92.75MB/sec (avg: 93.66MB/sec),  0.04 (avg:  0.04) msec latency[RUN #1 45%,  27 secs]  1 threads  4 conns:     2480443 ops,   91196 (avg:   91861) ops/sec, 92.62MB/sec (avg: 93.62MB/sec),  0.04 (avg:  0.04) msec latency[RUN #1 47%,  28 secs]  1 threads  4 conns:     2571511 ops,   91060 (avg:   91832) ops/sec, 92.56MB/sec (avg: 93.58MB/sec),  0.04 (avg:  0.04) msec latency[RUN #1 48%,  29 secs]  1 threads  4 conns:     2662754 ops,   91236 (avg:   91812) ops/sec, 93.27MB/sec (avg: 93.57MB/sec),  0.04 (avg:  0.04) msec latency[RUN #1 50%,  30 secs]  1 threads  4 conns:     2753759 ops,   90997 (avg:   91785) ops/sec, 93.09MB/sec (avg: 93.56MB/sec),  0.04 (avg:  0.04) msec latency[RUN #1 52%,  31 secs]  1 threads  4 conns:     2844794 ops,   91027 (avg:   91760) ops/sec, 92.74MB/sec (avg: 93.53MB/sec),  0.04 (avg:  0.04) msec latency[RUN #1 53%,  32 secs]  1 threads  4 conns:     2935790 ops,   90988 (avg:   91736) ops/sec, 92.80MB/sec (avg: 93.51MB/sec),  0.04 (avg:  0.04) msec latency[RUN #1 55%,  33 secs]  1 threads  4 conns:     3026844 ops,   91047 (avg:   91715) ops/sec, 92.75MB/sec (avg: 93.48MB/sec),  0.04 (avg:  0.04) msec latency[RUN #1 57%,  34 secs]  1 threads  4 conns:     3117915 ops,   91063 (avg:   91696) ops/sec, 93.00MB/sec (avg: 93.47MB/sec),  0.04 (avg:  0.04) msec latency[RUN #1 58%,  35 secs]  1 threads  4 conns:     3209065 ops,   91142 (avg:   91680) ops/sec, 92.86MB/sec (avg: 93.45MB/sec),  0.04 (avg:  0.04) msec latency[RUN #1 60%,  36 secs]  1 threads  4 conns:     3300138 ops,   91066 (avg:   91663) ops/sec, 92.39MB/sec (avg: 93.42MB/sec),  0.04 (avg:  0.04) msec latency[RUN #1 62%,  37 secs]  1 threads  4 conns:     3391130 ops,   90984 (avg:   91645) ops/sec, 92.14MB/sec (avg: 93.39MB/sec),  0.04 (avg:  0.04) msec latency[RUN #1 63%,  38 secs]  1 threads  4 conns:     3482188 ops,   91050 (avg:   91629) ops/sec, 92.67MB/sec (avg: 93.37MB/sec),  0.04 (avg:  0.04) msec latency[RUN #1 65%,  39 secs]  1 threads  4 conns:     3573138 ops,   90942 (avg:   91612) ops/sec, 92.91MB/sec (avg: 93.36MB/sec),  0.04 (avg:  0.04) msec latency[RUN #1 67%,  40 secs]  1 threads  4 conns:     3664290 ops,   91145 (avg:   91600) ops/sec, 92.89MB/sec (avg: 93.35MB/sec),  0.04 (avg:  0.04) msec latency[RUN #1 68%,  41 secs]  1 threads  4 conns:     3755138 ops,   90840 (avg:   91581) ops/sec, 92.71MB/sec (avg: 93.33MB/sec),  0.04 (avg:  0.04) msec latency[RUN #1 70%,  42 secs]  1 threads  4 conns:     3846018 ops,   90873 (avg:   91564) ops/sec, 93.02MB/sec (avg: 93.32MB/sec),  0.04 (avg:  0.04) msec latency[RUN #1 72%,  43 secs]  1 threads  4 conns:     3936879 ops,   90853 (avg:   91548) ops/sec, 93.03MB/sec (avg: 93.32MB/sec),  0.04 (avg:  0.04) msec latency[RUN #1 73%,  44 secs]  1 threads  4 conns:     4027664 ops,   90778 (avg:   91530) ops/sec, 92.51MB/sec (avg: 93.30MB/sec),  0.04 (avg:  0.04) msec latency[RUN #1 75%,  45 secs]  1 threads  4 conns:     4118741 ops,   91070 (avg:   91520) ops/sec, 92.80MB/sec (avg: 93.29MB/sec),  0.04 (avg:  0.04) msec latency[RUN #1 77%,  46 secs]  1 threads  4 conns:     4209466 ops,   90717 (avg:   91503) ops/sec, 92.17MB/sec (avg: 93.26MB/sec),  0.04 (avg:  0.04) msec latency[RUN #1 78%,  47 secs]  1 threads  4 conns:     4300365 ops,   90892 (avg:   91490) ops/sec, 92.75MB/sec (avg: 93.25MB/sec),  0.04 (avg:  0.04) msec latency[RUN #1 80%,  48 secs]  1 threads  4 conns:     4391134 ops,   90761 (avg:   91475) ops/sec, 92.62MB/sec (avg: 93.24MB/sec),  0.04 (avg:  0.04) msec latency[RUN #1 82%,  49 secs]  1 threads  4 conns:     4482181 ops,   91040 (avg:   91466) ops/sec, 92.61MB/sec (avg: 93.23MB/sec),  0.04 (avg:  0.04) msec latency[RUN #1 83%,  50 secs]  1 threads  4 conns:     4573419 ops,   91231 (avg:   91461) ops/sec, 92.86MB/sec (avg: 93.22MB/sec),  0.04 (avg:  0.04) msec latency[RUN #1 85%,  51 secs]  1 threads  4 conns:     4664277 ops,   90851 (avg:   91449) ops/sec, 92.43MB/sec (avg: 93.20MB/sec),  0.04 (avg:  0.04) msec latency[RUN #1 87%,  52 secs]  1 threads  4 conns:     4755305 ops,   91020 (avg:   91441) ops/sec, 92.68MB/sec (avg: 93.19MB/sec),  0.04 (avg:  0.04) msec latency[RUN #1 88%,  53 secs]  1 threads  4 conns:     4846230 ops,   90918 (avg:   91431) ops/sec, 92.47MB/sec (avg: 93.18MB/sec),  0.04 (avg:  0.04) msec latency[RUN #1 90%,  54 secs]  1 threads  4 conns:     4937218 ops,   90981 (avg:   91423) ops/sec, 92.47MB/sec (avg: 93.17MB/sec),  0.04 (avg:  0.04) msec latency[RUN #1 92%,  55 secs]  1 threads  4 conns:     5028356 ops,   91130 (avg:   91417) ops/sec, 92.77MB/sec (avg: 93.16MB/sec),  0.04 (avg:  0.04) msec latency[RUN #1 93%,  56 secs]  1 threads  4 conns:     5119284 ops,   90920 (avg:   91408) ops/sec, 92.44MB/sec (avg: 93.15MB/sec),  0.04 (avg:  0.04) msec latency[RUN #1 95%,  57 secs]  1 threads  4 conns:     5210207 ops,   90915 (avg:   91400) ops/sec, 92.13MB/sec (avg: 93.13MB/sec),  0.04 (avg:  0.04) msec latency[RUN #1 97%,  58 secs]  1 threads  4 conns:     5301115 ops,   90901 (avg:   91391) ops/sec, 92.40MB/sec (avg: 93.12MB/sec),  0.04 (avg:  0.04) msec latency[RUN #1 98%,  59 secs]  1 threads  4 conns:     5392011 ops,   90889 (avg:   91383) ops/sec, 92.27MB/sec (avg: 93.10MB/sec),  0.04 (avg:  0.04) msec latency[RUN #1 100%,  60 secs]  0 threads  4 conns:     5482532 ops,   90889 (avg:   91375) ops/sec, 92.27MB/sec (avg: 93.09MB/sec),  0.04 (avg:  0.04) msec latency
+
+Writing Full Run command HDR latency histogram results to /home/cc/contention-appbench/experiments/redis_contention/redis_numactl_same_node_vtune/clients_4_threads_1_pipeline_1_multi_key_50/loaded_pairs_0/pair_0/latency.out_FULL_RUN_1.txt...
+Writing Full Run command HDR latency histogram results in HistogramLogProcessor format to /home/cc/contention-appbench/experiments/redis_contention/redis_numactl_same_node_vtune/clients_4_threads_1_pipeline_1_multi_key_50/loaded_pairs_0/pair_0/latency.out_FULL_RUN_1.hgrm...
+Writing GET command HDR latency histogram results to /home/cc/contention-appbench/experiments/redis_contention/redis_numactl_same_node_vtune/clients_4_threads_1_pipeline_1_multi_key_50/loaded_pairs_0/pair_0/latency.out_GET_command_run_1.txt...
+Writing GET command HDR latency histogram results in HistogramLogProcessor format to /home/cc/contention-appbench/experiments/redis_contention/redis_numactl_same_node_vtune/clients_4_threads_1_pipeline_1_multi_key_50/loaded_pairs_0/pair_0/latency.out_GET_command_run_1.hgrm...
+	Command being timed: "numactl -C 2 --membind=1 memtier_benchmark --port 6500 --test-time=60 --clients 4 --threads 1 --pipeline 1 --random-data --data-size-range=4-2048 --data-size-pattern=R --key-maximum=1000000 --ratio=0:1 --hide-histogram --out-file=/home/cc/contention-appbench/experiments/redis_contention/redis_numactl_same_node_vtune/clients_4_threads_1_pipeline_1_multi_key_50/loaded_pairs_0/pair_0/redis.out --hdr-file-prefix=/home/cc/contention-appbench/experiments/redis_contention/redis_numactl_same_node_vtune/clients_4_threads_1_pipeline_1_multi_key_50/loaded_pairs_0/pair_0/latency.out"
+	User time (seconds): 12.72
+	System time (seconds): 37.88
+	Percent of CPU this job got: 84%
+	Elapsed (wall clock) time (h:mm:ss or m:ss): 1:00.02
+	Average shared text size (kbytes): 0
+	Average unshared data size (kbytes): 0
+	Average stack size (kbytes): 0
+	Average total size (kbytes): 0
+	Maximum resident set size (kbytes): 8216
+	Average resident set size (kbytes): 0
+	Major (requiring I/O) page faults: 27
+	Minor (reclaiming a frame) page faults: 728
+	Voluntary context switches: 2002392
+	Involuntary context switches: 2669
+	Swaps: 0
+	File system inputs: 4048
+	File system outputs: 120
+	Socket messages sent: 0
+	Socket messages received: 0
+	Signals delivered: 0
+	Page size (bytes): 4096
+	Exit status: 0
++ kill 2832586
++ wait 2832586
++ echo 'Done. Output: /home/cc/contention-appbench/experiments/redis_contention/redis_numactl_same_node_vtune/clients_4_threads_1_pipeline_1_multi_key_50/loaded_pairs_0/pair_0/redis.out'
+Done. Output: /home/cc/contention-appbench/experiments/redis_contention/redis_numactl_same_node_vtune/clients_4_threads_1_pipeline_1_multi_key_50/loaded_pairs_0/pair_0/redis.out
++ set -x

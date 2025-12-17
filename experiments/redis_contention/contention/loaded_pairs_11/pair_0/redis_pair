@@ -1,1095 +1,0 @@
-+ CODEBASE=/mnt/appbench-sudarsun
-+ REDIS_DIR=/mnt/appbench-sudarsun/redis-3.0.0/src
-+ REDIS_SERVER=/mnt/appbench-sudarsun/redis-3.0.0/src/redis-server
-+ REDIS_BENCH=/mnt/appbench-sudarsun/redis-3.0.0/src/redis-benchmark
-+ REDIS_CLI=/mnt/appbench-sudarsun/redis-3.0.0/src/redis-cli
-+ REDIS_CONF=/mnt/appbench-sudarsun/redis-3.0.0/redis.conf
-+ OUTPUT=/mnt/appbench-sudarsun/output/redis
-+ FLUSH=1
-+ HOST=127.0.0.1
-+ CLIENTS=8
-+ THREADS=4
-+ PIPELINE=1
-+ LOADED_PAIRS=11
-+ REDIS_PORT=6500
-+ REDIS_TESTTIME=60
-+ REDIS_DATASIZE_RANGE=4-2048
-+ REDIS_DATASIZE_PATTERN=R
-+ REDIS_KEY_MAXIMUM=10000000
-+ REDIS_KEY_PATTERN=S:R
-+ REDIS_RATIO=0:1
-+ REDIS_OUTPUT=/mnt/appbench-sudarsun/experiments/redis_contention/contention/loaded_pairs_11/pair_0/redis.out
-+ REDIS_HISTOGRAM_FILE=/mnt/appbench-sudarsun/experiments/redis_contention/contention/loaded_pairs_11/pair_0/latency.out
-+ SERVER_LOG=/mnt/appbench-sudarsun/experiments/redis_contention/contention/loaded_pairs_11/pair_0/server.log
-+ REDIS_PREFIX='taskset -c 1'
-+ MEMTIER_PREFIX='/usr/bin/time -v taskset -c 32'
-+ VTUNE_DIR=contention/loaded_pairs_11
-+ echo '==> starting redis-server on 127.0.0.1:6500'
-==> starting redis-server on 127.0.0.1:6500
-+ flush
-+ '[' 1 = 1 ']'
-+ sudo sh -c 'sync; echo 3 > /proc/sys/vm/drop_caches'
-+ echo 'Printing server log to: /mnt/appbench-sudarsun/experiments/redis_contention/contention/loaded_pairs_11/pair_0/server.log'
-Printing server log to: /mnt/appbench-sudarsun/experiments/redis_contention/contention/loaded_pairs_11/pair_0/server.log
-+ echo '==> redis-server: taskset -c 1 /mnt/appbench-sudarsun/redis-3.0.0/src/redis-server /mnt/appbench-sudarsun/redis-3.0.0/redis.conf --bind 127.0.0.1 --port 6500 --daemonize no --dir ./databases --dbfilename dump_0.rdb >/mnt/appbench-sudarsun/experiments/redis_contention/contention/loaded_pairs_11/pair_0/server.log 2>&1 &'
-==> redis-server: taskset -c 1 /mnt/appbench-sudarsun/redis-3.0.0/src/redis-server /mnt/appbench-sudarsun/redis-3.0.0/redis.conf --bind 127.0.0.1 --port 6500 --daemonize no --dir ./databases --dbfilename dump_0.rdb >/mnt/appbench-sudarsun/experiments/redis_contention/contention/loaded_pairs_11/pair_0/server.log 2>&1 &
-+ rm -f /mnt/appbench-sudarsun/experiments/redis_contention/contention/loaded_pairs_11/ready.txt
-+ SRV_PID=595117
-+ echo '[SERVER PID]: 595117'
-[SERVER PID]: 595117
-+ echo 'Waiting for Redis to finish loading RDB (watching log: /mnt/appbench-sudarsun/experiments/redis_contention/contention/loaded_pairs_11/pair_0/server.log)...'
-Waiting for Redis to finish loading RDB (watching log: /mnt/appbench-sudarsun/experiments/redis_contention/contention/loaded_pairs_11/pair_0/server.log)...
-+ true
-+ grep -q 'DB loaded from disk' /mnt/appbench-sudarsun/experiments/redis_contention/contention/loaded_pairs_11/pair_0/server.log
-+ taskset -c 1 /mnt/appbench-sudarsun/redis-3.0.0/src/redis-server /mnt/appbench-sudarsun/redis-3.0.0/redis.conf --bind 127.0.0.1 --port 6500 --daemonize no --dir ./databases --dbfilename dump_0.rdb
-+ sleep 1
-+ true
-+ grep -q 'DB loaded from disk' /mnt/appbench-sudarsun/experiments/redis_contention/contention/loaded_pairs_11/pair_0/server.log
-+ sleep 1
-+ true
-+ grep -q 'DB loaded from disk' /mnt/appbench-sudarsun/experiments/redis_contention/contention/loaded_pairs_11/pair_0/server.log
-+ sleep 1
-+ true
-+ grep -q 'DB loaded from disk' /mnt/appbench-sudarsun/experiments/redis_contention/contention/loaded_pairs_11/pair_0/server.log
-+ sleep 1
-+ true
-+ grep -q 'DB loaded from disk' /mnt/appbench-sudarsun/experiments/redis_contention/contention/loaded_pairs_11/pair_0/server.log
-+ sleep 1
-+ true
-+ grep -q 'DB loaded from disk' /mnt/appbench-sudarsun/experiments/redis_contention/contention/loaded_pairs_11/pair_0/server.log
-+ sleep 1
-+ true
-+ grep -q 'DB loaded from disk' /mnt/appbench-sudarsun/experiments/redis_contention/contention/loaded_pairs_11/pair_0/server.log
-+ sleep 1
-+ true
-+ grep -q 'DB loaded from disk' /mnt/appbench-sudarsun/experiments/redis_contention/contention/loaded_pairs_11/pair_0/server.log
-+ sleep 1
-+ true
-+ grep -q 'DB loaded from disk' /mnt/appbench-sudarsun/experiments/redis_contention/contention/loaded_pairs_11/pair_0/server.log
-+ sleep 1
-+ true
-+ grep -q 'DB loaded from disk' /mnt/appbench-sudarsun/experiments/redis_contention/contention/loaded_pairs_11/pair_0/server.log
-+ sleep 1
-+ true
-+ grep -q 'DB loaded from disk' /mnt/appbench-sudarsun/experiments/redis_contention/contention/loaded_pairs_11/pair_0/server.log
-+ sleep 1
-+ true
-+ grep -q 'DB loaded from disk' /mnt/appbench-sudarsun/experiments/redis_contention/contention/loaded_pairs_11/pair_0/server.log
-+ sleep 1
-+ true
-+ grep -q 'DB loaded from disk' /mnt/appbench-sudarsun/experiments/redis_contention/contention/loaded_pairs_11/pair_0/server.log
-+ sleep 1
-+ true
-+ grep -q 'DB loaded from disk' /mnt/appbench-sudarsun/experiments/redis_contention/contention/loaded_pairs_11/pair_0/server.log
-+ sleep 1
-+ true
-+ grep -q 'DB loaded from disk' /mnt/appbench-sudarsun/experiments/redis_contention/contention/loaded_pairs_11/pair_0/server.log
-+ sleep 1
-+ true
-+ grep -q 'DB loaded from disk' /mnt/appbench-sudarsun/experiments/redis_contention/contention/loaded_pairs_11/pair_0/server.log
-+ sleep 1
-+ true
-+ grep -q 'DB loaded from disk' /mnt/appbench-sudarsun/experiments/redis_contention/contention/loaded_pairs_11/pair_0/server.log
-+ sleep 1
-+ true
-+ grep -q 'DB loaded from disk' /mnt/appbench-sudarsun/experiments/redis_contention/contention/loaded_pairs_11/pair_0/server.log
-+ sleep 1
-+ true
-+ grep -q 'DB loaded from disk' /mnt/appbench-sudarsun/experiments/redis_contention/contention/loaded_pairs_11/pair_0/server.log
-+ sleep 1
-+ true
-+ grep -q 'DB loaded from disk' /mnt/appbench-sudarsun/experiments/redis_contention/contention/loaded_pairs_11/pair_0/server.log
-+ sleep 1
-+ true
-+ grep -q 'DB loaded from disk' /mnt/appbench-sudarsun/experiments/redis_contention/contention/loaded_pairs_11/pair_0/server.log
-+ sleep 1
-+ true
-+ grep -q 'DB loaded from disk' /mnt/appbench-sudarsun/experiments/redis_contention/contention/loaded_pairs_11/pair_0/server.log
-+ sleep 1
-+ true
-+ grep -q 'DB loaded from disk' /mnt/appbench-sudarsun/experiments/redis_contention/contention/loaded_pairs_11/pair_0/server.log
-+ sleep 1
-+ true
-+ grep -q 'DB loaded from disk' /mnt/appbench-sudarsun/experiments/redis_contention/contention/loaded_pairs_11/pair_0/server.log
-+ sleep 1
-+ true
-+ grep -q 'DB loaded from disk' /mnt/appbench-sudarsun/experiments/redis_contention/contention/loaded_pairs_11/pair_0/server.log
-+ sleep 1
-+ true
-+ grep -q 'DB loaded from disk' /mnt/appbench-sudarsun/experiments/redis_contention/contention/loaded_pairs_11/pair_0/server.log
-+ sleep 1
-+ true
-+ grep -q 'DB loaded from disk' /mnt/appbench-sudarsun/experiments/redis_contention/contention/loaded_pairs_11/pair_0/server.log
-+ sleep 1
-+ true
-+ grep -q 'DB loaded from disk' /mnt/appbench-sudarsun/experiments/redis_contention/contention/loaded_pairs_11/pair_0/server.log
-+ sleep 1
-+ true
-+ grep -q 'DB loaded from disk' /mnt/appbench-sudarsun/experiments/redis_contention/contention/loaded_pairs_11/pair_0/server.log
-+ sleep 1
-+ true
-+ grep -q 'DB loaded from disk' /mnt/appbench-sudarsun/experiments/redis_contention/contention/loaded_pairs_11/pair_0/server.log
-+ sleep 1
-+ true
-+ grep -q 'DB loaded from disk' /mnt/appbench-sudarsun/experiments/redis_contention/contention/loaded_pairs_11/pair_0/server.log
-+ sleep 1
-+ true
-+ grep -q 'DB loaded from disk' /mnt/appbench-sudarsun/experiments/redis_contention/contention/loaded_pairs_11/pair_0/server.log
-+ sleep 1
-+ true
-+ grep -q 'DB loaded from disk' /mnt/appbench-sudarsun/experiments/redis_contention/contention/loaded_pairs_11/pair_0/server.log
-+ sleep 1
-+ true
-+ grep -q 'DB loaded from disk' /mnt/appbench-sudarsun/experiments/redis_contention/contention/loaded_pairs_11/pair_0/server.log
-+ sleep 1
-+ true
-+ grep -q 'DB loaded from disk' /mnt/appbench-sudarsun/experiments/redis_contention/contention/loaded_pairs_11/pair_0/server.log
-+ sleep 1
-+ true
-+ grep -q 'DB loaded from disk' /mnt/appbench-sudarsun/experiments/redis_contention/contention/loaded_pairs_11/pair_0/server.log
-+ sleep 1
-+ true
-+ grep -q 'DB loaded from disk' /mnt/appbench-sudarsun/experiments/redis_contention/contention/loaded_pairs_11/pair_0/server.log
-+ sleep 1
-+ true
-+ grep -q 'DB loaded from disk' /mnt/appbench-sudarsun/experiments/redis_contention/contention/loaded_pairs_11/pair_0/server.log
-+ sleep 1
-+ true
-+ grep -q 'DB loaded from disk' /mnt/appbench-sudarsun/experiments/redis_contention/contention/loaded_pairs_11/pair_0/server.log
-+ sleep 1
-+ true
-+ grep -q 'DB loaded from disk' /mnt/appbench-sudarsun/experiments/redis_contention/contention/loaded_pairs_11/pair_0/server.log
-+ sleep 1
-+ true
-+ grep -q 'DB loaded from disk' /mnt/appbench-sudarsun/experiments/redis_contention/contention/loaded_pairs_11/pair_0/server.log
-+ sleep 1
-+ true
-+ grep -q 'DB loaded from disk' /mnt/appbench-sudarsun/experiments/redis_contention/contention/loaded_pairs_11/pair_0/server.log
-+ sleep 1
-+ true
-+ grep -q 'DB loaded from disk' /mnt/appbench-sudarsun/experiments/redis_contention/contention/loaded_pairs_11/pair_0/server.log
-+ sleep 1
-+ true
-+ grep -q 'DB loaded from disk' /mnt/appbench-sudarsun/experiments/redis_contention/contention/loaded_pairs_11/pair_0/server.log
-+ sleep 1
-+ true
-+ grep -q 'DB loaded from disk' /mnt/appbench-sudarsun/experiments/redis_contention/contention/loaded_pairs_11/pair_0/server.log
-+ sleep 1
-+ true
-+ grep -q 'DB loaded from disk' /mnt/appbench-sudarsun/experiments/redis_contention/contention/loaded_pairs_11/pair_0/server.log
-+ sleep 1
-+ true
-+ grep -q 'DB loaded from disk' /mnt/appbench-sudarsun/experiments/redis_contention/contention/loaded_pairs_11/pair_0/server.log
-+ sleep 1
-+ true
-+ grep -q 'DB loaded from disk' /mnt/appbench-sudarsun/experiments/redis_contention/contention/loaded_pairs_11/pair_0/server.log
-+ sleep 1
-+ true
-+ grep -q 'DB loaded from disk' /mnt/appbench-sudarsun/experiments/redis_contention/contention/loaded_pairs_11/pair_0/server.log
-+ sleep 1
-+ true
-+ grep -q 'DB loaded from disk' /mnt/appbench-sudarsun/experiments/redis_contention/contention/loaded_pairs_11/pair_0/server.log
-+ sleep 1
-+ true
-+ grep -q 'DB loaded from disk' /mnt/appbench-sudarsun/experiments/redis_contention/contention/loaded_pairs_11/pair_0/server.log
-+ sleep 1
-+ true
-+ grep -q 'DB loaded from disk' /mnt/appbench-sudarsun/experiments/redis_contention/contention/loaded_pairs_11/pair_0/server.log
-+ sleep 1
-+ true
-+ grep -q 'DB loaded from disk' /mnt/appbench-sudarsun/experiments/redis_contention/contention/loaded_pairs_11/pair_0/server.log
-+ sleep 1
-+ true
-+ grep -q 'DB loaded from disk' /mnt/appbench-sudarsun/experiments/redis_contention/contention/loaded_pairs_11/pair_0/server.log
-+ sleep 1
-+ true
-+ grep -q 'DB loaded from disk' /mnt/appbench-sudarsun/experiments/redis_contention/contention/loaded_pairs_11/pair_0/server.log
-+ sleep 1
-+ true
-+ grep -q 'DB loaded from disk' /mnt/appbench-sudarsun/experiments/redis_contention/contention/loaded_pairs_11/pair_0/server.log
-+ sleep 1
-+ true
-+ grep -q 'DB loaded from disk' /mnt/appbench-sudarsun/experiments/redis_contention/contention/loaded_pairs_11/pair_0/server.log
-+ sleep 1
-+ true
-+ grep -q 'DB loaded from disk' /mnt/appbench-sudarsun/experiments/redis_contention/contention/loaded_pairs_11/pair_0/server.log
-+ sleep 1
-+ true
-+ grep -q 'DB loaded from disk' /mnt/appbench-sudarsun/experiments/redis_contention/contention/loaded_pairs_11/pair_0/server.log
-+ sleep 1
-+ true
-+ grep -q 'DB loaded from disk' /mnt/appbench-sudarsun/experiments/redis_contention/contention/loaded_pairs_11/pair_0/server.log
-+ sleep 1
-+ true
-+ grep -q 'DB loaded from disk' /mnt/appbench-sudarsun/experiments/redis_contention/contention/loaded_pairs_11/pair_0/server.log
-+ sleep 1
-+ true
-+ grep -q 'DB loaded from disk' /mnt/appbench-sudarsun/experiments/redis_contention/contention/loaded_pairs_11/pair_0/server.log
-+ sleep 1
-+ true
-+ grep -q 'DB loaded from disk' /mnt/appbench-sudarsun/experiments/redis_contention/contention/loaded_pairs_11/pair_0/server.log
-+ sleep 1
-+ true
-+ grep -q 'DB loaded from disk' /mnt/appbench-sudarsun/experiments/redis_contention/contention/loaded_pairs_11/pair_0/server.log
-+ sleep 1
-+ true
-+ grep -q 'DB loaded from disk' /mnt/appbench-sudarsun/experiments/redis_contention/contention/loaded_pairs_11/pair_0/server.log
-+ sleep 1
-+ true
-+ grep -q 'DB loaded from disk' /mnt/appbench-sudarsun/experiments/redis_contention/contention/loaded_pairs_11/pair_0/server.log
-+ sleep 1
-+ true
-+ grep -q 'DB loaded from disk' /mnt/appbench-sudarsun/experiments/redis_contention/contention/loaded_pairs_11/pair_0/server.log
-+ sleep 1
-+ true
-+ grep -q 'DB loaded from disk' /mnt/appbench-sudarsun/experiments/redis_contention/contention/loaded_pairs_11/pair_0/server.log
-+ sleep 1
-+ true
-+ grep -q 'DB loaded from disk' /mnt/appbench-sudarsun/experiments/redis_contention/contention/loaded_pairs_11/pair_0/server.log
-+ sleep 1
-+ true
-+ grep -q 'DB loaded from disk' /mnt/appbench-sudarsun/experiments/redis_contention/contention/loaded_pairs_11/pair_0/server.log
-+ sleep 1
-+ true
-+ grep -q 'DB loaded from disk' /mnt/appbench-sudarsun/experiments/redis_contention/contention/loaded_pairs_11/pair_0/server.log
-+ sleep 1
-+ true
-+ grep -q 'DB loaded from disk' /mnt/appbench-sudarsun/experiments/redis_contention/contention/loaded_pairs_11/pair_0/server.log
-+ sleep 1
-+ true
-+ grep -q 'DB loaded from disk' /mnt/appbench-sudarsun/experiments/redis_contention/contention/loaded_pairs_11/pair_0/server.log
-+ sleep 1
-+ true
-+ grep -q 'DB loaded from disk' /mnt/appbench-sudarsun/experiments/redis_contention/contention/loaded_pairs_11/pair_0/server.log
-+ sleep 1
-+ true
-+ grep -q 'DB loaded from disk' /mnt/appbench-sudarsun/experiments/redis_contention/contention/loaded_pairs_11/pair_0/server.log
-+ sleep 1
-+ true
-+ grep -q 'DB loaded from disk' /mnt/appbench-sudarsun/experiments/redis_contention/contention/loaded_pairs_11/pair_0/server.log
-+ sleep 1
-+ true
-+ grep -q 'DB loaded from disk' /mnt/appbench-sudarsun/experiments/redis_contention/contention/loaded_pairs_11/pair_0/server.log
-+ sleep 1
-+ true
-+ grep -q 'DB loaded from disk' /mnt/appbench-sudarsun/experiments/redis_contention/contention/loaded_pairs_11/pair_0/server.log
-+ sleep 1
-+ true
-+ grep -q 'DB loaded from disk' /mnt/appbench-sudarsun/experiments/redis_contention/contention/loaded_pairs_11/pair_0/server.log
-+ sleep 1
-+ true
-+ grep -q 'DB loaded from disk' /mnt/appbench-sudarsun/experiments/redis_contention/contention/loaded_pairs_11/pair_0/server.log
-+ sleep 1
-+ true
-+ grep -q 'DB loaded from disk' /mnt/appbench-sudarsun/experiments/redis_contention/contention/loaded_pairs_11/pair_0/server.log
-+ sleep 1
-+ true
-+ grep -q 'DB loaded from disk' /mnt/appbench-sudarsun/experiments/redis_contention/contention/loaded_pairs_11/pair_0/server.log
-+ sleep 1
-+ true
-+ grep -q 'DB loaded from disk' /mnt/appbench-sudarsun/experiments/redis_contention/contention/loaded_pairs_11/pair_0/server.log
-+ sleep 1
-+ true
-+ grep -q 'DB loaded from disk' /mnt/appbench-sudarsun/experiments/redis_contention/contention/loaded_pairs_11/pair_0/server.log
-+ sleep 1
-+ true
-+ grep -q 'DB loaded from disk' /mnt/appbench-sudarsun/experiments/redis_contention/contention/loaded_pairs_11/pair_0/server.log
-+ sleep 1
-+ true
-+ grep -q 'DB loaded from disk' /mnt/appbench-sudarsun/experiments/redis_contention/contention/loaded_pairs_11/pair_0/server.log
-+ sleep 1
-+ true
-+ grep -q 'DB loaded from disk' /mnt/appbench-sudarsun/experiments/redis_contention/contention/loaded_pairs_11/pair_0/server.log
-+ sleep 1
-+ true
-+ grep -q 'DB loaded from disk' /mnt/appbench-sudarsun/experiments/redis_contention/contention/loaded_pairs_11/pair_0/server.log
-+ sleep 1
-+ true
-+ grep -q 'DB loaded from disk' /mnt/appbench-sudarsun/experiments/redis_contention/contention/loaded_pairs_11/pair_0/server.log
-+ sleep 1
-+ true
-+ grep -q 'DB loaded from disk' /mnt/appbench-sudarsun/experiments/redis_contention/contention/loaded_pairs_11/pair_0/server.log
-+ sleep 1
-+ true
-+ grep -q 'DB loaded from disk' /mnt/appbench-sudarsun/experiments/redis_contention/contention/loaded_pairs_11/pair_0/server.log
-+ sleep 1
-+ true
-+ grep -q 'DB loaded from disk' /mnt/appbench-sudarsun/experiments/redis_contention/contention/loaded_pairs_11/pair_0/server.log
-+ sleep 1
-+ true
-+ grep -q 'DB loaded from disk' /mnt/appbench-sudarsun/experiments/redis_contention/contention/loaded_pairs_11/pair_0/server.log
-+ sleep 1
-+ true
-+ grep -q 'DB loaded from disk' /mnt/appbench-sudarsun/experiments/redis_contention/contention/loaded_pairs_11/pair_0/server.log
-+ sleep 1
-+ true
-+ grep -q 'DB loaded from disk' /mnt/appbench-sudarsun/experiments/redis_contention/contention/loaded_pairs_11/pair_0/server.log
-+ sleep 1
-+ true
-+ grep -q 'DB loaded from disk' /mnt/appbench-sudarsun/experiments/redis_contention/contention/loaded_pairs_11/pair_0/server.log
-+ sleep 1
-+ true
-+ grep -q 'DB loaded from disk' /mnt/appbench-sudarsun/experiments/redis_contention/contention/loaded_pairs_11/pair_0/server.log
-+ sleep 1
-+ true
-+ grep -q 'DB loaded from disk' /mnt/appbench-sudarsun/experiments/redis_contention/contention/loaded_pairs_11/pair_0/server.log
-+ sleep 1
-+ true
-+ grep -q 'DB loaded from disk' /mnt/appbench-sudarsun/experiments/redis_contention/contention/loaded_pairs_11/pair_0/server.log
-+ sleep 1
-+ true
-+ grep -q 'DB loaded from disk' /mnt/appbench-sudarsun/experiments/redis_contention/contention/loaded_pairs_11/pair_0/server.log
-+ sleep 1
-+ true
-+ grep -q 'DB loaded from disk' /mnt/appbench-sudarsun/experiments/redis_contention/contention/loaded_pairs_11/pair_0/server.log
-+ sleep 1
-+ true
-+ grep -q 'DB loaded from disk' /mnt/appbench-sudarsun/experiments/redis_contention/contention/loaded_pairs_11/pair_0/server.log
-+ sleep 1
-+ true
-+ grep -q 'DB loaded from disk' /mnt/appbench-sudarsun/experiments/redis_contention/contention/loaded_pairs_11/pair_0/server.log
-+ sleep 1
-+ true
-+ grep -q 'DB loaded from disk' /mnt/appbench-sudarsun/experiments/redis_contention/contention/loaded_pairs_11/pair_0/server.log
-+ sleep 1
-+ true
-+ grep -q 'DB loaded from disk' /mnt/appbench-sudarsun/experiments/redis_contention/contention/loaded_pairs_11/pair_0/server.log
-+ sleep 1
-+ true
-+ grep -q 'DB loaded from disk' /mnt/appbench-sudarsun/experiments/redis_contention/contention/loaded_pairs_11/pair_0/server.log
-+ sleep 1
-+ true
-+ grep -q 'DB loaded from disk' /mnt/appbench-sudarsun/experiments/redis_contention/contention/loaded_pairs_11/pair_0/server.log
-+ sleep 1
-+ true
-+ grep -q 'DB loaded from disk' /mnt/appbench-sudarsun/experiments/redis_contention/contention/loaded_pairs_11/pair_0/server.log
-+ sleep 1
-+ true
-+ grep -q 'DB loaded from disk' /mnt/appbench-sudarsun/experiments/redis_contention/contention/loaded_pairs_11/pair_0/server.log
-+ sleep 1
-+ true
-+ grep -q 'DB loaded from disk' /mnt/appbench-sudarsun/experiments/redis_contention/contention/loaded_pairs_11/pair_0/server.log
-+ sleep 1
-+ true
-+ grep -q 'DB loaded from disk' /mnt/appbench-sudarsun/experiments/redis_contention/contention/loaded_pairs_11/pair_0/server.log
-+ sleep 1
-+ true
-+ grep -q 'DB loaded from disk' /mnt/appbench-sudarsun/experiments/redis_contention/contention/loaded_pairs_11/pair_0/server.log
-+ sleep 1
-+ true
-+ grep -q 'DB loaded from disk' /mnt/appbench-sudarsun/experiments/redis_contention/contention/loaded_pairs_11/pair_0/server.log
-+ sleep 1
-+ true
-+ grep -q 'DB loaded from disk' /mnt/appbench-sudarsun/experiments/redis_contention/contention/loaded_pairs_11/pair_0/server.log
-+ sleep 1
-+ true
-+ grep -q 'DB loaded from disk' /mnt/appbench-sudarsun/experiments/redis_contention/contention/loaded_pairs_11/pair_0/server.log
-+ sleep 1
-+ true
-+ grep -q 'DB loaded from disk' /mnt/appbench-sudarsun/experiments/redis_contention/contention/loaded_pairs_11/pair_0/server.log
-+ sleep 1
-+ true
-+ grep -q 'DB loaded from disk' /mnt/appbench-sudarsun/experiments/redis_contention/contention/loaded_pairs_11/pair_0/server.log
-+ sleep 1
-+ true
-+ grep -q 'DB loaded from disk' /mnt/appbench-sudarsun/experiments/redis_contention/contention/loaded_pairs_11/pair_0/server.log
-+ sleep 1
-+ true
-+ grep -q 'DB loaded from disk' /mnt/appbench-sudarsun/experiments/redis_contention/contention/loaded_pairs_11/pair_0/server.log
-+ sleep 1
-+ true
-+ grep -q 'DB loaded from disk' /mnt/appbench-sudarsun/experiments/redis_contention/contention/loaded_pairs_11/pair_0/server.log
-+ sleep 1
-+ true
-+ grep -q 'DB loaded from disk' /mnt/appbench-sudarsun/experiments/redis_contention/contention/loaded_pairs_11/pair_0/server.log
-+ sleep 1
-+ true
-+ grep -q 'DB loaded from disk' /mnt/appbench-sudarsun/experiments/redis_contention/contention/loaded_pairs_11/pair_0/server.log
-+ sleep 1
-+ true
-+ grep -q 'DB loaded from disk' /mnt/appbench-sudarsun/experiments/redis_contention/contention/loaded_pairs_11/pair_0/server.log
-+ sleep 1
-+ true
-+ grep -q 'DB loaded from disk' /mnt/appbench-sudarsun/experiments/redis_contention/contention/loaded_pairs_11/pair_0/server.log
-+ sleep 1
-+ true
-+ grep -q 'DB loaded from disk' /mnt/appbench-sudarsun/experiments/redis_contention/contention/loaded_pairs_11/pair_0/server.log
-+ sleep 1
-+ true
-+ grep -q 'DB loaded from disk' /mnt/appbench-sudarsun/experiments/redis_contention/contention/loaded_pairs_11/pair_0/server.log
-+ sleep 1
-+ true
-+ grep -q 'DB loaded from disk' /mnt/appbench-sudarsun/experiments/redis_contention/contention/loaded_pairs_11/pair_0/server.log
-+ sleep 1
-+ true
-+ grep -q 'DB loaded from disk' /mnt/appbench-sudarsun/experiments/redis_contention/contention/loaded_pairs_11/pair_0/server.log
-+ sleep 1
-+ true
-+ grep -q 'DB loaded from disk' /mnt/appbench-sudarsun/experiments/redis_contention/contention/loaded_pairs_11/pair_0/server.log
-+ sleep 1
-+ true
-+ grep -q 'DB loaded from disk' /mnt/appbench-sudarsun/experiments/redis_contention/contention/loaded_pairs_11/pair_0/server.log
-+ sleep 1
-+ true
-+ grep -q 'DB loaded from disk' /mnt/appbench-sudarsun/experiments/redis_contention/contention/loaded_pairs_11/pair_0/server.log
-+ sleep 1
-+ true
-+ grep -q 'DB loaded from disk' /mnt/appbench-sudarsun/experiments/redis_contention/contention/loaded_pairs_11/pair_0/server.log
-+ sleep 1
-+ true
-+ grep -q 'DB loaded from disk' /mnt/appbench-sudarsun/experiments/redis_contention/contention/loaded_pairs_11/pair_0/server.log
-+ sleep 1
-+ true
-+ grep -q 'DB loaded from disk' /mnt/appbench-sudarsun/experiments/redis_contention/contention/loaded_pairs_11/pair_0/server.log
-+ sleep 1
-+ true
-+ grep -q 'DB loaded from disk' /mnt/appbench-sudarsun/experiments/redis_contention/contention/loaded_pairs_11/pair_0/server.log
-+ sleep 1
-+ true
-+ grep -q 'DB loaded from disk' /mnt/appbench-sudarsun/experiments/redis_contention/contention/loaded_pairs_11/pair_0/server.log
-+ sleep 1
-+ true
-+ grep -q 'DB loaded from disk' /mnt/appbench-sudarsun/experiments/redis_contention/contention/loaded_pairs_11/pair_0/server.log
-+ sleep 1
-+ true
-+ grep -q 'DB loaded from disk' /mnt/appbench-sudarsun/experiments/redis_contention/contention/loaded_pairs_11/pair_0/server.log
-+ sleep 1
-+ true
-+ grep -q 'DB loaded from disk' /mnt/appbench-sudarsun/experiments/redis_contention/contention/loaded_pairs_11/pair_0/server.log
-+ sleep 1
-+ true
-+ grep -q 'DB loaded from disk' /mnt/appbench-sudarsun/experiments/redis_contention/contention/loaded_pairs_11/pair_0/server.log
-+ sleep 1
-+ true
-+ grep -q 'DB loaded from disk' /mnt/appbench-sudarsun/experiments/redis_contention/contention/loaded_pairs_11/pair_0/server.log
-+ sleep 1
-+ true
-+ grep -q 'DB loaded from disk' /mnt/appbench-sudarsun/experiments/redis_contention/contention/loaded_pairs_11/pair_0/server.log
-+ sleep 1
-+ true
-+ grep -q 'DB loaded from disk' /mnt/appbench-sudarsun/experiments/redis_contention/contention/loaded_pairs_11/pair_0/server.log
-+ sleep 1
-+ true
-+ grep -q 'DB loaded from disk' /mnt/appbench-sudarsun/experiments/redis_contention/contention/loaded_pairs_11/pair_0/server.log
-+ sleep 1
-+ true
-+ grep -q 'DB loaded from disk' /mnt/appbench-sudarsun/experiments/redis_contention/contention/loaded_pairs_11/pair_0/server.log
-+ sleep 1
-+ true
-+ grep -q 'DB loaded from disk' /mnt/appbench-sudarsun/experiments/redis_contention/contention/loaded_pairs_11/pair_0/server.log
-+ sleep 1
-+ true
-+ grep -q 'DB loaded from disk' /mnt/appbench-sudarsun/experiments/redis_contention/contention/loaded_pairs_11/pair_0/server.log
-+ sleep 1
-+ true
-+ grep -q 'DB loaded from disk' /mnt/appbench-sudarsun/experiments/redis_contention/contention/loaded_pairs_11/pair_0/server.log
-+ sleep 1
-+ true
-+ grep -q 'DB loaded from disk' /mnt/appbench-sudarsun/experiments/redis_contention/contention/loaded_pairs_11/pair_0/server.log
-+ sleep 1
-+ true
-+ grep -q 'DB loaded from disk' /mnt/appbench-sudarsun/experiments/redis_contention/contention/loaded_pairs_11/pair_0/server.log
-+ sleep 1
-+ true
-+ grep -q 'DB loaded from disk' /mnt/appbench-sudarsun/experiments/redis_contention/contention/loaded_pairs_11/pair_0/server.log
-+ sleep 1
-+ true
-+ grep -q 'DB loaded from disk' /mnt/appbench-sudarsun/experiments/redis_contention/contention/loaded_pairs_11/pair_0/server.log
-+ sleep 1
-+ true
-+ grep -q 'DB loaded from disk' /mnt/appbench-sudarsun/experiments/redis_contention/contention/loaded_pairs_11/pair_0/server.log
-+ sleep 1
-+ true
-+ grep -q 'DB loaded from disk' /mnt/appbench-sudarsun/experiments/redis_contention/contention/loaded_pairs_11/pair_0/server.log
-+ sleep 1
-+ true
-+ grep -q 'DB loaded from disk' /mnt/appbench-sudarsun/experiments/redis_contention/contention/loaded_pairs_11/pair_0/server.log
-+ sleep 1
-+ true
-+ grep -q 'DB loaded from disk' /mnt/appbench-sudarsun/experiments/redis_contention/contention/loaded_pairs_11/pair_0/server.log
-+ sleep 1
-+ true
-+ grep -q 'DB loaded from disk' /mnt/appbench-sudarsun/experiments/redis_contention/contention/loaded_pairs_11/pair_0/server.log
-+ sleep 1
-+ true
-+ grep -q 'DB loaded from disk' /mnt/appbench-sudarsun/experiments/redis_contention/contention/loaded_pairs_11/pair_0/server.log
-+ sleep 1
-+ true
-+ grep -q 'DB loaded from disk' /mnt/appbench-sudarsun/experiments/redis_contention/contention/loaded_pairs_11/pair_0/server.log
-+ sleep 1
-+ true
-+ grep -q 'DB loaded from disk' /mnt/appbench-sudarsun/experiments/redis_contention/contention/loaded_pairs_11/pair_0/server.log
-+ sleep 1
-+ true
-+ grep -q 'DB loaded from disk' /mnt/appbench-sudarsun/experiments/redis_contention/contention/loaded_pairs_11/pair_0/server.log
-+ sleep 1
-+ true
-+ grep -q 'DB loaded from disk' /mnt/appbench-sudarsun/experiments/redis_contention/contention/loaded_pairs_11/pair_0/server.log
-+ sleep 1
-+ true
-+ grep -q 'DB loaded from disk' /mnt/appbench-sudarsun/experiments/redis_contention/contention/loaded_pairs_11/pair_0/server.log
-+ sleep 1
-+ true
-+ grep -q 'DB loaded from disk' /mnt/appbench-sudarsun/experiments/redis_contention/contention/loaded_pairs_11/pair_0/server.log
-+ sleep 1
-+ true
-+ grep -q 'DB loaded from disk' /mnt/appbench-sudarsun/experiments/redis_contention/contention/loaded_pairs_11/pair_0/server.log
-+ sleep 1
-+ true
-+ grep -q 'DB loaded from disk' /mnt/appbench-sudarsun/experiments/redis_contention/contention/loaded_pairs_11/pair_0/server.log
-+ sleep 1
-+ true
-+ grep -q 'DB loaded from disk' /mnt/appbench-sudarsun/experiments/redis_contention/contention/loaded_pairs_11/pair_0/server.log
-+ sleep 1
-+ true
-+ grep -q 'DB loaded from disk' /mnt/appbench-sudarsun/experiments/redis_contention/contention/loaded_pairs_11/pair_0/server.log
-+ sleep 1
-+ true
-+ grep -q 'DB loaded from disk' /mnt/appbench-sudarsun/experiments/redis_contention/contention/loaded_pairs_11/pair_0/server.log
-+ sleep 1
-+ true
-+ grep -q 'DB loaded from disk' /mnt/appbench-sudarsun/experiments/redis_contention/contention/loaded_pairs_11/pair_0/server.log
-+ sleep 1
-+ true
-+ grep -q 'DB loaded from disk' /mnt/appbench-sudarsun/experiments/redis_contention/contention/loaded_pairs_11/pair_0/server.log
-+ sleep 1
-+ true
-+ grep -q 'DB loaded from disk' /mnt/appbench-sudarsun/experiments/redis_contention/contention/loaded_pairs_11/pair_0/server.log
-+ sleep 1
-+ true
-+ grep -q 'DB loaded from disk' /mnt/appbench-sudarsun/experiments/redis_contention/contention/loaded_pairs_11/pair_0/server.log
-+ sleep 1
-+ true
-+ grep -q 'DB loaded from disk' /mnt/appbench-sudarsun/experiments/redis_contention/contention/loaded_pairs_11/pair_0/server.log
-+ sleep 1
-+ true
-+ grep -q 'DB loaded from disk' /mnt/appbench-sudarsun/experiments/redis_contention/contention/loaded_pairs_11/pair_0/server.log
-+ sleep 1
-+ true
-+ grep -q 'DB loaded from disk' /mnt/appbench-sudarsun/experiments/redis_contention/contention/loaded_pairs_11/pair_0/server.log
-+ sleep 1
-+ true
-+ grep -q 'DB loaded from disk' /mnt/appbench-sudarsun/experiments/redis_contention/contention/loaded_pairs_11/pair_0/server.log
-+ sleep 1
-+ true
-+ grep -q 'DB loaded from disk' /mnt/appbench-sudarsun/experiments/redis_contention/contention/loaded_pairs_11/pair_0/server.log
-+ sleep 1
-+ true
-+ grep -q 'DB loaded from disk' /mnt/appbench-sudarsun/experiments/redis_contention/contention/loaded_pairs_11/pair_0/server.log
-+ sleep 1
-+ true
-+ grep -q 'DB loaded from disk' /mnt/appbench-sudarsun/experiments/redis_contention/contention/loaded_pairs_11/pair_0/server.log
-+ sleep 1
-+ true
-+ grep -q 'DB loaded from disk' /mnt/appbench-sudarsun/experiments/redis_contention/contention/loaded_pairs_11/pair_0/server.log
-+ sleep 1
-+ true
-+ grep -q 'DB loaded from disk' /mnt/appbench-sudarsun/experiments/redis_contention/contention/loaded_pairs_11/pair_0/server.log
-+ sleep 1
-+ true
-+ grep -q 'DB loaded from disk' /mnt/appbench-sudarsun/experiments/redis_contention/contention/loaded_pairs_11/pair_0/server.log
-+ sleep 1
-+ true
-+ grep -q 'DB loaded from disk' /mnt/appbench-sudarsun/experiments/redis_contention/contention/loaded_pairs_11/pair_0/server.log
-+ sleep 1
-+ true
-+ grep -q 'DB loaded from disk' /mnt/appbench-sudarsun/experiments/redis_contention/contention/loaded_pairs_11/pair_0/server.log
-+ sleep 1
-+ true
-+ grep -q 'DB loaded from disk' /mnt/appbench-sudarsun/experiments/redis_contention/contention/loaded_pairs_11/pair_0/server.log
-+ sleep 1
-+ true
-+ grep -q 'DB loaded from disk' /mnt/appbench-sudarsun/experiments/redis_contention/contention/loaded_pairs_11/pair_0/server.log
-+ sleep 1
-+ true
-+ grep -q 'DB loaded from disk' /mnt/appbench-sudarsun/experiments/redis_contention/contention/loaded_pairs_11/pair_0/server.log
-+ sleep 1
-+ true
-+ grep -q 'DB loaded from disk' /mnt/appbench-sudarsun/experiments/redis_contention/contention/loaded_pairs_11/pair_0/server.log
-+ sleep 1
-+ true
-+ grep -q 'DB loaded from disk' /mnt/appbench-sudarsun/experiments/redis_contention/contention/loaded_pairs_11/pair_0/server.log
-+ sleep 1
-+ true
-+ grep -q 'DB loaded from disk' /mnt/appbench-sudarsun/experiments/redis_contention/contention/loaded_pairs_11/pair_0/server.log
-+ sleep 1
-+ true
-+ grep -q 'DB loaded from disk' /mnt/appbench-sudarsun/experiments/redis_contention/contention/loaded_pairs_11/pair_0/server.log
-+ sleep 1
-+ true
-+ grep -q 'DB loaded from disk' /mnt/appbench-sudarsun/experiments/redis_contention/contention/loaded_pairs_11/pair_0/server.log
-+ sleep 1
-+ true
-+ grep -q 'DB loaded from disk' /mnt/appbench-sudarsun/experiments/redis_contention/contention/loaded_pairs_11/pair_0/server.log
-+ sleep 1
-+ true
-+ grep -q 'DB loaded from disk' /mnt/appbench-sudarsun/experiments/redis_contention/contention/loaded_pairs_11/pair_0/server.log
-+ sleep 1
-+ true
-+ grep -q 'DB loaded from disk' /mnt/appbench-sudarsun/experiments/redis_contention/contention/loaded_pairs_11/pair_0/server.log
-+ sleep 1
-+ true
-+ grep -q 'DB loaded from disk' /mnt/appbench-sudarsun/experiments/redis_contention/contention/loaded_pairs_11/pair_0/server.log
-+ sleep 1
-+ true
-+ grep -q 'DB loaded from disk' /mnt/appbench-sudarsun/experiments/redis_contention/contention/loaded_pairs_11/pair_0/server.log
-+ sleep 1
-+ true
-+ grep -q 'DB loaded from disk' /mnt/appbench-sudarsun/experiments/redis_contention/contention/loaded_pairs_11/pair_0/server.log
-+ sleep 1
-+ true
-+ grep -q 'DB loaded from disk' /mnt/appbench-sudarsun/experiments/redis_contention/contention/loaded_pairs_11/pair_0/server.log
-+ sleep 1
-+ true
-+ grep -q 'DB loaded from disk' /mnt/appbench-sudarsun/experiments/redis_contention/contention/loaded_pairs_11/pair_0/server.log
-+ sleep 1
-+ true
-+ grep -q 'DB loaded from disk' /mnt/appbench-sudarsun/experiments/redis_contention/contention/loaded_pairs_11/pair_0/server.log
-+ sleep 1
-+ true
-+ grep -q 'DB loaded from disk' /mnt/appbench-sudarsun/experiments/redis_contention/contention/loaded_pairs_11/pair_0/server.log
-+ sleep 1
-+ true
-+ grep -q 'DB loaded from disk' /mnt/appbench-sudarsun/experiments/redis_contention/contention/loaded_pairs_11/pair_0/server.log
-+ sleep 1
-+ true
-+ grep -q 'DB loaded from disk' /mnt/appbench-sudarsun/experiments/redis_contention/contention/loaded_pairs_11/pair_0/server.log
-+ sleep 1
-+ true
-+ grep -q 'DB loaded from disk' /mnt/appbench-sudarsun/experiments/redis_contention/contention/loaded_pairs_11/pair_0/server.log
-+ sleep 1
-+ true
-+ grep -q 'DB loaded from disk' /mnt/appbench-sudarsun/experiments/redis_contention/contention/loaded_pairs_11/pair_0/server.log
-+ sleep 1
-+ true
-+ grep -q 'DB loaded from disk' /mnt/appbench-sudarsun/experiments/redis_contention/contention/loaded_pairs_11/pair_0/server.log
-+ sleep 1
-+ true
-+ grep -q 'DB loaded from disk' /mnt/appbench-sudarsun/experiments/redis_contention/contention/loaded_pairs_11/pair_0/server.log
-+ sleep 1
-+ true
-+ grep -q 'DB loaded from disk' /mnt/appbench-sudarsun/experiments/redis_contention/contention/loaded_pairs_11/pair_0/server.log
-+ sleep 1
-+ true
-+ grep -q 'DB loaded from disk' /mnt/appbench-sudarsun/experiments/redis_contention/contention/loaded_pairs_11/pair_0/server.log
-+ sleep 1
-+ true
-+ grep -q 'DB loaded from disk' /mnt/appbench-sudarsun/experiments/redis_contention/contention/loaded_pairs_11/pair_0/server.log
-+ sleep 1
-+ true
-+ grep -q 'DB loaded from disk' /mnt/appbench-sudarsun/experiments/redis_contention/contention/loaded_pairs_11/pair_0/server.log
-+ sleep 1
-+ true
-+ grep -q 'DB loaded from disk' /mnt/appbench-sudarsun/experiments/redis_contention/contention/loaded_pairs_11/pair_0/server.log
-+ sleep 1
-+ true
-+ grep -q 'DB loaded from disk' /mnt/appbench-sudarsun/experiments/redis_contention/contention/loaded_pairs_11/pair_0/server.log
-+ sleep 1
-+ true
-+ grep -q 'DB loaded from disk' /mnt/appbench-sudarsun/experiments/redis_contention/contention/loaded_pairs_11/pair_0/server.log
-+ sleep 1
-+ true
-+ grep -q 'DB loaded from disk' /mnt/appbench-sudarsun/experiments/redis_contention/contention/loaded_pairs_11/pair_0/server.log
-+ sleep 1
-+ true
-+ grep -q 'DB loaded from disk' /mnt/appbench-sudarsun/experiments/redis_contention/contention/loaded_pairs_11/pair_0/server.log
-+ sleep 1
-+ true
-+ grep -q 'DB loaded from disk' /mnt/appbench-sudarsun/experiments/redis_contention/contention/loaded_pairs_11/pair_0/server.log
-+ sleep 1
-+ true
-+ grep -q 'DB loaded from disk' /mnt/appbench-sudarsun/experiments/redis_contention/contention/loaded_pairs_11/pair_0/server.log
-+ sleep 1
-+ true
-+ grep -q 'DB loaded from disk' /mnt/appbench-sudarsun/experiments/redis_contention/contention/loaded_pairs_11/pair_0/server.log
-+ sleep 1
-+ true
-+ grep -q 'DB loaded from disk' /mnt/appbench-sudarsun/experiments/redis_contention/contention/loaded_pairs_11/pair_0/server.log
-+ sleep 1
-+ true
-+ grep -q 'DB loaded from disk' /mnt/appbench-sudarsun/experiments/redis_contention/contention/loaded_pairs_11/pair_0/server.log
-+ sleep 1
-+ true
-+ grep -q 'DB loaded from disk' /mnt/appbench-sudarsun/experiments/redis_contention/contention/loaded_pairs_11/pair_0/server.log
-+ sleep 1
-+ true
-+ grep -q 'DB loaded from disk' /mnt/appbench-sudarsun/experiments/redis_contention/contention/loaded_pairs_11/pair_0/server.log
-+ sleep 1
-+ true
-+ grep -q 'DB loaded from disk' /mnt/appbench-sudarsun/experiments/redis_contention/contention/loaded_pairs_11/pair_0/server.log
-+ sleep 1
-+ true
-+ grep -q 'DB loaded from disk' /mnt/appbench-sudarsun/experiments/redis_contention/contention/loaded_pairs_11/pair_0/server.log
-+ sleep 1
-+ true
-+ grep -q 'DB loaded from disk' /mnt/appbench-sudarsun/experiments/redis_contention/contention/loaded_pairs_11/pair_0/server.log
-+ sleep 1
-+ true
-+ grep -q 'DB loaded from disk' /mnt/appbench-sudarsun/experiments/redis_contention/contention/loaded_pairs_11/pair_0/server.log
-+ sleep 1
-+ true
-+ grep -q 'DB loaded from disk' /mnt/appbench-sudarsun/experiments/redis_contention/contention/loaded_pairs_11/pair_0/server.log
-+ sleep 1
-+ true
-+ grep -q 'DB loaded from disk' /mnt/appbench-sudarsun/experiments/redis_contention/contention/loaded_pairs_11/pair_0/server.log
-+ sleep 1
-+ true
-+ grep -q 'DB loaded from disk' /mnt/appbench-sudarsun/experiments/redis_contention/contention/loaded_pairs_11/pair_0/server.log
-+ sleep 1
-+ true
-+ grep -q 'DB loaded from disk' /mnt/appbench-sudarsun/experiments/redis_contention/contention/loaded_pairs_11/pair_0/server.log
-+ sleep 1
-+ true
-+ grep -q 'DB loaded from disk' /mnt/appbench-sudarsun/experiments/redis_contention/contention/loaded_pairs_11/pair_0/server.log
-+ sleep 1
-+ true
-+ grep -q 'DB loaded from disk' /mnt/appbench-sudarsun/experiments/redis_contention/contention/loaded_pairs_11/pair_0/server.log
-+ sleep 1
-+ true
-+ grep -q 'DB loaded from disk' /mnt/appbench-sudarsun/experiments/redis_contention/contention/loaded_pairs_11/pair_0/server.log
-+ sleep 1
-+ true
-+ grep -q 'DB loaded from disk' /mnt/appbench-sudarsun/experiments/redis_contention/contention/loaded_pairs_11/pair_0/server.log
-+ sleep 1
-+ true
-+ grep -q 'DB loaded from disk' /mnt/appbench-sudarsun/experiments/redis_contention/contention/loaded_pairs_11/pair_0/server.log
-+ sleep 1
-+ true
-+ grep -q 'DB loaded from disk' /mnt/appbench-sudarsun/experiments/redis_contention/contention/loaded_pairs_11/pair_0/server.log
-+ sleep 1
-+ true
-+ grep -q 'DB loaded from disk' /mnt/appbench-sudarsun/experiments/redis_contention/contention/loaded_pairs_11/pair_0/server.log
-+ sleep 1
-+ true
-+ grep -q 'DB loaded from disk' /mnt/appbench-sudarsun/experiments/redis_contention/contention/loaded_pairs_11/pair_0/server.log
-+ sleep 1
-+ true
-+ grep -q 'DB loaded from disk' /mnt/appbench-sudarsun/experiments/redis_contention/contention/loaded_pairs_11/pair_0/server.log
-+ sleep 1
-+ true
-+ grep -q 'DB loaded from disk' /mnt/appbench-sudarsun/experiments/redis_contention/contention/loaded_pairs_11/pair_0/server.log
-+ sleep 1
-+ true
-+ grep -q 'DB loaded from disk' /mnt/appbench-sudarsun/experiments/redis_contention/contention/loaded_pairs_11/pair_0/server.log
-+ sleep 1
-+ true
-+ grep -q 'DB loaded from disk' /mnt/appbench-sudarsun/experiments/redis_contention/contention/loaded_pairs_11/pair_0/server.log
-+ sleep 1
-+ true
-+ grep -q 'DB loaded from disk' /mnt/appbench-sudarsun/experiments/redis_contention/contention/loaded_pairs_11/pair_0/server.log
-+ sleep 1
-+ true
-+ grep -q 'DB loaded from disk' /mnt/appbench-sudarsun/experiments/redis_contention/contention/loaded_pairs_11/pair_0/server.log
-+ sleep 1
-+ true
-+ grep -q 'DB loaded from disk' /mnt/appbench-sudarsun/experiments/redis_contention/contention/loaded_pairs_11/pair_0/server.log
-+ sleep 1
-+ true
-+ grep -q 'DB loaded from disk' /mnt/appbench-sudarsun/experiments/redis_contention/contention/loaded_pairs_11/pair_0/server.log
-+ sleep 1
-+ true
-+ grep -q 'DB loaded from disk' /mnt/appbench-sudarsun/experiments/redis_contention/contention/loaded_pairs_11/pair_0/server.log
-+ sleep 1
-+ true
-+ grep -q 'DB loaded from disk' /mnt/appbench-sudarsun/experiments/redis_contention/contention/loaded_pairs_11/pair_0/server.log
-+ sleep 1
-+ true
-+ grep -q 'DB loaded from disk' /mnt/appbench-sudarsun/experiments/redis_contention/contention/loaded_pairs_11/pair_0/server.log
-+ sleep 1
-+ true
-+ grep -q 'DB loaded from disk' /mnt/appbench-sudarsun/experiments/redis_contention/contention/loaded_pairs_11/pair_0/server.log
-+ sleep 1
-+ true
-+ grep -q 'DB loaded from disk' /mnt/appbench-sudarsun/experiments/redis_contention/contention/loaded_pairs_11/pair_0/server.log
-+ sleep 1
-+ true
-+ grep -q 'DB loaded from disk' /mnt/appbench-sudarsun/experiments/redis_contention/contention/loaded_pairs_11/pair_0/server.log
-+ sleep 1
-+ true
-+ grep -q 'DB loaded from disk' /mnt/appbench-sudarsun/experiments/redis_contention/contention/loaded_pairs_11/pair_0/server.log
-+ sleep 1
-+ true
-+ grep -q 'DB loaded from disk' /mnt/appbench-sudarsun/experiments/redis_contention/contention/loaded_pairs_11/pair_0/server.log
-+ sleep 1
-+ true
-+ grep -q 'DB loaded from disk' /mnt/appbench-sudarsun/experiments/redis_contention/contention/loaded_pairs_11/pair_0/server.log
-+ sleep 1
-+ true
-+ grep -q 'DB loaded from disk' /mnt/appbench-sudarsun/experiments/redis_contention/contention/loaded_pairs_11/pair_0/server.log
-+ sleep 1
-+ true
-+ grep -q 'DB loaded from disk' /mnt/appbench-sudarsun/experiments/redis_contention/contention/loaded_pairs_11/pair_0/server.log
-+ sleep 1
-+ true
-+ grep -q 'DB loaded from disk' /mnt/appbench-sudarsun/experiments/redis_contention/contention/loaded_pairs_11/pair_0/server.log
-+ sleep 1
-+ true
-+ grep -q 'DB loaded from disk' /mnt/appbench-sudarsun/experiments/redis_contention/contention/loaded_pairs_11/pair_0/server.log
-+ sleep 1
-+ true
-+ grep -q 'DB loaded from disk' /mnt/appbench-sudarsun/experiments/redis_contention/contention/loaded_pairs_11/pair_0/server.log
-+ sleep 1
-+ true
-+ grep -q 'DB loaded from disk' /mnt/appbench-sudarsun/experiments/redis_contention/contention/loaded_pairs_11/pair_0/server.log
-+ sleep 1
-+ true
-+ grep -q 'DB loaded from disk' /mnt/appbench-sudarsun/experiments/redis_contention/contention/loaded_pairs_11/pair_0/server.log
-+ sleep 1
-+ true
-+ grep -q 'DB loaded from disk' /mnt/appbench-sudarsun/experiments/redis_contention/contention/loaded_pairs_11/pair_0/server.log
-+ sleep 1
-+ true
-+ grep -q 'DB loaded from disk' /mnt/appbench-sudarsun/experiments/redis_contention/contention/loaded_pairs_11/pair_0/server.log
-+ sleep 1
-+ true
-+ grep -q 'DB loaded from disk' /mnt/appbench-sudarsun/experiments/redis_contention/contention/loaded_pairs_11/pair_0/server.log
-+ sleep 1
-+ true
-+ grep -q 'DB loaded from disk' /mnt/appbench-sudarsun/experiments/redis_contention/contention/loaded_pairs_11/pair_0/server.log
-+ sleep 1
-+ true
-+ grep -q 'DB loaded from disk' /mnt/appbench-sudarsun/experiments/redis_contention/contention/loaded_pairs_11/pair_0/server.log
-+ sleep 1
-+ true
-+ grep -q 'DB loaded from disk' /mnt/appbench-sudarsun/experiments/redis_contention/contention/loaded_pairs_11/pair_0/server.log
-+ sleep 1
-+ true
-+ grep -q 'DB loaded from disk' /mnt/appbench-sudarsun/experiments/redis_contention/contention/loaded_pairs_11/pair_0/server.log
-+ sleep 1
-+ true
-+ grep -q 'DB loaded from disk' /mnt/appbench-sudarsun/experiments/redis_contention/contention/loaded_pairs_11/pair_0/server.log
-+ sleep 1
-+ true
-+ grep -q 'DB loaded from disk' /mnt/appbench-sudarsun/experiments/redis_contention/contention/loaded_pairs_11/pair_0/server.log
-+ sleep 1
-+ true
-+ grep -q 'DB loaded from disk' /mnt/appbench-sudarsun/experiments/redis_contention/contention/loaded_pairs_11/pair_0/server.log
-+ sleep 1
-+ true
-+ grep -q 'DB loaded from disk' /mnt/appbench-sudarsun/experiments/redis_contention/contention/loaded_pairs_11/pair_0/server.log
-+ sleep 1
-+ true
-+ grep -q 'DB loaded from disk' /mnt/appbench-sudarsun/experiments/redis_contention/contention/loaded_pairs_11/pair_0/server.log
-+ sleep 1
-+ true
-+ grep -q 'DB loaded from disk' /mnt/appbench-sudarsun/experiments/redis_contention/contention/loaded_pairs_11/pair_0/server.log
-+ sleep 1
-+ true
-+ grep -q 'DB loaded from disk' /mnt/appbench-sudarsun/experiments/redis_contention/contention/loaded_pairs_11/pair_0/server.log
-+ sleep 1
-+ true
-+ grep -q 'DB loaded from disk' /mnt/appbench-sudarsun/experiments/redis_contention/contention/loaded_pairs_11/pair_0/server.log
-+ sleep 1
-+ true
-+ grep -q 'DB loaded from disk' /mnt/appbench-sudarsun/experiments/redis_contention/contention/loaded_pairs_11/pair_0/server.log
-+ sleep 1
-+ true
-+ grep -q 'DB loaded from disk' /mnt/appbench-sudarsun/experiments/redis_contention/contention/loaded_pairs_11/pair_0/server.log
-+ sleep 1
-+ true
-+ grep -q 'DB loaded from disk' /mnt/appbench-sudarsun/experiments/redis_contention/contention/loaded_pairs_11/pair_0/server.log
-+ sleep 1
-+ true
-+ grep -q 'DB loaded from disk' /mnt/appbench-sudarsun/experiments/redis_contention/contention/loaded_pairs_11/pair_0/server.log
-+ sleep 1
-+ true
-+ grep -q 'DB loaded from disk' /mnt/appbench-sudarsun/experiments/redis_contention/contention/loaded_pairs_11/pair_0/server.log
-+ sleep 1
-+ true
-+ grep -q 'DB loaded from disk' /mnt/appbench-sudarsun/experiments/redis_contention/contention/loaded_pairs_11/pair_0/server.log
-+ sleep 1
-+ true
-+ grep -q 'DB loaded from disk' /mnt/appbench-sudarsun/experiments/redis_contention/contention/loaded_pairs_11/pair_0/server.log
-+ sleep 1
-+ true
-+ grep -q 'DB loaded from disk' /mnt/appbench-sudarsun/experiments/redis_contention/contention/loaded_pairs_11/pair_0/server.log
-+ sleep 1
-+ true
-+ grep -q 'DB loaded from disk' /mnt/appbench-sudarsun/experiments/redis_contention/contention/loaded_pairs_11/pair_0/server.log
-+ sleep 1
-+ true
-+ grep -q 'DB loaded from disk' /mnt/appbench-sudarsun/experiments/redis_contention/contention/loaded_pairs_11/pair_0/server.log
-+ sleep 1
-+ true
-+ grep -q 'DB loaded from disk' /mnt/appbench-sudarsun/experiments/redis_contention/contention/loaded_pairs_11/pair_0/server.log
-+ sleep 1
-+ true
-+ grep -q 'DB loaded from disk' /mnt/appbench-sudarsun/experiments/redis_contention/contention/loaded_pairs_11/pair_0/server.log
-+ sleep 1
-+ true
-+ grep -q 'DB loaded from disk' /mnt/appbench-sudarsun/experiments/redis_contention/contention/loaded_pairs_11/pair_0/server.log
-+ sleep 1
-+ true
-+ grep -q 'DB loaded from disk' /mnt/appbench-sudarsun/experiments/redis_contention/contention/loaded_pairs_11/pair_0/server.log
-+ sleep 1
-+ true
-+ grep -q 'DB loaded from disk' /mnt/appbench-sudarsun/experiments/redis_contention/contention/loaded_pairs_11/pair_0/server.log
-+ sleep 1
-+ true
-+ grep -q 'DB loaded from disk' /mnt/appbench-sudarsun/experiments/redis_contention/contention/loaded_pairs_11/pair_0/server.log
-+ sleep 1
-+ true
-+ grep -q 'DB loaded from disk' /mnt/appbench-sudarsun/experiments/redis_contention/contention/loaded_pairs_11/pair_0/server.log
-+ sleep 1
-+ true
-+ grep -q 'DB loaded from disk' /mnt/appbench-sudarsun/experiments/redis_contention/contention/loaded_pairs_11/pair_0/server.log
-+ sleep 1
-+ true
-+ grep -q 'DB loaded from disk' /mnt/appbench-sudarsun/experiments/redis_contention/contention/loaded_pairs_11/pair_0/server.log
-+ sleep 1
-+ true
-+ grep -q 'DB loaded from disk' /mnt/appbench-sudarsun/experiments/redis_contention/contention/loaded_pairs_11/pair_0/server.log
-+ sleep 1
-+ true
-+ grep -q 'DB loaded from disk' /mnt/appbench-sudarsun/experiments/redis_contention/contention/loaded_pairs_11/pair_0/server.log
-+ sleep 1
-+ true
-+ grep -q 'DB loaded from disk' /mnt/appbench-sudarsun/experiments/redis_contention/contention/loaded_pairs_11/pair_0/server.log
-+ sleep 1
-+ true
-+ grep -q 'DB loaded from disk' /mnt/appbench-sudarsun/experiments/redis_contention/contention/loaded_pairs_11/pair_0/server.log
-+ echo 'Detected '\''DB loaded from disk'\'' in log. RDB load complete.'
-Detected 'DB loaded from disk' in log. RDB load complete.
-+ break
-+ for i in {1..100}
-+ /mnt/appbench-sudarsun/redis-3.0.0/src/redis-cli -h 127.0.0.1 -p 6500 PING
-+ READY=1
-+ echo '[INFO] Redis is ready on 127.0.0.1:6500 (after 200 ms)'
-[INFO] Redis is ready on 127.0.0.1:6500 (after 200 ms)
-+ echo READY
-+ break
-+ '[' 1 -ne 1 ']'
-+ vtune -collect memory-access -result-dir /mnt/appbench-sudarsun/vtune_projects/contention/loaded_pairs_11 -target-pid=595117 -knob analyze-mem-objects=true -finalization-mode=full -search-dir=/usr/lib/debug/boot
-++ pgrep -f 'vtune -collect memory-access'
-+ VTUNE_PID=603253
-+ echo '==> starting memtier_benchmark /usr/bin/time -v taskset -c 32 memtier_benchmark --port 6500 --test-time=60     --data-import=./databases/dump_0.rdb     --clients 8 --threads 4 --pipeline 1     --random-data --data-size-range=4-2048     --data-size-pattern=R --key-maximum=10000000     --ratio=0:1 --hide-histogram     --out-file=/mnt/appbench-sudarsun/experiments/redis_contention/contention/loaded_pairs_11/pair_0/redis.out --hdr-file-prefix=/mnt/appbench-sudarsun/experiments/redis_contention/contention/loaded_pairs_11/pair_0/latency.out 2>&1 &'
-==> starting memtier_benchmark /usr/bin/time -v taskset -c 32 memtier_benchmark --port 6500 --test-time=60     --data-import=./databases/dump_0.rdb     --clients 8 --threads 4 --pipeline 1     --random-data --data-size-range=4-2048     --data-size-pattern=R --key-maximum=10000000     --ratio=0:1 --hide-histogram     --out-file=/mnt/appbench-sudarsun/experiments/redis_contention/contention/loaded_pairs_11/pair_0/redis.out --hdr-file-prefix=/mnt/appbench-sudarsun/experiments/redis_contention/contention/loaded_pairs_11/pair_0/latency.out 2>&1 &
-+ MEMTIER_PID=603266
-+ echo '[MEMTIER PID]: 603266'
-[MEMTIER PID]: 603266
-+ wait 603266
-+ /usr/bin/time -v taskset -c 32 memtier_benchmark --port 6500 --test-time=60 --clients 8 --threads 4 --pipeline 1 --random-data --data-size-range=4-2048 --data-size-pattern=R --key-maximum=10000000 --ratio=0:1 --hide-histogram --out-file=/mnt/appbench-sudarsun/experiments/redis_contention/contention/loaded_pairs_11/pair_0/redis.out --hdr-file-prefix=/mnt/appbench-sudarsun/experiments/redis_contention/contention/loaded_pairs_11/pair_0/latency.out
-Writing results to /mnt/appbench-sudarsun/experiments/redis_contention/contention/loaded_pairs_11/pair_0/redis.out...
-[RUN #1] Preparing benchmark client...
-[RUN #1] Launching threads now...
-[RUN #1 2%,   0 secs]  4 threads  8 conns:      113439 ops,  113471 (avg:  113471) ops/sec, 115.17MB/sec (avg: 115.17MB/sec),  0.28 (avg:  0.28) msec latencyvtune: Warning: Measuring peak bandwidth may be not accurate in the attach mode since the system can be heavily loaded at the time of the measurement. Accurate peak DRAM bandwidth is important for further analysis. When collection is done, check the Bandwidth Utilization Histogram on the Summary view and make sure the Low/Medium/High utilization thresholds are correct for your system and manually adjust them, if required.
-vtune: Warning: To profile kernel modules during the session, make sure they are available in the /lib/modules/kernel_version/ location.
-[RUN #1 3%,   1 secs]  4 threads  8 conns:      217025 ops,  103577 (avg:  108523) ops/sec, 106.26MB/sec (avg: 110.72MB/sec),  0.31 (avg:  0.29) msec latencyvtune: Peak bandwidth measurement started.
-[RUN #1 5%,   2 secs]  4 threads  8 conns:      312957 ops,   95923 (avg:  104322) ops/sec, 98.24MB/sec (avg: 106.56MB/sec),  0.33 (avg:  0.31) msec latency[RUN #1 7%,   3 secs]  4 threads  8 conns:      374481 ops,   61518 (avg:   93620) ops/sec, 64.46MB/sec (avg: 96.03MB/sec),  0.52 (avg:  0.34) msec latency[RUN #1 8%,   5 secs]  4 threads  8 conns:      402809 ops,   28324 (avg:   80559) ops/sec, 27.42MB/sec (avg: 82.31MB/sec),  1.13 (avg:  0.40) msec latency[RUN #1 10%,   6 secs]  4 threads  8 conns:      455993 ops,   53174 (avg:   75995) ops/sec, 54.55MB/sec (avg: 77.68MB/sec),  0.60 (avg:  0.42) msec latency[RUN #1 12%,   7 secs]  4 threads  8 conns:      568629 ops,  112624 (avg:   81228) ops/sec, 115.51MB/sec (avg: 83.09MB/sec),  0.28 (avg:  0.39) msec latency[RUN #1 13%,   8 secs]  4 threads  8 conns:      667521 ops,   98836 (avg:   83430) ops/sec, 101.23MB/sec (avg: 85.36MB/sec),  0.32 (avg:  0.38) msec latency[RUN #1 15%,   9 secs]  4 threads  8 conns:      723914 ops,   56387 (avg:   80425) ops/sec, 57.84MB/sec (avg: 82.30MB/sec),  0.56 (avg:  0.40) msec latencyvtune: Peak bandwidth measurement finished.
-[RUN #1 17%,  10 secs]  4 threads  8 conns:      790649 ops,   66727 (avg:   79055) ops/sec, 68.00MB/sec (avg: 80.87MB/sec),  0.48 (avg:  0.40) msec latency[RUN #1 18%,  11 secs]  4 threads  8 conns:      852297 ops,   61642 (avg:   77472) ops/sec, 61.56MB/sec (avg: 79.11MB/sec),  0.34 (avg:  0.40) msec latencyvtune: Collection started. To stop the collection, either press CTRL-C or enter from another console window: vtune -r /mnt/appbench-sudarsun/vtune_projects/contention/loaded_pairs_11 -command stop.
-[RUN #1 20%,  12 secs]  4 threads  8 conns:      910420 ops,   58116 (avg:   75859) ops/sec, 59.14MB/sec (avg: 77.45MB/sec),  0.74 (avg:  0.42) msec latency[RUN #1 22%,  13 secs]  4 threads  8 conns:      969694 ops,   59269 (avg:   74583) ops/sec, 60.44MB/sec (avg: 76.14MB/sec),  0.54 (avg:  0.43) msec latency[RUN #1 23%,  14 secs]  4 threads  8 conns:     1029355 ops,   59656 (avg:   73517) ops/sec, 60.85MB/sec (avg: 75.05MB/sec),  0.54 (avg:  0.43) msec latency[RUN #1 25%,  15 secs]  4 threads  8 conns:     1089300 ops,   59937 (avg:   72612) ops/sec, 61.60MB/sec (avg: 74.15MB/sec),  0.53 (avg:  0.44) msec latency[RUN #1 27%,  16 secs]  4 threads  8 conns:     1149307 ops,   60002 (avg:   71823) ops/sec, 61.12MB/sec (avg: 73.34MB/sec),  0.53 (avg:  0.44) msec latency[RUN #1 28%,  17 secs]  4 threads  8 conns:     1209389 ops,   60057 (avg:   71131) ops/sec, 61.49MB/sec (avg: 72.64MB/sec),  0.53 (avg:  0.45) msec latency[RUN #1 30%,  18 secs]  4 threads  8 conns:     1268010 ops,   58615 (avg:   70436) ops/sec, 60.68MB/sec (avg: 71.98MB/sec),  0.55 (avg:  0.45) msec latency[RUN #1 32%,  19 secs]  4 threads  8 conns:     1327554 ops,   59538 (avg:   69862) ops/sec, 62.42MB/sec (avg: 71.47MB/sec),  0.54 (avg:  0.46) msec latency[RUN #1 33%,  20 secs]  4 threads  8 conns:     1387492 ops,   59931 (avg:   69366) ops/sec, 62.10MB/sec (avg: 71.00MB/sec),  0.53 (avg:  0.46) msec latency[RUN #1 35%,  21 secs]  4 threads  8 conns:     1446432 ops,   58934 (avg:   68869) ops/sec, 60.77MB/sec (avg: 70.52MB/sec),  0.54 (avg:  0.46) msec latency[RUN #1 37%,  22 secs]  4 threads  8 conns:     1505347 ops,   58910 (avg:   68416) ops/sec, 60.82MB/sec (avg: 70.08MB/sec),  0.54 (avg:  0.47) msec latency[RUN #1 38%,  23 secs]  4 threads  8 conns:     1564108 ops,   58754 (avg:   67996) ops/sec, 59.24MB/sec (avg: 69.60MB/sec),  0.54 (avg:  0.47) msec latency[RUN #1 40%,  24 secs]  4 threads  8 conns:     1623070 ops,   58957 (avg:   67620) ops/sec, 61.01MB/sec (avg: 69.25MB/sec),  0.54 (avg:  0.47) msec latency[RUN #1 42%,  25 secs]  4 threads  8 conns:     1680795 ops,   57713 (avg:   67223) ops/sec, 59.23MB/sec (avg: 68.85MB/sec),  0.55 (avg:  0.48) msec latency[RUN #1 43%,  26 secs]  4 threads  8 conns:     1738944 ops,   58144 (avg:   66874) ops/sec, 59.10MB/sec (avg: 68.47MB/sec),  0.55 (avg:  0.48) msec latency[RUN #1 45%,  27 secs]  4 threads  8 conns:     1796914 ops,   57965 (avg:   66544) ops/sec, 60.18MB/sec (avg: 68.16MB/sec),  0.55 (avg:  0.48) msec latency[RUN #1 47%,  28 secs]  4 threads  8 conns:     1855025 ops,   58105 (avg:   66243) ops/sec, 59.62MB/sec (avg: 67.86MB/sec),  0.55 (avg:  0.48) msec latency[RUN #1 48%,  29 secs]  4 threads  8 conns:     1912589 ops,   57557 (avg:   65943) ops/sec, 58.27MB/sec (avg: 67.53MB/sec),  0.56 (avg:  0.48) msec latency[RUN #1 50%,  30 secs]  4 threads  8 conns:     1970527 ops,   57933 (avg:   65676) ops/sec, 58.14MB/sec (avg: 67.22MB/sec),  0.55 (avg:  0.49) msec latency[RUN #1 52%,  31 secs]  4 threads  8 conns:     2027788 ops,   57256 (avg:   65405) ops/sec, 58.32MB/sec (avg: 66.93MB/sec),  0.56 (avg:  0.49) msec latency[RUN #1 53%,  32 secs]  4 threads  8 conns:     2085014 ops,   57221 (avg:   65149) ops/sec, 58.33MB/sec (avg: 66.66MB/sec),  0.56 (avg:  0.49) msec latency[RUN #1 55%,  33 secs]  4 threads  8 conns:     2142049 ops,   57030 (avg:   64903) ops/sec, 58.71MB/sec (avg: 66.42MB/sec),  0.56 (avg:  0.49) msec latency[RUN #1 57%,  34 secs]  4 threads  8 conns:     2198507 ops,   56453 (avg:   64654) ops/sec, 57.76MB/sec (avg: 66.16MB/sec),  0.57 (avg:  0.49) msec latency[RUN #1 58%,  35 secs]  4 threads  8 conns:     2255497 ops,   56985 (avg:   64435) ops/sec, 57.11MB/sec (avg: 65.91MB/sec),  0.56 (avg:  0.50) msec latency[RUN #1 60%,  36 secs]  4 threads  8 conns:     2311466 ops,   55964 (avg:   64200) ops/sec, 56.98MB/sec (avg: 65.66MB/sec),  0.57 (avg:  0.50) msec latency[RUN #1 62%,  37 secs]  4 threads  8 conns:     2368263 ops,   56791 (avg:   64000) ops/sec, 58.45MB/sec (avg: 65.46MB/sec),  0.56 (avg:  0.50) msec latency[RUN #1 63%,  38 secs]  4 threads  8 conns:     2425030 ops,   56762 (avg:   63809) ops/sec, 58.57MB/sec (avg: 65.28MB/sec),  0.56 (avg:  0.50) msec latency[RUN #1 65%,  39 secs]  4 threads  8 conns:     2484947 ops,   59910 (avg:   63709) ops/sec, 60.28MB/sec (avg: 65.15MB/sec),  0.53 (avg:  0.50) msec latency[RUN #1 67%,  40 secs]  4 threads  8 conns:     2548947 ops,   63995 (avg:   63716) ops/sec, 63.89MB/sec (avg: 65.12MB/sec),  0.50 (avg:  0.50) msec latency[RUN #1 68%,  41 secs]  4 threads  8 conns:     2612336 ops,   63382 (avg:   63708) ops/sec, 64.43MB/sec (avg: 65.11MB/sec),  0.50 (avg:  0.50) msec latency[RUN #1 70%,  42 secs]  4 threads  8 conns:     2676542 ops,   64200 (avg:   63720) ops/sec, 66.19MB/sec (avg: 65.13MB/sec),  0.50 (avg:  0.50) msec latency[RUN #1 72%,  43 secs]  4 threads  8 conns:     2740377 ops,   63829 (avg:   63722) ops/sec, 65.65MB/sec (avg: 65.14MB/sec),  0.50 (avg:  0.50) msec latency[RUN #1 73%,  44 secs]  4 threads  8 conns:     2804630 ops,   64246 (avg:   63734) ops/sec, 66.82MB/sec (avg: 65.18MB/sec),  0.50 (avg:  0.50) msec latency[RUN #1 75%,  45 secs]  4 threads  8 conns:     2869024 ops,   64387 (avg:   63749) ops/sec, 66.83MB/sec (avg: 65.22MB/sec),  0.50 (avg:  0.50) msec latency[RUN #1 77%,  46 secs]  4 threads  8 conns:     2933660 ops,   64630 (avg:   63768) ops/sec, 65.23MB/sec (avg: 65.22MB/sec),  0.49 (avg:  0.50) msec latency[RUN #1 78%,  47 secs]  4 threads  8 conns:     2997641 ops,   63976 (avg:   63772) ops/sec, 65.08MB/sec (avg: 65.22MB/sec),  0.50 (avg:  0.50) msec latency[RUN #1 80%,  48 secs]  4 threads  8 conns:     3061214 ops,   63567 (avg:   63768) ops/sec, 64.20MB/sec (avg: 65.19MB/sec),  0.50 (avg:  0.50) msec latency[RUN #1 82%,  49 secs]  4 threads  8 conns:     3125578 ops,   64357 (avg:   63780) ops/sec, 65.80MB/sec (avg: 65.21MB/sec),  0.50 (avg:  0.50) msec latency[RUN #1 83%,  50 secs]  4 threads  8 conns:     3189744 ops,   64160 (avg:   63788) ops/sec, 65.26MB/sec (avg: 65.21MB/sec),  0.50 (avg:  0.50) msec latency[RUN #1 85%,  51 secs]  4 threads  8 conns:     3254205 ops,   64455 (avg:   63801) ops/sec, 65.06MB/sec (avg: 65.20MB/sec),  0.50 (avg:  0.50) msec latency[RUN #1 87%,  52 secs]  4 threads  8 conns:     3318220 ops,   64009 (avg:   63805) ops/sec, 65.23MB/sec (avg: 65.20MB/sec),  0.50 (avg:  0.50) msec latency[RUN #1 88%,  53 secs]  4 threads  8 conns:     3382910 ops,   64684 (avg:   63821) ops/sec, 65.88MB/sec (avg: 65.22MB/sec),  0.49 (avg:  0.50) msec latency[RUN #1 90%,  54 secs]  4 threads  8 conns:     3447139 ops,   64223 (avg:   63829) ops/sec, 65.32MB/sec (avg: 65.22MB/sec),  0.50 (avg:  0.50) msec latency[RUN #1 92%,  55 secs]  4 threads  8 conns:     3511919 ops,   64763 (avg:   63846) ops/sec, 65.90MB/sec (avg: 65.23MB/sec),  0.49 (avg:  0.50) msec latency[RUN #1 93%,  56 secs]  4 threads  8 conns:     3576371 ops,   64446 (avg:   63857) ops/sec, 65.26MB/sec (avg: 65.23MB/sec),  0.50 (avg:  0.50) msec latency[RUN #1 95%,  57 secs]  4 threads  8 conns:     3640592 ops,   64215 (avg:   63863) ops/sec, 64.77MB/sec (avg: 65.22MB/sec),  0.50 (avg:  0.50) msec latency[RUN #1 97%,  58 secs]  4 threads  8 conns:     3704712 ops,   64113 (avg:   63867) ops/sec, 65.55MB/sec (avg: 65.23MB/sec),  0.50 (avg:  0.50) msec latency[RUN #1 98%,  59 secs]  4 threads  8 conns:     3768716 ops,   63999 (avg:   63869) ops/sec, 65.04MB/sec (avg: 65.23MB/sec),  0.50 (avg:  0.50) msec latency[RUN #1 100%,  60 secs]  0 threads  8 conns:     3832452 ops,   63999 (avg:   63871) ops/sec, 65.04MB/sec (avg: 65.21MB/sec),  0.50 (avg:  0.50) msec latency
-
-Writing Full Run command HDR latency histogram results to /mnt/appbench-sudarsun/experiments/redis_contention/contention/loaded_pairs_11/pair_0/latency.out_FULL_RUN_1.txt...
-Writing Full Run command HDR latency histogram results in HistogramLogProcessor format to /mnt/appbench-sudarsun/experiments/redis_contention/contention/loaded_pairs_11/pair_0/latency.out_FULL_RUN_1.hgrm...
-Writing GET command HDR latency histogram results to /mnt/appbench-sudarsun/experiments/redis_contention/contention/loaded_pairs_11/pair_0/latency.out_GET_command_run_1.txt...
-Writing GET command HDR latency histogram results in HistogramLogProcessor format to /mnt/appbench-sudarsun/experiments/redis_contention/contention/loaded_pairs_11/pair_0/latency.out_GET_command_run_1.hgrm...
-	Command being timed: "taskset -c 32 memtier_benchmark --port 6500 --test-time=60 --clients 8 --threads 4 --pipeline 1 --random-data --data-size-range=4-2048 --data-size-pattern=R --key-maximum=10000000 --ratio=0:1 --hide-histogram --out-file=/mnt/appbench-sudarsun/experiments/redis_contention/contention/loaded_pairs_11/pair_0/redis.out --hdr-file-prefix=/mnt/appbench-sudarsun/experiments/redis_contention/contention/loaded_pairs_11/pair_0/latency.out"
-	User time (seconds): 9.30
-	System time (seconds): 24.61
-	Percent of CPU this job got: 56%
-	Elapsed (wall clock) time (h:mm:ss or m:ss): 1:00.03
-	Average shared text size (kbytes): 0
-	Average unshared data size (kbytes): 0
-	Average stack size (kbytes): 0
-	Average total size (kbytes): 0
-	Maximum resident set size (kbytes): 14684
-	Average resident set size (kbytes): 0
-	Major (requiring I/O) page faults: 16
-	Minor (reclaiming a frame) page faults: 7080
-	Voluntary context switches: 1353482
-	Involuntary context switches: 49237
-	Swaps: 0
-	File system inputs: 312
-	File system outputs: 128
-	Socket messages sent: 0
-	Socket messages received: 0
-	Signals delivered: 0
-	Page size (bytes): 4096
-	Exit status: 0
-+ kill 595117
-+ wait 595117
-+ echo 'Done. Output: /mnt/appbench-sudarsun/experiments/redis_contention/contention/loaded_pairs_11/pair_0/redis.out'
-Done. Output: /mnt/appbench-sudarsun/experiments/redis_contention/contention/loaded_pairs_11/pair_0/redis.out
-+ set -x
-vtune: Collection detached.
-vtune: Collection stopped.
-vtune: Using result path `/mnt/appbench-sudarsun/vtune_projects/contention/loaded_pairs_11'
-vtune: Executing actions  0 %                                                  vtune: Executing actions  0 % Finalizing results                               vtune: Executing actions  0 % Finalizing the result                            vtune: Executing actions  0 % Clearing the database                            vtune: Executing actions  7 % Clearing the database                            vtune: Executing actions  7 % Loading raw data to the database                 vtune: Executing actions  7 % Loading 'systemcollector-603353-node0.redis-vtunevtune: Executing actions 12 % Loading 'systemcollector-603353-node0.redis-vtunevtune: Executing actions 12 % Loading 'system-wide.perf' file                  vtune: Executing actions 12 % Loading 'system-wide.stat.perf' file             vtune: Executing actions 12 % Loading '594616-595117.0.trace' file             vtune: Executing actions 12 % Updating precomputed scalar metrics              vtune: Executing actions 14 % Updating precomputed scalar metrics              vtune: Executing actions 14 % Processing profile metrics and debug information vtune: Executing actions 19 % Processing profile metrics and debug information vtune: Executing actions 19 % Setting data model parameters                    vtune: Executing actions 19 % Resolving module symbols                         vtune: Executing actions 19 % Resolving information for `libc++abi.so'         vtune: Executing actions 19 % Resolving information for `linker'               vtune: Executing actions 19 % Resolving information for `redis-server'         vtune: Executing actions 19 % Resolving information for `libdwarf.so'          vtune: Executing actions 19 % Resolving information for `libc-dynamic.so'      vtune: Executing actions 19 % Resolving information for `pinbin'               vtune: Executing actions 19 % Resolving information for `libxed.so'            vtune: Executing actions 19 % Resolving information for `libc.so.6'            vtune: Executing actions 20 % Resolving information for `libc.so.6'            vtune: Executing actions 20 % Resolving information for `libpindwarf.so'       vtune: Executing actions 20 % Resolving information for `libtpsstool.so'       vtune: Executing actions 20 % Resolving information for `libc++.so'            vtune: Executing actions 20 % Resolving information for `ipod.ko'              
-vtune: Warning: Cannot locate debugging information for file `/lib/modules/5.15.0-160-generic/updates/dkms/ipod.ko'.
-vtune: Warning: Cannot read load addresses of sections from `/sys/module/ipod/sections'. This may affect the correctness of symbol resolution for `/lib/modules/5.15.0-160-generic/updates/dkms/ipod.ko'. Make sure this directory exists and all files in this directory have read permissions.
-vtune: Executing actions 20 % Resolving information for `kvm.ko'               
-vtune: Warning: Cannot locate debugging information for file `/opt/intel/oneapi/vtune/2025.7/lib64/libtpsstool.so'.
-vtune: Warning: Cannot locate debugging information for file `/opt/intel/oneapi/vtune/2025.7/lib64/libtpsstool.so'.
-vtune: Warning: Cannot read load addresses of sections from `/sys/module/kvm/sections'. This may affect the correctness of symbol resolution for `/lib/modules/5.15.0-160-generic/kernel/arch/x86/kvm/kvm.ko'. Make sure this directory exists and all files in this directory have read permissions.
-vtune: Warning: Cannot locate file `/usr/lib/debug/.build-id/ac/af96d7b1a6bad57b559d646233d5dc1a23257c.debug'.
-`/usr/lib/debug/.build-id/ac/af96d7b1a6bad57b559d646233d5dc1a23257c.debug' is missing the .text section with code. The file may be a symbol file and not a binary module.
-vtune: Executing actions 20 % Resolving information for `af96d7b1a6bad57b559d64vtune: Executing actions 20 % Resolving information for `[vdso]'               vtune: Executing actions 21 % Resolving information for `[vdso]'               vtune: Executing actions 21 % Resolving information for `libm.so.6'            vtune: Executing actions 21 % Resolving information for `libc.so.6'            vtune: Executing actions 21 % Resolving information for dangling locations     
-vtune: Warning: Cannot locate file `vvar.ko'.
-vtune: Executing actions 21 % Resolving information for `vvar'                 vtune: Executing actions 22 % Resolving information for `vvar'                 vtune: Executing actions 22 % Resolving information for `vmlinux'              vtune: Executing actions 22 % Resolving bottom user stack information          vtune: Executing actions 23 % Resolving bottom user stack information          vtune: Executing actions 23 % Resolving thread name information                vtune: Executing actions 24 % Resolving thread name information                vtune: Executing actions 24 % Resolving call target names for dynamic code     vtune: Executing actions 25 % Resolving call target names for dynamic code     vtune: Executing actions 25 % Resolving interrupt name information             vtune: Executing actions 26 % Resolving interrupt name information             vtune: Executing actions 26 % Processing profile metrics and debug information vtune: Executing actions 27 % Processing profile metrics and debug information vtune: Executing actions 28 % Processing profile metrics and debug information vtune: Executing actions 29 % Processing profile metrics and debug information vtune: Executing actions 30 % Processing profile metrics and debug information vtune: Executing actions 31 % Processing profile metrics and debug information vtune: Executing actions 31 % Preparing output tree                            vtune: Executing actions 31 % Parsing columns in input tree                    vtune: Executing actions 32 % Parsing columns in input tree                    vtune: Executing actions 32 % Creating top-level columns                       vtune: Executing actions 32 % Creating top-level rows                          vtune: Executing actions 33 % Creating top-level rows                          vtune: Executing actions 33 % Preparing output tree                            vtune: Executing actions 33 % Parsing columns in input tree                    vtune: Executing actions 33 % Creating top-level columns                       vtune: Executing actions 34 % Creating top-level columns                       vtune: Executing actions 34 % Creating top-level rows                          vtune: Executing actions 35 % Creating top-level rows                          vtune: Executing actions 35 % Preparing output tree                            vtune: Executing actions 35 % Parsing columns in input tree                    vtune: Executing actions 35 % Creating top-level columns                       vtune: Executing actions 36 % Creating top-level columns                       vtune: Executing actions 36 % Creating top-level rows                          vtune: Executing actions 37 % Creating top-level rows                          vtune: Executing actions 37 % Preparing output tree                            vtune: Executing actions 37 % Parsing columns in input tree                    vtune: Executing actions 37 % Creating top-level columns                       vtune: Executing actions 38 % Creating top-level columns                       vtune: Executing actions 38 % Creating top-level rows                          vtune: Executing actions 39 % Creating top-level rows                          vtune: Executing actions 40 % Creating top-level rows                          vtune: Executing actions 40 % Preparing output tree                            vtune: Executing actions 40 % Parsing columns in input tree                    vtune: Executing actions 40 % Creating top-level columns                       vtune: Executing actions 41 % Creating top-level columns                       vtune: Executing actions 41 % Creating top-level rows                          vtune: Executing actions 42 % Creating top-level rows                          vtune: Executing actions 42 % Preparing output tree                            vtune: Executing actions 42 % Parsing columns in input tree                    vtune: Executing actions 42 % Creating top-level columns                       vtune: Executing actions 43 % Creating top-level columns                       vtune: Executing actions 43 % Creating top-level rows                          vtune: Executing actions 44 % Creating top-level rows                          vtune: Executing actions 44 % Preparing output tree                            vtune: Executing actions 44 % Parsing columns in input tree                    vtune: Executing actions 44 % Creating top-level columns                       vtune: Executing actions 45 % Creating top-level columns                       vtune: Executing actions 45 % Creating top-level rows                          vtune: Executing actions 46 % Creating top-level rows                          vtune: Executing actions 46 % Preparing output tree                            vtune: Executing actions 46 % Parsing columns in input tree                    vtune: Executing actions 46 % Creating top-level columns                       vtune: Executing actions 46 % Creating top-level rows                          vtune: Executing actions 47 % Creating top-level rows                          vtune: Executing actions 47 % Preparing output tree                            vtune: Executing actions 47 % Parsing columns in input tree                    vtune: Executing actions 48 % Parsing columns in input tree                    vtune: Executing actions 48 % Creating top-level columns                       vtune: Executing actions 48 % Creating top-level rows                          vtune: Executing actions 49 % Creating top-level rows                          vtune: Executing actions 49 % Preparing output tree                            vtune: Executing actions 49 % Parsing columns in input tree                    vtune: Executing actions 49 % Creating top-level columns                       vtune: Executing actions 49 % Creating top-level rows                          vtune: Executing actions 49 % Preparing output tree                            vtune: Executing actions 49 % Parsing columns in input tree                    vtune: Executing actions 49 % Creating top-level columns                       vtune: Executing actions 49 % Creating top-level rows                          vtune: Executing actions 49 % Preparing output tree                            vtune: Executing actions 49 % Parsing columns in input tree                    vtune: Executing actions 49 % Creating top-level columns                       vtune: Executing actions 49 % Creating top-level rows                          vtune: Executing actions 49 % Preparing output tree                            vtune: Executing actions 49 % Parsing columns in input tree                    vtune: Executing actions 49 % Creating top-level columns                       vtune: Executing actions 49 % Creating top-level rows                          vtune: Executing actions 49 % Preparing output tree                            vtune: Executing actions 49 % Parsing columns in input tree                    vtune: Executing actions 49 % Creating top-level columns                       vtune: Executing actions 49 % Creating top-level rows                          vtune: Executing actions 49 % Preparing output tree                            vtune: Executing actions 49 % Parsing columns in input tree                    vtune: Executing actions 49 % Creating top-level columns                       vtune: Executing actions 49 % Creating top-level rows                          vtune: Executing actions 49 % Preparing output tree                            vtune: Executing actions 49 % Parsing columns in input tree                    vtune: Executing actions 49 % Creating top-level columns                       vtune: Executing actions 49 % Creating top-level rows                          vtune: Executing actions 49 % Preparing output tree                            vtune: Executing actions 49 % Parsing columns in input tree                    vtune: Executing actions 49 % Creating top-level columns                       vtune: Executing actions 49 % Creating top-level rows                          vtune: Executing actions 49 % Preparing output tree                            vtune: Executing actions 49 % Parsing columns in input tree                    vtune: Executing actions 49 % Creating top-level columns                       vtune: Executing actions 49 % Creating top-level rows                          vtune: Executing actions 49 % Setting data model parameters                    vtune: Executing actions 49 % Precomputing frequently used data                vtune: Executing actions 49 % Precomputing frequently used data                vtune: Executing actions 49 % Updating precomputed scalar metrics              vtune: Executing actions 49 % Discarding redundant overtime data               vtune: Executing actions 49 % Saving the result                                vtune: Executing actions 50 % Saving the result                                vtune: Executing actions 50 % Generating a report                              vtune: Executing actions 50 % Setting data model parameters                    vtune: Executing actions 75 % Setting data model parameters                    vtune: Executing actions 75 % Generating a report                              Elapsed Time: 49.975s
-    CPU Time: 38.250s
-    Memory Bound: 8.2% of Pipeline Slots
-        L1 Bound: 15.7% of Clockticks
-        L2 Bound: 3.4% of Clockticks
-        L3 Bound: 8.9% of Clockticks
-        DRAM Bound: 10.6% of Clockticks
-            DRAM Bandwidth Bound: 0.0% of Elapsed Time
-        Store Bound: 2.2% of Clockticks
-        NUMA: % of Remote Accesses: 30.4%
-         | A significant amount of DRAM loads were serviced from remote DRAM.
-         | Wherever possible, try to consistently use data on the same core, or
-         | at least the same package, as it was allocated on.
-         |
-        UPI Utilization Bound: 0.0% of Elapsed Time
-    Loads: 12,858,208,930
-    Stores: 11,085,342,130
-    LLC Miss Count: 39,412,400
-        Local Memory Access Count: 24,624,135
-        Remote Memory Access Count: 9,849,654
-        Remote Cache Access Count: 0
-    Total Memory Traffic, GB: 12.922
-        Read Traffic from Local Memory, GB: 5.043
-        Read Traffic from Remote Memory, GB: 2.206
-        Read Traffic from Sub-NUMA Memory, GB: 0.000
-        Write Memory Traffic, GB: 5.673
-    Average Latency (cycles): 14
-    Total Thread Count: 5
-    Paused Time: 0s
-
-Bandwidth Utilization
-Bandwidth Domain                  Platform Maximum  Observed Maximum  Average  % of Elapsed Time with High BW Utilization(%)
---------------------------------  ----------------  ----------------  -------  ---------------------------------------------
-DRAM, GB/sec                      252                         18.400   14.278                                           0.0%
-DRAM Single-Package, GB/sec       126                         15.600   10.937                                           0.0%
-UPI Utilization Single-link, (%)  100                         33.500   16.609                                           0.0%
-
-Top Memory Objects by Latency
-Memory Object     Total Latency          Loads         Stores  LLC Miss Count
-----------------  -------------  -------------  -------------  --------------
-[vmlinux]               56.548%  7,652,875,020  6,692,572,170       7,389,825
-[Unknown]               37.963%  3,831,362,140  4,166,236,980      32,022,575
-[libtpsstool.so]         1.735%    325,025,580              0               0
-[libm.so.6]              0.623%    261,005,390    113,266,490               0
-[libc.so.6]              0.248%     29,547,780              0               0
-[Unknown]                2.883%    758,393,020    113,266,490               0
-Collection and Platform Info
-    Operating System: 5.15.0-160-generic DISTRIB_ID=Ubuntu DISTRIB_RELEASE=22.04 DISTRIB_CODENAME=jammy DISTRIB_DESCRIPTION="Ubuntu 22.04.2 LTS"
-    Computer Name: node0.redis-vtune.lsm-pg0.wisc.cloudlab.us
-    Result Size: 249.0 MB 
-    Collection start time: 08:29:24 12/12/2025 UTC
-    Collection stop time: 08:30:14 12/12/2025 UTC
-    Collector Type: Driverless Perf system-wide sampling,User-mode sampling and tracing
-    CPU
-        Name: Intel(R) Xeon(R) Processor code named Icelake
-        Frequency: 2.400 GHz
-        Logical CPU Count: 64
-        Max DRAM Single-Package Bandwidth: 126.000 GB/s
-        LLC size: 25.2 MB 
-        Cache Allocation Technology
-            Level 2 capability: not detected
-            Level 3 capability: available
-
-If you want to skip descriptions of detected performance issues in the report,
-enter: vtune -report summary -report-knob show-issues=false -r <my_result_dir>.
-Alternatively, you may view the report in the csv format: vtune -report
-<report_name> -format=csv.
-vtune: Executing actions 100 % Generating a report                             vtune: Executing actions 100 % done                                            

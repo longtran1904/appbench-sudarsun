@@ -1,0 +1,109 @@
++ CODEBASE=/home/cc/contention-appbench
++ REDIS_DIR=/home/cc/contention-appbench/redis-3.0.0/src
++ REDIS_SERVER=/home/cc/contention-appbench/redis-3.0.0/src/redis-server
++ REDIS_BENCH=/home/cc/contention-appbench/redis-3.0.0/src/redis-benchmark
++ REDIS_CLI=/home/cc/contention-appbench/redis-3.0.0/src/redis-cli
++ REDIS_CONF=/home/cc/contention-appbench/redis-3.0.0/redis.conf
++ OUTPUT=/home/cc/contention-appbench/output/redis
++ FLUSH=1
++ HOST=127.0.0.1
++ CLIENTS=4
++ THREADS=4
++ PIPELINE=128
++ LOADED_PAIRS=0
++ REDIS_PORT=6500
++ REDIS_TESTTIME=60
++ REDIS_DATASIZE_RANGE=4-2048
++ REDIS_DATASIZE_PATTERN=R
++ REDIS_KEY_MAXIMUM=1000000
++ REDIS_KEY_PATTERN=S:R
++ REDIS_RATIO=0:1
++ REDIS_OUTPUT=/home/cc/contention-appbench/experiments/redis_contention/max_bandwidth_single_server/clients_4_threads_4_pipeline_128_multi_get_50/loaded_pairs_0/pair_0/redis.out
++ REDIS_HISTOGRAM_FILE=/home/cc/contention-appbench/experiments/redis_contention/max_bandwidth_single_server/clients_4_threads_4_pipeline_128_multi_get_50/loaded_pairs_0/pair_0/latency.out
++ SERVER_LOG=/home/cc/contention-appbench/experiments/redis_contention/max_bandwidth_single_server/clients_4_threads_4_pipeline_128_multi_get_50/loaded_pairs_0/pair_0/server.log
++ REDIS_PREFIX='taskset -c 0'
++ MEMTIER_PREFIX='/usr/bin/time -v taskset -c 1'
++ echo '==> starting redis-server on 127.0.0.1:6500'
+==> starting redis-server on 127.0.0.1:6500
++ flush
++ '[' 1 = 1 ']'
++ sudo sh -c 'sync; echo 3 > /proc/sys/vm/drop_caches'
++ echo 'Printing server log to: /home/cc/contention-appbench/experiments/redis_contention/max_bandwidth_single_server/clients_4_threads_4_pipeline_128_multi_get_50/loaded_pairs_0/pair_0/server.log'
+Printing server log to: /home/cc/contention-appbench/experiments/redis_contention/max_bandwidth_single_server/clients_4_threads_4_pipeline_128_multi_get_50/loaded_pairs_0/pair_0/server.log
++ rm -f /home/cc/contention-appbench/experiments/redis_contention/max_bandwidth_single_server/clients_4_threads_4_pipeline_128_multi_get_50/loaded_pairs_0/ready.txt
++ SRV_PID=283950
++ echo '[SERVER PID]: 283950'
+[SERVER PID]: 283950
++ echo 'Waiting for Redis to finish loading RDB (watching log: /home/cc/contention-appbench/experiments/redis_contention/max_bandwidth_single_server/clients_4_threads_4_pipeline_128_multi_get_50/loaded_pairs_0/pair_0/server.log)...'
+Waiting for Redis to finish loading RDB (watching log: /home/cc/contention-appbench/experiments/redis_contention/max_bandwidth_single_server/clients_4_threads_4_pipeline_128_multi_get_50/loaded_pairs_0/pair_0/server.log)...
++ true
++ grep -q 'DB loaded from disk' /home/cc/contention-appbench/experiments/redis_contention/max_bandwidth_single_server/clients_4_threads_4_pipeline_128_multi_get_50/loaded_pairs_0/pair_0/server.log
++ taskset -c 0 /home/cc/contention-appbench/redis-3.0.0/src/redis-server /home/cc/contention-appbench/redis-3.0.0/redis.conf --bind 127.0.0.1 --port 6500 --daemonize no --dir ./databases --dbfilename dump_0.rdb
++ sleep 1
++ true
++ grep -q 'DB loaded from disk' /home/cc/contention-appbench/experiments/redis_contention/max_bandwidth_single_server/clients_4_threads_4_pipeline_128_multi_get_50/loaded_pairs_0/pair_0/server.log
++ sleep 1
++ true
++ grep -q 'DB loaded from disk' /home/cc/contention-appbench/experiments/redis_contention/max_bandwidth_single_server/clients_4_threads_4_pipeline_128_multi_get_50/loaded_pairs_0/pair_0/server.log
++ sleep 1
++ true
++ grep -q 'DB loaded from disk' /home/cc/contention-appbench/experiments/redis_contention/max_bandwidth_single_server/clients_4_threads_4_pipeline_128_multi_get_50/loaded_pairs_0/pair_0/server.log
++ sleep 1
++ true
++ grep -q 'DB loaded from disk' /home/cc/contention-appbench/experiments/redis_contention/max_bandwidth_single_server/clients_4_threads_4_pipeline_128_multi_get_50/loaded_pairs_0/pair_0/server.log
++ sleep 1
++ true
++ grep -q 'DB loaded from disk' /home/cc/contention-appbench/experiments/redis_contention/max_bandwidth_single_server/clients_4_threads_4_pipeline_128_multi_get_50/loaded_pairs_0/pair_0/server.log
++ echo 'Detected '\''DB loaded from disk'\'' in log. RDB load complete.'
+Detected 'DB loaded from disk' in log. RDB load complete.
++ break
++ for i in {1..100}
++ /home/cc/contention-appbench/redis-3.0.0/src/redis-cli -h 127.0.0.1 -p 6500 PING
++ READY=1
++ echo '[INFO] Redis is ready on 127.0.0.1:6500 (after 200 ms)'
+[INFO] Redis is ready on 127.0.0.1:6500 (after 200 ms)
++ echo READY
++ break
++ '[' 1 -ne 1 ']'
++ MEMTIER_PID=283988
++ echo '[MEMTIER PID]: 283988'
+[MEMTIER PID]: 283988
++ wait 283988
++ /usr/bin/time -v taskset -c 1 memtier_benchmark --port 6500 --test-time=60 --clients 4 --threads 4 --pipeline 128 --multi-key-get 50 --random-data --data-size-range=4-2048 --data-size-pattern=R --key-maximum=1000000 --ratio=0:1 --hide-histogram --out-file=/home/cc/contention-appbench/experiments/redis_contention/max_bandwidth_single_server/clients_4_threads_4_pipeline_128_multi_get_50/loaded_pairs_0/pair_0/redis.out --hdr-file-prefix=/home/cc/contention-appbench/experiments/redis_contention/max_bandwidth_single_server/clients_4_threads_4_pipeline_128_multi_get_50/loaded_pairs_0/pair_0/latency.out
+Writing results to /home/cc/contention-appbench/experiments/redis_contention/max_bandwidth_single_server/clients_4_threads_4_pipeline_128_multi_get_50/loaded_pairs_0/pair_0/redis.out...
+[RUN #1] Preparing benchmark client...
+[RUN #1] Launching threads now...
+[RUN #1 2%,   0 secs]  4 threads  4 conns:       13979 ops,   14162 (avg:   14162) ops/sec, 713.11MB/sec (avg: 713.11MB/sec), 134.45 (avg: 134.45) msec latency[RUN #1 3%,   1 secs]  4 threads  4 conns:       28778 ops,   14797 (avg:   14482) ops/sec, 741.11MB/sec (avg: 727.20MB/sec), 138.38 (avg: 136.47) msec latency[RUN #1 5%,   2 secs]  4 threads  4 conns:       43361 ops,   14581 (avg:   14515) ops/sec, 735.92MB/sec (avg: 730.12MB/sec), 140.25 (avg: 137.74) msec latency[RUN #1 7%,   3 secs]  4 threads  4 conns:       57389 ops,   14026 (avg:   14392) ops/sec, 708.95MB/sec (avg: 724.81MB/sec), 145.59 (avg: 139.66) msec latency[RUN #1 8%,   4 secs]  4 threads  4 conns:       71942 ops,   14551 (avg:   14424) ops/sec, 734.45MB/sec (avg: 726.74MB/sec), 141.39 (avg: 140.01) msec latency[RUN #1 10%,   5 secs]  4 threads  4 conns:       86709 ops,   14765 (avg:   14481) ops/sec, 741.40MB/sec (avg: 729.19MB/sec), 138.55 (avg: 139.76) msec latency[RUN #1 12%,   6 secs]  4 threads  4 conns:      101369 ops,   14657 (avg:   14506) ops/sec, 741.03MB/sec (avg: 730.89MB/sec), 139.74 (avg: 139.76) msec latency[RUN #1 13%,   7 secs]  4 threads  4 conns:      116060 ops,   14685 (avg:   14529) ops/sec, 738.30MB/sec (avg: 731.82MB/sec), 139.21 (avg: 139.69) msec latency[RUN #1 15%,   8 secs]  4 threads  4 conns:      130673 ops,   14608 (avg:   14538) ops/sec, 735.81MB/sec (avg: 732.26MB/sec), 140.48 (avg: 139.78) msec latency[RUN #1 17%,   9 secs]  4 threads  4 conns:      145181 ops,   14504 (avg:   14534) ops/sec, 733.09MB/sec (avg: 732.34MB/sec), 141.06 (avg: 139.91) msec latency[RUN #1 18%,  10 secs]  4 threads  4 conns:      159208 ops,   14024 (avg:   14488) ops/sec, 706.13MB/sec (avg: 729.96MB/sec), 146.16 (avg: 140.46) msec latency[RUN #1 20%,  11 secs]  4 threads  4 conns:      173840 ops,   14630 (avg:   14500) ops/sec, 737.68MB/sec (avg: 730.60MB/sec), 139.93 (avg: 140.41) msec latency[RUN #1 22%,  12 secs]  4 threads  4 conns:      188643 ops,   14796 (avg:   14522) ops/sec, 741.37MB/sec (avg: 731.43MB/sec), 138.52 (avg: 140.26) msec latency[RUN #1 23%,  13 secs]  4 threads  4 conns:      203421 ops,   14774 (avg:   14540) ops/sec, 741.47MB/sec (avg: 732.15MB/sec), 138.65 (avg: 140.15) msec latency[RUN #1 25%,  14 secs]  4 threads  4 conns:      218021 ops,   14596 (avg:   14544) ops/sec, 737.81MB/sec (avg: 732.53MB/sec), 140.17 (avg: 140.15) msec latency[RUN #1 27%,  15 secs]  4 threads  4 conns:      232712 ops,   14689 (avg:   14553) ops/sec, 739.98MB/sec (avg: 732.99MB/sec), 139.45 (avg: 140.10) msec latency[RUN #1 28%,  16 secs]  4 threads  4 conns:      247401 ops,   14685 (avg:   14561) ops/sec, 739.91MB/sec (avg: 733.40MB/sec), 139.57 (avg: 140.07) msec latency[RUN #1 30%,  17 secs]  4 threads  4 conns:      261986 ops,   14584 (avg:   14562) ops/sec, 734.15MB/sec (avg: 733.44MB/sec), 140.40 (avg: 140.09) msec latency[RUN #1 32%,  18 secs]  4 threads  4 conns:      276109 ops,   14117 (avg:   14539) ops/sec, 706.30MB/sec (avg: 732.01MB/sec), 144.91 (avg: 140.34) msec latency[RUN #1 33%,  19 secs]  4 threads  4 conns:      290783 ops,   14672 (avg:   14545) ops/sec, 740.64MB/sec (avg: 732.44MB/sec), 139.36 (avg: 140.29) msec latency[RUN #1 35%,  20 secs]  4 threads  4 conns:      305592 ops,   14805 (avg:   14558) ops/sec, 746.68MB/sec (avg: 733.12MB/sec), 138.82 (avg: 140.22) msec latency[RUN #1 37%,  21 secs]  4 threads  4 conns:      320441 ops,   14847 (avg:   14571) ops/sec, 749.90MB/sec (avg: 733.88MB/sec), 137.64 (avg: 140.10) msec latency[RUN #1 38%,  22 secs]  4 threads  4 conns:      335309 ops,   14866 (avg:   14584) ops/sec, 747.01MB/sec (avg: 734.46MB/sec), 138.04 (avg: 140.01) msec latency[RUN #1 40%,  23 secs]  4 threads  4 conns:      350025 ops,   14714 (avg:   14589) ops/sec, 742.42MB/sec (avg: 734.79MB/sec), 139.02 (avg: 139.96) msec latency[RUN #1 42%,  24 secs]  4 threads  4 conns:      364819 ops,   14789 (avg:   14597) ops/sec, 743.63MB/sec (avg: 735.14MB/sec), 138.66 (avg: 139.91) msec latency[RUN #1 43%,  25 secs]  4 threads  4 conns:      379482 ops,   14661 (avg:   14600) ops/sec, 737.74MB/sec (avg: 735.24MB/sec), 139.47 (avg: 139.89) msec latency[RUN #1 45%,  26 secs]  4 threads  4 conns:      394268 ops,   14784 (avg:   14606) ops/sec, 742.69MB/sec (avg: 735.52MB/sec), 138.67 (avg: 139.85) msec latency[RUN #1 47%,  27 secs]  4 threads  4 conns:      408961 ops,   14692 (avg:   14610) ops/sec, 739.60MB/sec (avg: 735.66MB/sec), 139.41 (avg: 139.83) msec latency[RUN #1 48%,  28 secs]  4 threads  4 conns:      423830 ops,   14867 (avg:   14618) ops/sec, 744.71MB/sec (avg: 735.98MB/sec), 137.80 (avg: 139.76) msec latency[RUN #1 50%,  29 secs]  4 threads  4 conns:      438022 ops,   14188 (avg:   14604) ops/sec, 711.69MB/sec (avg: 735.17MB/sec), 144.29 (avg: 139.91) msec latency[RUN #1 52%,  30 secs]  4 threads  4 conns:      452810 ops,   14786 (avg:   14610) ops/sec, 745.57MB/sec (avg: 735.50MB/sec), 138.48 (avg: 139.86) msec latency[RUN #1 53%,  31 secs]  4 threads  4 conns:      467609 ops,   14793 (avg:   14616) ops/sec, 743.99MB/sec (avg: 735.77MB/sec), 138.38 (avg: 139.81) msec latency[RUN #1 55%,  32 secs]  4 threads  4 conns:      482497 ops,   14885 (avg:   14624) ops/sec, 752.46MB/sec (avg: 736.27MB/sec), 137.77 (avg: 139.75) msec latency[RUN #1 57%,  33 secs]  4 threads  4 conns:      497349 ops,   14848 (avg:   14630) ops/sec, 748.01MB/sec (avg: 736.62MB/sec), 137.79 (avg: 139.69) msec latency[RUN #1 58%,  34 secs]  4 threads  4 conns:      512229 ops,   14878 (avg:   14637) ops/sec, 750.88MB/sec (avg: 737.03MB/sec), 137.76 (avg: 139.64) msec latency[RUN #1 60%,  35 secs]  4 threads  4 conns:      527099 ops,   14868 (avg:   14644) ops/sec, 748.49MB/sec (avg: 737.34MB/sec), 137.37 (avg: 139.57) msec latency[RUN #1 62%,  36 secs]  4 threads  4 conns:      541835 ops,   14734 (avg:   14646) ops/sec, 743.37MB/sec (avg: 737.51MB/sec), 139.18 (avg: 139.56) msec latency[RUN #1 63%,  37 secs]  4 threads  4 conns:      556759 ops,   14920 (avg:   14654) ops/sec, 750.88MB/sec (avg: 737.86MB/sec), 137.32 (avg: 139.50) msec latency[RUN #1 65%,  38 secs]  4 threads  4 conns:      571566 ops,   14804 (avg:   14657) ops/sec, 745.93MB/sec (avg: 738.07MB/sec), 138.23 (avg: 139.47) msec latency[RUN #1 67%,  39 secs]  4 threads  4 conns:      586422 ops,   14850 (avg:   14662) ops/sec, 747.70MB/sec (avg: 738.31MB/sec), 138.01 (avg: 139.43) msec latency[RUN #1 68%,  40 secs]  4 threads  4 conns:      601317 ops,   14893 (avg:   14668) ops/sec, 749.68MB/sec (avg: 738.58MB/sec), 137.44 (avg: 139.38) msec latency[RUN #1 70%,  41 secs]  4 threads  4 conns:      616048 ops,   14729 (avg:   14669) ops/sec, 742.07MB/sec (avg: 738.67MB/sec), 138.99 (avg: 139.37) msec latency[RUN #1 72%,  42 secs]  4 threads  4 conns:      630892 ops,   14842 (avg:   14673) ops/sec, 749.19MB/sec (avg: 738.91MB/sec), 138.09 (avg: 139.34) msec latency[RUN #1 73%,  43 secs]  4 threads  4 conns:      645149 ops,   14255 (avg:   14664) ops/sec, 718.02MB/sec (avg: 738.44MB/sec), 143.56 (avg: 139.44) msec latency[RUN #1 75%,  44 secs]  4 threads  4 conns:      660012 ops,   14860 (avg:   14668) ops/sec, 745.81MB/sec (avg: 738.60MB/sec), 137.83 (avg: 139.40) msec latency[RUN #1 77%,  45 secs]  4 threads  4 conns:      674817 ops,   14803 (avg:   14671) ops/sec, 745.55MB/sec (avg: 738.75MB/sec), 138.41 (avg: 139.38) msec latency[RUN #1 78%,  46 secs]  4 threads  4 conns:      689705 ops,   14884 (avg:   14676) ops/sec, 754.26MB/sec (avg: 739.08MB/sec), 137.69 (avg: 139.34) msec latency[RUN #1 80%,  47 secs]  4 threads  4 conns:      704601 ops,   14890 (avg:   14680) ops/sec, 751.33MB/sec (avg: 739.34MB/sec), 137.43 (avg: 139.30) msec latency[RUN #1 82%,  48 secs]  4 threads  4 conns:      719541 ops,   14938 (avg:   14685) ops/sec, 751.74MB/sec (avg: 739.59MB/sec), 136.88 (avg: 139.25) msec latency[RUN #1 83%,  49 secs]  4 threads  4 conns:      734319 ops,   14776 (avg:   14687) ops/sec, 744.57MB/sec (avg: 739.69MB/sec), 138.71 (avg: 139.24) msec latency[RUN #1 85%,  50 secs]  4 threads  4 conns:      749195 ops,   14872 (avg:   14691) ops/sec, 750.83MB/sec (avg: 739.91MB/sec), 137.96 (avg: 139.22) msec latency[RUN #1 87%,  51 secs]  4 threads  4 conns:      764137 ops,   14940 (avg:   14696) ops/sec, 751.02MB/sec (avg: 740.12MB/sec), 136.80 (avg: 139.17) msec latency[RUN #1 88%,  52 secs]  4 threads  4 conns:      778886 ops,   14744 (avg:   14697) ops/sec, 743.43MB/sec (avg: 740.18MB/sec), 138.92 (avg: 139.16) msec latency[RUN #1 90%,  53 secs]  4 threads  4 conns:      793737 ops,   14849 (avg:   14699) ops/sec, 748.88MB/sec (avg: 740.35MB/sec), 138.20 (avg: 139.15) msec latency[RUN #1 92%,  54 secs]  4 threads  4 conns:      808706 ops,   14966 (avg:   14704) ops/sec, 753.18MB/sec (avg: 740.58MB/sec), 136.77 (avg: 139.10) msec latency[RUN #1 93%,  55 secs]  4 threads  4 conns:      823453 ops,   14745 (avg:   14705) ops/sec, 744.69MB/sec (avg: 740.65MB/sec), 138.56 (avg: 139.09) msec latency[RUN #1 95%,  56 secs]  4 threads  4 conns:      838249 ops,   14794 (avg:   14707) ops/sec, 743.31MB/sec (avg: 740.70MB/sec), 138.54 (avg: 139.08) msec latency[RUN #1 97%,  57 secs]  4 threads  4 conns:      853212 ops,   14961 (avg:   14711) ops/sec, 750.72MB/sec (avg: 740.87MB/sec), 137.03 (avg: 139.05) msec latency[RUN #1 98%,  58 secs]  4 threads  4 conns:      868091 ops,   14878 (avg:   14714) ops/sec, 747.40MB/sec (avg: 740.98MB/sec), 137.68 (avg: 139.02) msec latency[RUN #1 100%,  59 secs]  4 threads  4 conns:      882965 ops,   14897 (avg:   14717) ops/sec, 746.46MB/sec (avg: 741.07MB/sec), 137.74 (avg: 139.00) msec latency[RUN #1 100%,  60 secs]  0 threads  4 conns:      885073 ops,   14897 (avg:   14751) ops/sec, 746.46MB/sec (avg: 742.75MB/sec), 137.74 (avg: 138.93) msec latency
+
+Writing Full Run command HDR latency histogram results to /home/cc/contention-appbench/experiments/redis_contention/max_bandwidth_single_server/clients_4_threads_4_pipeline_128_multi_get_50/loaded_pairs_0/pair_0/latency.out_FULL_RUN_1.txt...
+Writing Full Run command HDR latency histogram results in HistogramLogProcessor format to /home/cc/contention-appbench/experiments/redis_contention/max_bandwidth_single_server/clients_4_threads_4_pipeline_128_multi_get_50/loaded_pairs_0/pair_0/latency.out_FULL_RUN_1.hgrm...
+Writing GET command HDR latency histogram results to /home/cc/contention-appbench/experiments/redis_contention/max_bandwidth_single_server/clients_4_threads_4_pipeline_128_multi_get_50/loaded_pairs_0/pair_0/latency.out_GET_command_run_1.txt...
+Writing GET command HDR latency histogram results in HistogramLogProcessor format to /home/cc/contention-appbench/experiments/redis_contention/max_bandwidth_single_server/clients_4_threads_4_pipeline_128_multi_get_50/loaded_pairs_0/pair_0/latency.out_GET_command_run_1.hgrm...
+	Command being timed: "taskset -c 1 memtier_benchmark --port 6500 --test-time=60 --clients 4 --threads 4 --pipeline 128 --multi-key-get 50 --random-data --data-size-range=4-2048 --data-size-pattern=R --key-maximum=1000000 --ratio=0:1 --hide-histogram --out-file=/home/cc/contention-appbench/experiments/redis_contention/max_bandwidth_single_server/clients_4_threads_4_pipeline_128_multi_get_50/loaded_pairs_0/pair_0/redis.out --hdr-file-prefix=/home/cc/contention-appbench/experiments/redis_contention/max_bandwidth_single_server/clients_4_threads_4_pipeline_128_multi_get_50/loaded_pairs_0/pair_0/latency.out"
+	User time (seconds): 23.15
+	System time (seconds): 29.47
+	Percent of CPU this job got: 86%
+	Elapsed (wall clock) time (h:mm:ss or m:ss): 1:01.03
+	Average shared text size (kbytes): 0
+	Average unshared data size (kbytes): 0
+	Average stack size (kbytes): 0
+	Average total size (kbytes): 0
+	Maximum resident set size (kbytes): 12764
+	Average resident set size (kbytes): 0
+	Major (requiring I/O) page faults: 26
+	Minor (reclaiming a frame) page faults: 9867
+	Voluntary context switches: 389654
+	Involuntary context switches: 29746
+	Swaps: 0
+	File system inputs: 2744
+	File system outputs: 184
+	Socket messages sent: 0
+	Socket messages received: 0
+	Signals delivered: 0
+	Page size (bytes): 4096
+	Exit status: 0
++ kill 283950
++ wait 283950
++ echo 'Done. Output: /home/cc/contention-appbench/experiments/redis_contention/max_bandwidth_single_server/clients_4_threads_4_pipeline_128_multi_get_50/loaded_pairs_0/pair_0/redis.out'
+Done. Output: /home/cc/contention-appbench/experiments/redis_contention/max_bandwidth_single_server/clients_4_threads_4_pipeline_128_multi_get_50/loaded_pairs_0/pair_0/redis.out
++ set -x

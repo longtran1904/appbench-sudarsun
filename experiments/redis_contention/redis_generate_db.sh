@@ -28,7 +28,7 @@ REDIS_PORT="${REDIS_PORT:-${PORT:-6500}}"
 REDIS_TESTTIME="${REDIS_TESTTIME:-60}"       # seconds
 REDIS_DATASIZE_RANGE="${REDIS_DATASIZE_RANGE:-4-2048}" # bytes
 REDIS_DATASIZE_PATTERN="${REDIS_DATASIZE_PATTERN:-R}"  
-REDIS_KEY_MAXIMUM="${REDIS_KEY_MAXIMUM:-10000000}"
+REDIS_KEY_MAXIMUM="${REDIS_KEY_MAXIMUM:-1000000}"
 REDIS_KEY_PATTERN="${REDIS_KEY_PATTERN:-S:R}"
 REDIS_RATIO="${REDIS_RATIO:-1:0}"           # SET:GET ratio
 REDIS_OUTPUT="${REDIS_OUTPUT:-$OUTPUT/redis.out}"
@@ -51,12 +51,15 @@ flush # Flush page cache
 echo "Printing server log to: $SERVER_LOG"
 echo "==> redis-server: ${REDIS_PREFIX:+$REDIS_PREFIX }$REDIS_SERVER ${REDIS_CONF:+$REDIS_CONF} --bind $HOST --port $REDIS_PORT --daemonize no >$SERVER_LOG 2>&1 &"
 
+mkdir -p "$(dirname "$SERVER_LOG")"
+
 ${REDIS_PREFIX:+$REDIS_PREFIX }"$REDIS_SERVER" ${REDIS_CONF:+$REDIS_CONF} \
     --bind "$HOST" --port "$REDIS_PORT" --daemonize no > "$SERVER_LOG" 2>&1 &
 
 SRV_PID=$!
 echo "[SERVER PID]: $SRV_PID"
 
+READY=0
 # wait until it answers PING (max ~20s)
 for i in {1..100}; do
     if "$REDIS_CLI" -h "$HOST" -p "$REDIS_PORT" PING >/dev/null 2>&1; then

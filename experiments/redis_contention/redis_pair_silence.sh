@@ -1,5 +1,6 @@
 #!/usr/bin/env bash
 set -euo pipefail
+set -x
 
 # --- paths (change via env or keep defaults) ---
 CODEBASE="${CODEBASE:-$APPBENCH}"
@@ -18,18 +19,19 @@ HOST="${HOST:-127.0.0.1}"
 # CLIENTS="${CLIENTS:-16}"
 # THREADS="${THREADS:-4}"
 # PIPELINE="${PIPELINE:-100}"
-CLIENTS="${CLIENTS:-8}"
-THREADS="${THREADS:-4}"
-PIPELINE="${PIPELINE:-10}"
+CLIENTS="${CLIENTS:-4}"
+THREADS="${THREADS:-1}"
+PIPELINE="${PIPELINE:-1}"
+MULTI_GET_COUNT="${MULTI_GET_COUNT:-50}"
 
 # Honor REDIS_PORT first, then PORT, fall back to 6500
 REDIS_PORT="${REDIS_PORT:-${PORT:-6500}}"
 REDIS_TESTTIME="${REDIS_TESTTIME:-60}"       # seconds
 REDIS_DATASIZE_RANGE="${REDIS_DATASIZE_RANGE:-4-2048}" # bytes
 REDIS_DATASIZE_PATTERN="${REDIS_DATASIZE_PATTERN:-R}"  
-REDIS_KEY_MAXIMUM="${REDIS_KEY_MAXIMUM:-100000000}"
+REDIS_KEY_MAXIMUM="${REDIS_KEY_MAXIMUM:-1000000}"
 REDIS_KEY_PATTERN="${REDIS_KEY_PATTERN:-R:R}"
-REDIS_RATIO="${REDIS_RATIO:-1:1}"           # read:set ratio
+REDIS_RATIO="${REDIS_RATIO:-0:1}"           # SET:GET ratio
 REDIS_OUTPUT="${REDIS_OUTPUT:-$OUTPUT/redis.out}"
 REDIS_HISTOGRAM_FILE="${REDIS_HISTOGRAM_FILE:-$OUTPUT/latency.out}"
 SERVER_LOG="${SERVER_LOG:-$OUTPUT/server.log}"
@@ -38,17 +40,10 @@ SERVER_LOG="${SERVER_LOG:-$OUTPUT/server.log}"
 REDIS_PREFIX="${REDIS_PREFIX:-}"
 MEMTIER_PREFIX="${MEMTIER_PREFIX:-}"
 
-flush() {
-  [ "$FLUSH" = "1" ] && sudo sh -c 'sync; echo 3 > /proc/sys/vm/drop_caches' || true
-}
-
 echo "==> starting redis-server on $HOST:$REDIS_PORT"
-
-flush # Flush page cache
 
 # start server in foreground, background the process; capture PID
 echo "Printing server log to: $SERVER_LOG"
-echo "==> redis-server: ${REDIS_PREFIX:+$REDIS_PREFIX }$REDIS_SERVER ${REDIS_CONF:+$REDIS_CONF} --bind $HOST --port $REDIS_PORT --daemonize no --dir \"./databases\" --dbfilename \"dump_${PAIR_INDEX}.rdb\" >$SERVER_LOG 2>&1 &"
 ${REDIS_PREFIX:+$REDIS_PREFIX }"$REDIS_SERVER" ${REDIS_CONF:+$REDIS_CONF} \
   --bind "$HOST" --port "$REDIS_PORT" --daemonize no > "$SERVER_LOG" \
   --dir "./databases" --dbfilename "dump_${PAIR_INDEX}.rdb" 2>&1 &
@@ -73,18 +68,12 @@ while [ ! -s "${READY_FLAG:-}" ]; do
   sleep 0.1
 done
 
-echo "==> starting memtier_benchmark ${MEMTIER_PREFIX:+$MEMTIER_PREFIX }memtier_benchmark --port "$REDIS_PORT" --test-time="$REDIS_TESTTIME" \
-    --clients "$CLIENTS" --threads "$THREADS" --pipeline "$PIPELINE" \
-    --random-data --data-size-range="$REDIS_DATASIZE_RANGE" \
-    --data-size-pattern="$REDIS_DATASIZE_PATTERN" --key-maximum="$REDIS_KEY_MAXIMUM" \
-    --ratio="$REDIS_RATIO" --hide-histogram \
-    --out-file="$REDIS_OUTPUT" --hdr-file-prefix="$REDIS_HISTOGRAM_FILE" 2>&1 &"
-
 ${MEMTIER_PREFIX:+$MEMTIER_PREFIX }memtier_benchmark --port "$REDIS_PORT" --test-time="$REDIS_TESTTIME" \
-  --clients "$CLIENTS" --threads "$THREADS" --pipeline "$PIPELINE" \
+  --clients "$CLIENTS" --threads "$THREADS" --pipeline "$PIPELINE" --multi-key-get "$MULTI_GET_COUNT" \
   --random-data --data-size-range="$REDIS_DATASIZE_RANGE" \
   --data-size-pattern="$REDIS_DATASIZE_PATTERN" --key-maximum="$REDIS_KEY_MAXIMUM" \
-  --ratio="$REDIS_RATIO" --hide-histogram 2>&1 &
+  --ratio="$REDIS_RATIO" --hide-histogram \
+  --out-file="$REDIS_OUTPUT" --hdr-file-prefix="$REDIS_HISTOGRAM_FILE" 2>&1 &
 MEMTIER_PID=$!
 echo "[MEMTIER PID]: $MEMTIER_PID"
 
@@ -92,3 +81,5 @@ wait "$MEMTIER_PID" 2>/dev/null || true
 kill "$SRV_PID" >/dev/null 2>&1 || true
 wait "$SRV_PID" 2>/dev/null || true
 echo "Done. Output: $REDIS_OUTPUT"
+
+set -x
